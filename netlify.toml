@@ -5,6 +5,10 @@
 [build.environment]
   NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
+  # Netlify sets NODE_ENV=production during install, which skips devDependencies.
+  # Tailwind/PostCSS and TypeScript are required at build time.
+  NPM_CONFIG_PRODUCTION = "false"
+  HUSKY = "0"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
