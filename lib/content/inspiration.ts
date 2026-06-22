@@ -1,0 +1,224 @@
+/** Biographies from Obsidian about-sri-ramakrishna, about-sri-saradadevi, about-swami-vivekananda */
+
+export type InspirationBio = {
+  slug: string;
+  name: string;
+  title: string;
+  img: string;
+  sections: { heading?: string; paragraphs: string[] }[];
+  messages: string[];
+};
+
+export const INSPIRATION_BIOGRAPHIES: InspirationBio[] = [
+  {
+    slug: "sri-ramakrishna",
+    name: "Sri Ramakrishna",
+    title: "The Prophet of Harmony",
+    img: "/images/sri-ramakrishna.jpg",
+    sections: [
+      {
+        paragraphs: [
+          "Sri Ramakrishna was born on 18 February 1836 in the village of Kamarpukur about sixty miles northwest of Kolkata. His parents, Kshudiram Chattopadhyaya and Chandramani Devi, were poor but very pious and virtuous. As a child, Ramakrishna (his childhood name was Gadadhar) was dearly loved by the villagers.",
+        ],
+      },
+      {
+        heading: "Early Days",
+        paragraphs: [
+          "From early days, he was disinclined towards formal education and worldly affairs. He was, however, a talented boy, and could sing and paint well. He was fond of serving holy men and listening to their discourses. He was also very often found to be absorbed in spiritual moods. At the age of six, he experienced the first ecstasy while watching a flight of white cranes moving against the background of black clouds. This tendency to enter into ecstasy intensified with age. His father's death when he was seven years old served only to deepen his introspection and increase his detachment from the world.",
+        ],
+      },
+      {
+        heading: "As a Priest at Dakshineswar Temple",
+        paragraphs: [
+          "When Sri Ramakrishna was sixteen, his brother Ramkumar took him to Kolkata to assist him in his priestly profession. In 1855 the Kali Temple at Dakshineswar built by Rani Rasmani was consecrated and Ramkumar became the chief priest in that temple. When he died a few months later, Ramakrishna was appointed the priest. Ramakrishna developed intense devotion to Mother Kali and spent hours in loving adoration of her image, forgetting the rituals of priestly duties. His intense longing culminated in the vision of Mother Kali as boundless effulgence engulfing everything around him.",
+        ],
+      },
+      {
+        heading: "Intense Spiritual Practices",
+        paragraphs: [
+          "Sri Ramakrishna's God-intoxicated state alarmed his relatives in Kamarpukur and they got him married to Saradamani, a girl from the neighboring village of Jayrambati. Unaffected by marriage, Sri Ramakrishna plunged into even more intense spiritual practices. Impelled by a strong inner urge to experience different aspects of God he followed, with the help of a series of Gurus, the various paths described in the Hindu scriptures, and realized God through each of them. The first teacher to appear at Dakshineswar (in 1861) was a remarkable woman known as Bhairavi Brahmani who was an advanced spiritual adept, well versed in scriptures. With her help, Sri Ramakrishna practised various difficult disciplines of the Tantrik path, and attained success in all of them. Three years later came a wandering monk by name Totapuri, under whose guidance Sri Ramakrishna attained Nirvikalpa Samadhi, the highest spiritual experience mentioned in the Hindu scriptures. He remained in that state of non-dual existence for six months without the least awareness of even his own body. In this way, Sri Ramakrishna relived the entire range of spiritual experiences of more than three thousand years of Hindu religion.",
+        ],
+      },
+      {
+        heading: "Following Other Faiths",
+        paragraphs: [
+          "With his unquenchable thirst for God, Sri Ramakrishna broke the frontiers of Hinduism, glided through the paths of Islam and Christianity, and attained the highest realization through each of them in a short span of time. He looked upon Jesus and Buddha as incarnations of God, and venerated the ten Sikh Gurus. He expressed the quintessence of his twelve-year-long spiritual realizations in a simple dictum: Yato mat, tato path — \"As many faiths, so many paths.\" He now habitually lived in an exalted state of consciousness in which he saw God in all beings.",
+        ],
+      },
+      {
+        heading: "Worshipping His Wife",
+        paragraphs: [
+          "In 1872, his wife Sarada, now nineteen years old, came from the village to meet him. He received her cordially, and taught her how to attend to household duties and at the same time lead an intensely spiritual life. One night he worshipped her as the Divine Mother in his room at the Dakshineswar temple. Although Sarada continued to stay with him, they lived immaculately pure lives, and their marital relationship was purely spiritual. It should be mentioned here that Sri Ramakrishna had been ordained a Sannyasin (Hindu monk), and he observed the basic vows of a monk to perfection. But outwardly he lived like a layman, humble, loving and with childlike simplicity.",
+        ],
+      },
+      {
+        heading: "Contact with Some Notables",
+        paragraphs: [
+          "Sri Ramakrishna's name as an illumined saint began to spread. Mathur once convened an assembly of scholars, and they declared him to be not an ordinary human being but the Avatar of the Modern Age. In those days the socio-religious movement known as Brahmo Samaj, founded by Raja Ram Mohan Roy, was at the height of popularity in Bengal. Sri Ramakrishna came into contact with several leaders and members of Brahmo Samaj and exerted much influence on them. His teaching on the harmony of religions attracted people belonging to different denominations, and Dakshineswar became a veritable Parliament of Religions.",
+        ],
+      },
+      {
+        heading: "Coming of the Devotees",
+        paragraphs: [
+          "As bees swarm around a fully blossomed flower, devotees now started coming to Sri Ramakrishna. He divided them into two categories. The first one consisted of householders. He taught them how to realize God while living in the world and discharging their family duties. The other more important category was a band of educated youths, mostly from the middle-class families of Bengal, whom he trained to become monks and to be the torchbearers of his message to humankind. The foremost among them was Narendranath, who years later, as Swami Vivekananda, carried the universal message of Vedanta to different parts of the world, revitalized Hinduism, and awakened the soul of India.",
+        ],
+      },
+      {
+        heading: "The Gospel of Sri Ramakrishna",
+        paragraphs: [
+          "Sri Ramakrishna did not write any book, nor did he deliver public lectures. Instead, he chose to speak in a simple language using parables and metaphors by way of illustration, drawn from the observation of nature and ordinary things of daily use. His conversations were charming and attracted the cultural elite of Bengal. These conversations were noted down by his disciple Mahendranath Gupta who published them in the form of a book, Sri Sri Ramakrishna Kathamrita in Bengali. Its English rendering, The Gospel of Sri Ramakrishna, was released in 1942; it continues to be increasingly popular to this day on account of its universal appeal and relevance.",
+        ],
+      },
+      {
+        heading: "Last Days",
+        paragraphs: [
+          "The intensity of his spiritual life and untiring spiritual ministration to the endless stream of seekers told on Sri Ramakrishna's health. He developed cancer of the throat in 1885. He was shifted to a spacious suburban villa where his young disciples nursed him day and night. He instilled in them love for one another, and thus laid the foundation for the future monastic brotherhood known as Ramakrishna Math. In the small hours of 16 August 1886 Sri Ramakrishna gave up his physical body, uttering the name of the Divine Mother, and passed into Eternity.",
+        ],
+      },
+    ],
+    messages: [
+      "The goal of human life is the realization of the Ultimate Reality which alone can give man supreme fulfilment and everlasting peace. This is the essence of all religions.",
+      "The Ultimate Reality is one; but it is personal as well as impersonal, and is indicated by different names (such as God, Ishvar, etc.) in different religions.",
+    ],
+  },
+  {
+    slug: "sri-saradadevi",
+    name: "Sri Sarada Devi",
+    title: "The Holy Mother",
+    img: "/images/holy-mother.jpg",
+    sections: [
+      {
+        paragraphs: [
+          "Endearingly known as 'Holy Mother', Sri Sarada Devi, the spiritual consort of Sri Ramakrishna, was born on 22 December 1853 in a poor Brahmin family in Jayrambati, a village adjoining Kamarpukur in West Bengal. Her father, Ramachandra Mukhopadhyay, was a pious and kind-hearted person, and her mother, Shyama Sundari Devi, was a loving and hard-working woman.",
+        ],
+      },
+      {
+        heading: "Marriage",
+        paragraphs: [
+          "As a child Sarada was devoted to God, and spent most of her time helping her mother in various household chores like caring for younger children, looking after cattle and carrying food to her father and others engaged in work in the field. She had no formal schooling, but managed to learn the Bengali alphabet. When she was about six years old, she was married to Sri Ramakrishna, according to the custom prevalent in India in those days. However, after the event, she continued to live with her parents, while Sri Ramakrishna lived a God-intoxicated life at Dakshineshwar.",
+        ],
+      },
+      {
+        heading: "Visit to Dakshineshwar",
+        paragraphs: [
+          "At the age of eighteen she walked all the way to Dakshineshwar to meet her husband. Sri Ramakrishna, who had immersed himself in the intense practice of several spiritual disciplines for more than twelve years, had reached the highest state of realization in which he saw God in all beings. He received Sarada Devi with great affection and allowed her to stay with him. He taught her how to lead a spiritual life while discharging her household duties. They led absolutely pure lives, and Sarada Devi served Sri Ramakrishna as his devoted wife and disciple, while remaining a virgin nun and following the spiritual path.",
+        ],
+      },
+      {
+        heading: "Life at Dakshineshwar",
+        paragraphs: [
+          "Sri Ramakrishna looked upon Sarada Devi as a special manifestation of Divine Mother of the universe. In 1872, on the night of the Phala-harini-Kali-puja, he ritualistically worshipped Sarada Devi as the Divine Mother, thereby awakening universal Motherhood latent in her. When disciples began to gather around Sri Ramakrishna, Sarada Devi learned to look upon them as her own children. The room in which she stayed at Dakshineshwar was too small to live in and had hardly any amenities; and on many days she did not get the opportunity of meeting Sri Ramakrishna. But she bore all difficulties silently and lived in contentment and peace, serving the increasing number of devotees who came to see Sri Ramakrishna.",
+        ],
+      },
+      {
+        heading: "Leading the Sangha after the Master's Passing",
+        paragraphs: [
+          "After Sri Ramakrishna's passing away in 1886, Sarada Devi spent some months in pilgrimage, and then went to Kamarpukur where she lived in great privation. Coming to know of this, the disciples of Sri Ramakrishna brought her to Kolkata. This marked a turning point in her life. She now began to accept spiritual seekers as her disciples, and became the open portal to immortality for hundreds of people. Her great universal mother-heart, endowed with boundless love and compassion, embraced all people without any distinction, including many who had lived sinful lives.",
+          "When the Western women disciples of Swami Vivekananda came to Kolkata, the Holy Mother accepted them with open arms as her daughters, ignoring the restrictions of the orthodox society of those days. Although she had grown up in a conservative rural society without any access to modern education, she held progressive views, and whole-heartedly supported Swami Vivekananda in his plans for rejuvenation of India and the uplift of the masses and women. She was closely associated with the school for girls started by Sister Nivedita.",
+        ],
+      },
+      {
+        heading: "Simplicity and Forbearance",
+        paragraphs: [
+          "Although she was highly venerated for her spiritual status, and literally worshipped as the Divine Mother, she continued to live like a simple village mother, washing clothes, sweeping the floor, bringing water from the pond, dressing vegetables, cooking and serving food. At Jayrambati she lived with her brothers and their families. They gave her endless troubles but, established as she was in the awareness of God and in Divine Motherhood, she always remained calm and self-possessed, showering love and blessings on all who came into contact with her. As Sister Nivedita stated, \"Her life was one long stillness of prayer.\"",
+        ],
+      },
+      {
+        heading: "Mother of All",
+        paragraphs: [
+          "In the history of humanity, there has never been another woman who looked upon herself as the Mother of all beings, including animals and birds, and spent her whole life in serving them as her children, undergoing unending sacrifice and self-denial. About her role in the mission of Sri Ramakrishna on earth, she stated: \"My son, you know the Master had a maternal attitude (matri-bhava) towards everyone. He has left me behind to manifest that Divine Motherhood in the world.\"",
+        ],
+      },
+      {
+        heading: "Ideal Woman",
+        paragraphs: [
+          "On account of her immaculate purity, extraordinary forbearance, selfless service, unconditional love, wisdom and spiritual illumination, Swami Vivekananda regarded Sri Sarada Devi as the ideal for women in the modern age. He believed that with the advent of Holy Mother, the spiritual awakening of women in modern times had begun.",
+        ],
+      },
+      {
+        heading: "Last Days",
+        paragraphs: [
+          "Under the strain of constant physical work and repeated attacks of malaria, her health deteriorated in the closing years of her life, and she left the mortal world on 21 July 1920.",
+        ],
+      },
+    ],
+    messages: [
+      "Ordinary human love results in misery. Love for God brings blessedness.",
+      "I tell you one thing — if you want peace, do not find fault with others. Rather see your own faults. Learn to make the whole world your own. No one is a stranger, my child; the whole world is your own.",
+    ],
+  },
+  {
+    slug: "swami-vivekananda",
+    name: "Swami Vivekananda",
+    title: "The Patriot-Saint of India",
+    img: "/images/swami-vivekananda.jpg",
+    sections: [
+      {
+        paragraphs: [
+          "Swami Vivekananda, known in his pre-monastic life as Narendra Nath Datta, was born in an affluent family in Kolkata on 12 January 1863. His father, Vishwanath Datta, was a successful attorney with interests in a wide range of subjects, and his mother, Bhuvaneshwari Devi, was endowed with deep devotion, strong character and other qualities. A precocious boy, Narendra excelled in music, gymnastics and studies. By the time he graduated from Calcutta University, he had acquired a vast knowledge of different subjects, especially Western philosophy and history. Born with a yogic temperament, he used to practice meditation even from his boyhood, and was associated with Brahmo Movement for some time.",
+        ],
+      },
+      {
+        heading: "With Sri Ramakrishna",
+        paragraphs: [
+          "At the threshold of youth, Narendra had to pass through a period of spiritual crisis when doubts about the existence of God assailed him. It was at that time he first heard about Sri Ramakrishna from one of his English professors at college. One day in November 1881, Narendra went to meet Sri Ramakrishna who was staying at the Kali Temple in Dakshineshwar. He straightaway asked the Master a question which he had put to several others but had received no satisfactory answer: \"Sir, have you seen God?\" Without a moment's hesitation, Sri Ramakrishna replied: \"Yes, I have. I see Him as clearly as I see you, only in a much intenser sense.\"",
+          "Apart from removing doubts from the mind of Narendra, Sri Ramakrishna won him over through his pure, unselfish love. Thus began a guru-disciple relationship which is unique in the history of spiritual masters. Narendra now became a frequent visitor to Dakshineshwar and, under the guidance of the Master, made rapid strides on the spiritual path.",
+        ],
+      },
+      {
+        heading: "Difficult Situations",
+        paragraphs: [
+          "After a few years two events took place which caused Narendra considerable distress. One was the sudden death of his father in 1884. This left the family penniless, and Narendra had to bear the burden of supporting his mother, brothers and sisters. The second event was the illness of Sri Ramakrishna which was diagnosed to be cancer of the throat. In September 1885 Sri Ramakrishna was moved to a house at Shyampukur, and a few months later to a rented villa at Cossipore. In these two places the young disciples nursed the Master with devoted care. In spite of poverty at home and inability to find a job for himself, Narendra joined the group as its leader.",
+        ],
+      },
+      {
+        heading: "Beginnings of a Monastic Brotherhood",
+        paragraphs: [
+          "Sri Ramakrishna instilled in these young men the spirit of renunciation and brotherly love for one another. One day he distributed ochre robes among them and sent them out to beg for food. In this way, he laid the foundation for a new monastic order. He gave specific instructions to Narendra about the formation of the new monastic Order. In the small hours of 16 August 1886, Sri Ramakrishna gave up his mortal body.",
+          "After the Master's passing, fifteen of his young disciples (one more joined them later) began to live together in a dilapidated building at Baranagar in North Kolkata. Under the leadership of Narendra, they formed a new monastic brotherhood, and in 1887 they took the formal vows of sannyasa, thereby assuming new names. Narendra now became Swami Vivekananda (although this name was assumed much later).",
+        ],
+      },
+      {
+        heading: "Discovery of Real India",
+        paragraphs: [
+          "During his travels all over India, Swami Vivekananda was deeply moved to see the appalling poverty and backwardness of the masses. He was the first religious leader in India to understand and openly declare that the real cause of India's downfall was the neglect of the masses. The immediate need was to provide food and other bare necessities of life to the hungry millions. For this they should be taught improved methods of agriculture, village industries, etc.",
+          "Owing to centuries of oppression, the downtrodden masses had lost faith in their capacity to improve their lot. It was first of all necessary to infuse into their minds faith in themselves. Swamiji found this message in the principle of the Atman, the doctrine of the potential divinity of the soul, taught in Vedanta. Thus the masses needed two kinds of knowledge: secular knowledge to improve their economic condition, and spiritual knowledge to infuse in them faith in themselves and strengthen their moral sense. Through education — this was the answer that Swamiji found.",
+        ],
+      },
+      {
+        heading: "Parliament of Religions",
+        paragraphs: [
+          "Swami Vivekananda heard about the World's Parliament of Religions to be held in Chicago in 1893. His friends and admirers in India wanted him to attend the Parliament. He too felt that the Parliament would provide the right forum to present his Master's message to the world. With the funds partly collected by his Chennai disciples and partly provided by the Raja of Khetri, Swami Vivekananda left for America from Mumbai on 31 May 1893.",
+          "His speeches at the World's Parliament of Religions held in September 1893 made him famous as an 'orator by divine right' and as a 'Messenger of Indian wisdom to the Western world'. After the Parliament, Swamiji spent nearly three and a half years spreading Vedanta as lived and taught by Sri Ramakrishna, mostly in the eastern parts of USA and also in London.",
+        ],
+      },
+      {
+        heading: "Founding of Ramakrishna Mission",
+        paragraphs: [
+          "He returned to India in January 1897. Through a series of inspiring lectures he attempted to rouse the religious consciousness of the people, bring about unification of Hinduism, and focus attention on the plight of the downtrodden masses.",
+          "Soon after his return to Kolkata, Swami Vivekananda founded on 1 May 1897 a unique type of organization known as Ramakrishna Mission, in which monks and lay people would jointly undertake propagation of Practical Vedanta, and various forms of social service, such as running hospitals, schools, colleges, hostels, rural development centres etc.",
+          "In early 1898 Swami Vivekananda acquired a big plot of land on the western bank of the Ganga at a place called Belur to have a permanent abode for the monastery. Here Swamiji established a new, universal pattern of monastic life which adapts ancient monastic ideals to the conditions of modern life, which gives equal importance to personal illumination and social service.",
+        ],
+      },
+      {
+        heading: "Last Days",
+        paragraphs: [
+          "In June 1899 he went to the West on a second visit. After delivering many lectures there, he returned to Belur Math in December 1900. The rest of his life was spent in India, inspiring and guiding people, both monastic and lay. Incessant work, especially giving lectures and inspiring people, told upon Swamiji's health. His health deteriorated and the end came quietly on the night of 4 July 1902. Before his Mahasamadhi he had written to a Western follower: \"It may be that I shall find it good to get outside my body, to cast it off like a worn out garment. But I shall not cease to work. I shall inspire men everywhere until the whole world shall know that it is one with God.\"",
+        ],
+      },
+    ],
+    messages: [
+      "My ideal, indeed, can be put into a few words, and that is: to preach unto mankind their divinity, and how to make it manifest in every movement of life.",
+      "We want that education by which character is formed, strength of mind is increased, the intellect is expanded, and by which one can stand on one's own feet.",
+      "Religion is realization; not talk, not doctrine, nor theories, however beautiful they may be. It is being and becoming, not hearing or acknowledging; it is the whole soul becoming changed into what it believes.",
+    ],
+  },
+];
+
+export function getInspirationBySlug(slug: string): InspirationBio | undefined {
+  return INSPIRATION_BIOGRAPHIES.find((b) => b.slug === slug);
+}
+
+export function getAllInspirationSlugs(): string[] {
+  return INSPIRATION_BIOGRAPHIES.map((b) => b.slug);
+}

@@ -1,0 +1,1488 @@
+{
+  "node": {
+    "4060949d3a0c6f9e6235d8b740f3c4dc436154275d": {
+      "workers": {
+        "app/(marketing)/contact/page": {
+          "moduleId": 29498,
+          "async": false,
+          "exportedName": "submitContactEnquiry",
+          "filename": "lib/actions/contact.ts"
+        }
+      },
+      "filename": "lib/actions/contact.ts",
+      "exportedName": "submitContactEnquiry"
+    },
+    "40b7ede390420cfde5f1e66619b161e56ba24d93d4": {
+      "workers": {
+        "app/admin/page": {
+          "moduleId": 556996,
+          "async": false,
+          "exportedName": "getAdminDashboard",
+          "filename": "lib/actions/admin-dashboard.ts"
+        }
+      },
+      "filename": "lib/actions/admin-dashboard.ts",
+      "exportedName": "getAdminDashboard"
+    },
+    "00f35bc3f2111a12fa69452a1ee77024158addeced": {
+      "workers": {
+        "app/admin/admissions/[id]/page": {
+          "moduleId": 884522,
+          "async": false,
+          "exportedName": "getAdmissionStats",
+          "filename": "lib/actions/admin-admissions.ts"
+        },
+        "app/admin/admissions/page": {
+          "moduleId": 739223,
+          "async": false,
+          "exportedName": "getAdmissionStats",
+          "filename": "lib/actions/admin-admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admin-admissions.ts",
+      "exportedName": "getAdmissionStats"
+    },
+    "409c813f3d3e7edb254ee7f564515aa1482ff2c417": {
+      "workers": {
+        "app/admin/admissions/[id]/page": {
+          "moduleId": 884522,
+          "async": false,
+          "exportedName": "listApplications",
+          "filename": "lib/actions/admin-admissions.ts"
+        },
+        "app/admin/admissions/page": {
+          "moduleId": 739223,
+          "async": false,
+          "exportedName": "listApplications",
+          "filename": "lib/actions/admin-admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admin-admissions.ts",
+      "exportedName": "listApplications"
+    },
+    "40b1349d231dc85215cc92fe0563cb2d48d3957a5a": {
+      "workers": {
+        "app/admin/admissions/[id]/page": {
+          "moduleId": 884522,
+          "async": false,
+          "exportedName": "getApplicationForStaff",
+          "filename": "lib/actions/admin-admissions.ts"
+        },
+        "app/admin/admissions/page": {
+          "moduleId": 739223,
+          "async": false,
+          "exportedName": "getApplicationForStaff",
+          "filename": "lib/actions/admin-admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admin-admissions.ts",
+      "exportedName": "getApplicationForStaff"
+    },
+    "7026c41819abba5e3d0b05c253c5210b728ea1634d": {
+      "workers": {
+        "app/admin/admissions/[id]/page": {
+          "moduleId": 884522,
+          "async": false,
+          "exportedName": "requestDocuments",
+          "filename": "lib/actions/admin-admissions.ts"
+        },
+        "app/admin/admissions/page": {
+          "moduleId": 739223,
+          "async": false,
+          "exportedName": "requestDocuments",
+          "filename": "lib/actions/admin-admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admin-admissions.ts",
+      "exportedName": "requestDocuments"
+    },
+    "7049cfd77ad0a6ba51c3158cd663e61707f68fcc22": {
+      "workers": {
+        "app/admin/admissions/[id]/page": {
+          "moduleId": 884522,
+          "async": false,
+          "exportedName": "updateApplicationStatus",
+          "filename": "lib/actions/admin-admissions.ts"
+        },
+        "app/admin/admissions/page": {
+          "moduleId": 739223,
+          "async": false,
+          "exportedName": "updateApplicationStatus",
+          "filename": "lib/actions/admin-admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admin-admissions.ts",
+      "exportedName": "updateApplicationStatus"
+    },
+    "004adaac63d9f4ae28e2bd9bd69e30ba128f05e687": {
+      "workers": {
+        "app/admin/ai/page": {
+          "moduleId": 838254,
+          "async": false,
+          "exportedName": "getChatAnalytics",
+          "filename": "lib/actions/admin-ai.ts"
+        }
+      },
+      "filename": "lib/actions/admin-ai.ts",
+      "exportedName": "getChatAnalytics"
+    },
+    "4092297d4bda91fe41e5024a0b565828c30951fe60": {
+      "workers": {
+        "app/admin/ai/page": {
+          "moduleId": 838254,
+          "async": false,
+          "exportedName": "listChatLogs",
+          "filename": "lib/actions/admin-ai.ts"
+        }
+      },
+      "filename": "lib/actions/admin-ai.ts",
+      "exportedName": "listChatLogs"
+    },
+    "00b4aabe2e3e4b7e806b80d586c5f5fa50b2533b0c": {
+      "workers": {
+        "app/admin/audit/page": {
+          "moduleId": 801791,
+          "async": false,
+          "exportedName": "listAuditLogsForAdmin",
+          "filename": "lib/actions/admin-audit.ts"
+        }
+      },
+      "filename": "lib/actions/admin-audit.ts",
+      "exportedName": "listAuditLogsForAdmin"
+    },
+    "408b711eafaad60c48960a0e3e6c35ac2132f8c38b": {
+      "workers": {
+        "app/admin/audit/page": {
+          "moduleId": 801791,
+          "async": false,
+          "exportedName": "listAuditLogs",
+          "filename": "lib/actions/admin-audit.ts"
+        }
+      },
+      "filename": "lib/actions/admin-audit.ts",
+      "exportedName": "listAuditLogs"
+    },
+    "40ddfc99dded1a20a7db0cc368cb2bd80f1f348403": {
+      "workers": {
+        "app/admin/contact/page": {
+          "moduleId": 273357,
+          "async": false,
+          "exportedName": "markEnquiryRead",
+          "filename": "lib/actions/admin-contact.ts"
+        }
+      },
+      "filename": "lib/actions/admin-contact.ts",
+      "exportedName": "markEnquiryRead"
+    },
+    "40dfcf851349bc5d47eb9a5cdfe2e83664ee1ee0cc": {
+      "workers": {
+        "app/admin/contact/page": {
+          "moduleId": 273357,
+          "async": false,
+          "exportedName": "listContactEnquiries",
+          "filename": "lib/actions/admin-contact.ts"
+        }
+      },
+      "filename": "lib/actions/admin-contact.ts",
+      "exportedName": "listContactEnquiries"
+    },
+    "00739fa9dce382af36a233799df62bbe66acab9ca0": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "listDisclosureItems",
+          "filename": "lib/actions/admin-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-content.ts",
+      "exportedName": "listDisclosureItems"
+    },
+    "00c4f97e3589d5c345052c56df36c790eb8b04760c": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "listNewsEvents",
+          "filename": "lib/actions/admin-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-content.ts",
+      "exportedName": "listNewsEvents"
+    },
+    "00d34dd1a120eb9c45cf87c71dda92b8de83e71d48": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "listProgramsAdmin",
+          "filename": "lib/actions/admin-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-content.ts",
+      "exportedName": "listProgramsAdmin"
+    },
+    "00de7a7caf7a910e0fa4ae8526a17bbb96e69419e4": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "listFacultyMembers",
+          "filename": "lib/actions/admin-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-content.ts",
+      "exportedName": "listFacultyMembers"
+    },
+    "00f8367c2ea68e872d3c0da02bea8f73d3f05be659": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "listDepartments",
+          "filename": "lib/actions/admin-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-content.ts",
+      "exportedName": "listDepartments"
+    },
+    "4011a55934954c84777b2d878c70519679e5baeced": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "upsertFacultyMember",
+          "filename": "lib/actions/admin-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-content.ts",
+      "exportedName": "upsertFacultyMember"
+    },
+    "4053535a5216bd70ab0c3b306100e8d414af2a24cd": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "deleteNewsEvent",
+          "filename": "lib/actions/admin-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-content.ts",
+      "exportedName": "deleteNewsEvent"
+    },
+    "408d37f748f5bf2cdf5ce0d2127b9fa4f780608d34": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "upsertProgramAdmin",
+          "filename": "lib/actions/admin-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-content.ts",
+      "exportedName": "upsertProgramAdmin"
+    },
+    "409c4900961d47125745212cc265078995199eda00": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "upsertNewsEvent",
+          "filename": "lib/actions/admin-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-content.ts",
+      "exportedName": "upsertNewsEvent"
+    },
+    "40ce05243a9d4b870282fe58b9dc7b90299c64cf96": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "upsertDisclosureItem",
+          "filename": "lib/actions/admin-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-content.ts",
+      "exportedName": "upsertDisclosureItem"
+    },
+    "4061035e677dfa22069582b60bc48f4568d0a9acbc": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "upsertGalleryItem",
+          "filename": "lib/actions/admin-gallery.ts"
+        }
+      },
+      "filename": "lib/actions/admin-gallery.ts",
+      "exportedName": "upsertGalleryItem"
+    },
+    "40d61efacc5c3e286dea5ef146b9255d7206967229": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "deleteGalleryItem",
+          "filename": "lib/actions/admin-gallery.ts"
+        }
+      },
+      "filename": "lib/actions/admin-gallery.ts",
+      "exportedName": "deleteGalleryItem"
+    },
+    "40e2a5805166ad9f1abd1a75e60c3e4eac7da26318": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "upsertLeadershipEntry",
+          "filename": "lib/actions/admin-site-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-site-content.ts",
+      "exportedName": "upsertLeadershipEntry"
+    },
+    "40fcda45ce057fbe25116e554afb808ebed6076ee0": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "deleteLeadershipEntry",
+          "filename": "lib/actions/admin-site-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-site-content.ts",
+      "exportedName": "deleteLeadershipEntry"
+    },
+    "4037a7130ad488742a1fa43d5e8c19a688d4a94299": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "upsertPublicationLink",
+          "filename": "lib/actions/admin-site-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-site-content.ts",
+      "exportedName": "upsertPublicationLink"
+    },
+    "4085fdcd91f9bc7124e9619a918aa8c30150ff498d": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "deletePublicationLink",
+          "filename": "lib/actions/admin-site-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-site-content.ts",
+      "exportedName": "deletePublicationLink"
+    },
+    "00372a07fba1199233856b97dd25457af3f1433978": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "seedSiteContentFromStatic",
+          "filename": "lib/actions/admin-site-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-site-content.ts",
+      "exportedName": "seedSiteContentFromStatic"
+    },
+    "00c5a74af89c74c5c4ab1a4ec4b0776e68d55059a3": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "listGalleryItems",
+          "filename": "lib/actions/admin-gallery.ts"
+        }
+      },
+      "filename": "lib/actions/admin-gallery.ts",
+      "exportedName": "listGalleryItems"
+    },
+    "0019d97facf0da270b5e58fbf64c31d63686427b8f": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "listPublicationLinks",
+          "filename": "lib/actions/admin-site-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-site-content.ts",
+      "exportedName": "listPublicationLinks"
+    },
+    "00352a3da5d539d291a4a0280e4c79071825f1df84": {
+      "workers": {
+        "app/admin/content/page": {
+          "moduleId": 143590,
+          "async": false,
+          "exportedName": "listLeadershipEntries",
+          "filename": "lib/actions/admin-site-content.ts"
+        }
+      },
+      "filename": "lib/actions/admin-site-content.ts",
+      "exportedName": "listLeadershipEntries"
+    },
+    "406ee9bb5ce4a30fe1954937c16c74ddab3548608a": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "publishErpNotice",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "publishErpNotice"
+    },
+    "400ed902789736a6368e28b0546ce44bc8533ee184": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "recordAttendance",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "recordAttendance"
+    },
+    "40c12e814f5a0b9b7b7576d9549a371d8babd36478": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "publishMark",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "publishMark"
+    },
+    "408f34b2fad74a14e71de468ee3029ec8d2e09d02b": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "addTimetableSlot",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "addTimetableSlot"
+    },
+    "40fd81b0461789bfa731dfbb542ed5bf6caec6e4d0": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "createAssignment",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "createAssignment"
+    },
+    "60d19fcf007072251c7436f8199eaa9e030af909a9": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "updateEnrolmentRoll",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "updateEnrolmentRoll"
+    },
+    "60b99862b433165f208b822a7254e7b4540288fc6e": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "gradeSubmission",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "gradeSubmission"
+    },
+    "40ae4ca89455447247f009542421ec3171ca301d39": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "importAttendanceCsv",
+          "filename": "lib/actions/admin-erp-import.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp-import.ts",
+      "exportedName": "importAttendanceCsv"
+    },
+    "40e56b499cdffdf77129720bac380bd2a66cb25a1d": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "importMarksCsv",
+          "filename": "lib/actions/admin-erp-import.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp-import.ts",
+      "exportedName": "importMarksCsv"
+    },
+    "40373541743b5d10320edd739b368bc24848b8d6d7": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "createFeeRecord",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "createFeeRecord"
+    },
+    "6059e025238d48adf6554ae8037ea5a7777e870f4e": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "recordFeePayment",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "recordFeePayment"
+    },
+    "00129c650a51e4caec447c1409baf7ae3267661852": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "getErpAdminSummary",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "getErpAdminSummary"
+    },
+    "00713b98882b165b27190fcf6b6aca5fbe4d2cc5df": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "listProgramOptions",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "listProgramOptions"
+    },
+    "0096e5bcb605997ba0957a2a911040e768db3b4f31": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "listFeeRecords",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "listFeeRecords"
+    },
+    "00db0b928412035112a889bce83608437e5f002ea2": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "listAdminAssignments",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "listAdminAssignments"
+    },
+    "00f06d791610b08db6e10965753b6cbcbb726a4c8b": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "listEnrolledStudents",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "listEnrolledStudents"
+    },
+    "00f6f815ae9b74652b3f5dabe0f23d31dfdeb85b15": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "listErpNotices",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "listErpNotices"
+    },
+    "400cb3f6ae902b2e4c287975822a5ad2656b79963b": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "listRecentMarks",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "listRecentMarks"
+    },
+    "4055e5427ead5562918faef48f2cdf85128b45f105": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "listRecentAttendance",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "listRecentAttendance"
+    },
+    "408eb8c1a5f0d631cc8612850c8f71e9aabb35fc82": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "listGradingSubmissions",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "listGradingSubmissions"
+    },
+    "40a57f6ab29b4e0849ba784df97ac687fb6d7c141d": {
+      "workers": {
+        "app/admin/erp/page": {
+          "moduleId": 405490,
+          "async": false,
+          "exportedName": "listTimetableSlots",
+          "filename": "lib/actions/admin-erp.ts"
+        }
+      },
+      "filename": "lib/actions/admin-erp.ts",
+      "exportedName": "listTimetableSlots"
+    },
+    "0041d1b187c03adf967a9d77b57c35a89f033fca2f": {
+      "workers": {
+        "app/admin/payments/page": {
+          "moduleId": 688388,
+          "async": false,
+          "exportedName": "listPayments",
+          "filename": "lib/actions/admin-payments.ts"
+        }
+      },
+      "filename": "lib/actions/admin-payments.ts",
+      "exportedName": "listPayments"
+    },
+    "0008d9e98d88db39aa52ee64cf30747f2338d8d6c9": {
+      "workers": {
+        "app/admin/recruitment/page": {
+          "moduleId": 13310,
+          "async": false,
+          "exportedName": "getRecruitmentStats",
+          "filename": "lib/actions/admin-recruitment.ts"
+        }
+      },
+      "filename": "lib/actions/admin-recruitment.ts",
+      "exportedName": "getRecruitmentStats"
+    },
+    "4017d87a06e0edf1c5d85992ef661774ec63bf3fdb": {
+      "workers": {
+        "app/admin/recruitment/page": {
+          "moduleId": 13310,
+          "async": false,
+          "exportedName": "listFacultyApplications",
+          "filename": "lib/actions/admin-recruitment.ts"
+        }
+      },
+      "filename": "lib/actions/admin-recruitment.ts",
+      "exportedName": "listFacultyApplications"
+    },
+    "60017200295738c06b3dc24095786493be55f1b079": {
+      "workers": {
+        "app/admin/recruitment/page": {
+          "moduleId": 13310,
+          "async": false,
+          "exportedName": "updateFacultyAppStatus",
+          "filename": "lib/actions/admin-recruitment.ts"
+        }
+      },
+      "filename": "lib/actions/admin-recruitment.ts",
+      "exportedName": "updateFacultyAppStatus"
+    },
+    "4088627e06d4fc84f1f6d7a9188ad3910dfa31d599": {
+      "workers": {
+        "app/admin/recruitment/page": {
+          "moduleId": 13310,
+          "async": false,
+          "exportedName": "upsertVacancy",
+          "filename": "lib/actions/admin-vacancies.ts"
+        }
+      },
+      "filename": "lib/actions/admin-vacancies.ts",
+      "exportedName": "upsertVacancy"
+    },
+    "6065ab6a17fabe9d9012c8203cbeb4260d58c71f52": {
+      "workers": {
+        "app/admin/recruitment/page": {
+          "moduleId": 13310,
+          "async": false,
+          "exportedName": "setVacancyStatus",
+          "filename": "lib/actions/admin-vacancies.ts"
+        }
+      },
+      "filename": "lib/actions/admin-vacancies.ts",
+      "exportedName": "setVacancyStatus"
+    },
+    "009dd8060dfca303a4918c58a28f5ad816cad6fbb3": {
+      "workers": {
+        "app/admin/recruitment/page": {
+          "moduleId": 13310,
+          "async": false,
+          "exportedName": "listAdminVacancies",
+          "filename": "lib/actions/admin-vacancies.ts"
+        }
+      },
+      "filename": "lib/actions/admin-vacancies.ts",
+      "exportedName": "listAdminVacancies"
+    },
+    "005b1ac86c6ee95d80203cd1439115e33c6e94e469": {
+      "workers": {
+        "app/admin/settings/page": {
+          "moduleId": 315436,
+          "async": false,
+          "exportedName": "getSystemConfig",
+          "filename": "lib/actions/admin-settings.ts"
+        }
+      },
+      "filename": "lib/actions/admin-settings.ts",
+      "exportedName": "getSystemConfig"
+    },
+    "0007613b14f392ea9235e2279bd7eb6c9e47f2f680": {
+      "workers": {
+        "app/admin/users/page": {
+          "moduleId": 75567,
+          "async": false,
+          "exportedName": "listUsers",
+          "filename": "lib/actions/admin-users.ts"
+        }
+      },
+      "filename": "lib/actions/admin-users.ts",
+      "exportedName": "listUsers"
+    },
+    "60842f656dd738e51a0b0f923502333582817ae6c5": {
+      "workers": {
+        "app/admin/users/page": {
+          "moduleId": 75567,
+          "async": false,
+          "exportedName": "updateUserRole",
+          "filename": "lib/actions/admin-users.ts"
+        }
+      },
+      "filename": "lib/actions/admin-users.ts",
+      "exportedName": "updateUserRole"
+    },
+    "00aabf7678fb8b1aa572b88e9576c775aef1199198": {
+      "workers": {
+        "app/admissions/apply/page": {
+          "moduleId": 669470,
+          "async": false,
+          "exportedName": "createOrResumeDraft",
+          "filename": "lib/actions/admissions.ts"
+        },
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "createOrResumeDraft",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "createOrResumeDraft"
+    },
+    "60fb50f37d3e6c0c593cb67b942e05862fc36e7515": {
+      "workers": {
+        "app/admissions/apply/page": {
+          "moduleId": 669470,
+          "async": false,
+          "exportedName": "savePersonalStep",
+          "filename": "lib/actions/admissions.ts"
+        },
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "savePersonalStep",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "savePersonalStep"
+    },
+    "609ecee2ef85eb2f2b669bb9f15dd91b400b1b5c4a": {
+      "workers": {
+        "app/admissions/apply/page": {
+          "moduleId": 669470,
+          "async": false,
+          "exportedName": "saveAcademicStep",
+          "filename": "lib/actions/admissions.ts"
+        },
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "saveAcademicStep",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "saveAcademicStep"
+    },
+    "60caa099fc153501292807932c99948af89a3e5541": {
+      "workers": {
+        "app/admissions/apply/page": {
+          "moduleId": 669470,
+          "async": false,
+          "exportedName": "saveProgramStep",
+          "filename": "lib/actions/admissions.ts"
+        },
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "saveProgramStep",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "saveProgramStep"
+    },
+    "40f299dcc88a967eccdb2b7b21ee9b049dd666734d": {
+      "workers": {
+        "app/admissions/apply/page": {
+          "moduleId": 669470,
+          "async": false,
+          "exportedName": "saveDocumentsStep",
+          "filename": "lib/actions/admissions.ts"
+        },
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "saveDocumentsStep",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "saveDocumentsStep"
+    },
+    "70a94a188fad3f2ed491c3d5f7c2f87e2d46aff477": {
+      "workers": {
+        "app/admissions/apply/page": {
+          "moduleId": 669470,
+          "async": false,
+          "exportedName": "recordDocumentUploaded",
+          "filename": "lib/actions/admissions.ts"
+        },
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "recordDocumentUploaded",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "recordDocumentUploaded"
+    },
+    "603bc5f51537502b518ec836f1125c840f7ed24c04": {
+      "workers": {
+        "app/admissions/apply/page": {
+          "moduleId": 669470,
+          "async": false,
+          "exportedName": "submitApplication",
+          "filename": "lib/actions/admissions.ts"
+        },
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "submitApplication",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "submitApplication"
+    },
+    "0012cbf82d5b2d4471843b715b0284fcc62f640703": {
+      "workers": {
+        "app/admissions/apply/page": {
+          "moduleId": 669470,
+          "async": false,
+          "exportedName": "getActivePrograms",
+          "filename": "lib/actions/admissions.ts"
+        },
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "getActivePrograms",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "getActivePrograms"
+    },
+    "0031cb2ce4bfbfc566c127a13a25afd609baf36046": {
+      "workers": {
+        "app/admissions/apply/page": {
+          "moduleId": 669470,
+          "async": false,
+          "exportedName": "getPaymentConfig",
+          "filename": "lib/actions/payments.ts"
+        },
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "getPaymentConfig",
+          "filename": "lib/actions/payments.ts"
+        }
+      },
+      "filename": "lib/actions/payments.ts",
+      "exportedName": "getPaymentConfig"
+    },
+    "408b65bf1fbc25c790b3562496003b9c62c6f4005b": {
+      "workers": {
+        "app/admissions/apply/page": {
+          "moduleId": 669470,
+          "async": false,
+          "exportedName": "isApplicationPaid",
+          "filename": "lib/actions/payments.ts"
+        },
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "isApplicationPaid",
+          "filename": "lib/actions/payments.ts"
+        }
+      },
+      "filename": "lib/actions/payments.ts",
+      "exportedName": "isApplicationPaid"
+    },
+    "006597db450fbd5c0375a7e1e0a13c67cc332fc3de": {
+      "workers": {
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "getMyApplications",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "getMyApplications"
+    },
+    "0088fc58aed64b868c5394fb2e1b882258b78e7710": {
+      "workers": {
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "getMyNotifications",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "getMyNotifications"
+    },
+    "401d772339be852135ec8a3ba87bf6c65ef477225a": {
+      "workers": {
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "getApplicationById",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "getApplicationById"
+    },
+    "405588253bb74b5c59009854ec6e0fabf8b95ef4e7": {
+      "workers": {
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "markNotificationsRead",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "markNotificationsRead"
+    },
+    "40e11d8640beeb5db48933025e3fac1ea60af18b8c": {
+      "workers": {
+        "app/admissions/dashboard/page": {
+          "moduleId": 158362,
+          "async": false,
+          "exportedName": "getApplicationPaymentMap",
+          "filename": "lib/actions/admissions.ts"
+        }
+      },
+      "filename": "lib/actions/admissions.ts",
+      "exportedName": "getApplicationPaymentMap"
+    },
+    "0087d0af1a3611bc38affc4ef634c7f31633ab06c8": {
+      "workers": {
+        "app/careers/[id]/page": {
+          "moduleId": 137397,
+          "async": false,
+          "exportedName": "getMyFacultyApplications",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/apply/[id]/page": {
+          "moduleId": 237091,
+          "async": false,
+          "exportedName": "getMyFacultyApplications",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/dashboard/page": {
+          "moduleId": 546751,
+          "async": false,
+          "exportedName": "getMyFacultyApplications",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/page": {
+          "moduleId": 950740,
+          "async": false,
+          "exportedName": "getMyFacultyApplications",
+          "filename": "lib/actions/recruitment.ts"
+        }
+      },
+      "filename": "lib/actions/recruitment.ts",
+      "exportedName": "getMyFacultyApplications"
+    },
+    "00976e2227f5c3bc66fd656c9eb2728b146f6167e7": {
+      "workers": {
+        "app/careers/[id]/page": {
+          "moduleId": 137397,
+          "async": false,
+          "exportedName": "getOpenVacancies",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/apply/[id]/page": {
+          "moduleId": 237091,
+          "async": false,
+          "exportedName": "getOpenVacancies",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/dashboard/page": {
+          "moduleId": 546751,
+          "async": false,
+          "exportedName": "getOpenVacancies",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/page": {
+          "moduleId": 950740,
+          "async": false,
+          "exportedName": "getOpenVacancies",
+          "filename": "lib/actions/recruitment.ts"
+        }
+      },
+      "filename": "lib/actions/recruitment.ts",
+      "exportedName": "getOpenVacancies"
+    },
+    "40321722d3ebf4d0170e127cdeae357413022c2264": {
+      "workers": {
+        "app/careers/[id]/page": {
+          "moduleId": 137397,
+          "async": false,
+          "exportedName": "getVacancyById",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/apply/[id]/page": {
+          "moduleId": 237091,
+          "async": false,
+          "exportedName": "getVacancyById",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/dashboard/page": {
+          "moduleId": 546751,
+          "async": false,
+          "exportedName": "getVacancyById",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/page": {
+          "moduleId": 950740,
+          "async": false,
+          "exportedName": "getVacancyById",
+          "filename": "lib/actions/recruitment.ts"
+        }
+      },
+      "filename": "lib/actions/recruitment.ts",
+      "exportedName": "getVacancyById"
+    },
+    "7889f64753626b27644363e5b47036a3f7f6aab8e3": {
+      "workers": {
+        "app/careers/[id]/page": {
+          "moduleId": 137397,
+          "async": false,
+          "exportedName": "submitFacultyApplication",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/apply/[id]/page": {
+          "moduleId": 237091,
+          "async": false,
+          "exportedName": "submitFacultyApplication",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/dashboard/page": {
+          "moduleId": 546751,
+          "async": false,
+          "exportedName": "submitFacultyApplication",
+          "filename": "lib/actions/recruitment.ts"
+        },
+        "app/careers/page": {
+          "moduleId": 950740,
+          "async": false,
+          "exportedName": "submitFacultyApplication",
+          "filename": "lib/actions/recruitment.ts"
+        }
+      },
+      "filename": "lib/actions/recruitment.ts",
+      "exportedName": "submitFacultyApplication"
+    },
+    "00114cdd415726434c89bbbe40ea69794899429a87": {
+      "workers": {
+        "app/student/assignments/page": {
+          "moduleId": 503402,
+          "async": false,
+          "exportedName": "getStudentNotices",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/attendance/page": {
+          "moduleId": 257575,
+          "async": false,
+          "exportedName": "getStudentNotices",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/marks/page": {
+          "moduleId": 831145,
+          "async": false,
+          "exportedName": "getStudentNotices",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/page": {
+          "moduleId": 195728,
+          "async": false,
+          "exportedName": "getStudentNotices",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/timetable/page": {
+          "moduleId": 612667,
+          "async": false,
+          "exportedName": "getStudentNotices",
+          "filename": "lib/actions/erp.ts"
+        }
+      },
+      "filename": "lib/actions/erp.ts",
+      "exportedName": "getStudentNotices"
+    },
+    "00c18936961069c91ad65b99d1d272bcd450df9432": {
+      "workers": {
+        "app/student/assignments/page": {
+          "moduleId": 503402,
+          "async": false,
+          "exportedName": "getErpPageData",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/attendance/page": {
+          "moduleId": 257575,
+          "async": false,
+          "exportedName": "getErpPageData",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/marks/page": {
+          "moduleId": 831145,
+          "async": false,
+          "exportedName": "getErpPageData",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/page": {
+          "moduleId": 195728,
+          "async": false,
+          "exportedName": "getErpPageData",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/timetable/page": {
+          "moduleId": 612667,
+          "async": false,
+          "exportedName": "getErpPageData",
+          "filename": "lib/actions/erp.ts"
+        }
+      },
+      "filename": "lib/actions/erp.ts",
+      "exportedName": "getErpPageData"
+    },
+    "00c8096a3dd2a59c01ac26a82c853c606de6035ea9": {
+      "workers": {
+        "app/student/assignments/page": {
+          "moduleId": 503402,
+          "async": false,
+          "exportedName": "getStudentDashboard",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/attendance/page": {
+          "moduleId": 257575,
+          "async": false,
+          "exportedName": "getStudentDashboard",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/marks/page": {
+          "moduleId": 831145,
+          "async": false,
+          "exportedName": "getStudentDashboard",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/page": {
+          "moduleId": 195728,
+          "async": false,
+          "exportedName": "getStudentDashboard",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/timetable/page": {
+          "moduleId": 612667,
+          "async": false,
+          "exportedName": "getStudentDashboard",
+          "filename": "lib/actions/erp.ts"
+        }
+      },
+      "filename": "lib/actions/erp.ts",
+      "exportedName": "getStudentDashboard"
+    },
+    "4046cae8834eef1aebe1904e25c84b4a25fe0c2b6b": {
+      "workers": {
+        "app/student/assignments/page": {
+          "moduleId": 503402,
+          "async": false,
+          "exportedName": "getStudentEnrolments",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/attendance/page": {
+          "moduleId": 257575,
+          "async": false,
+          "exportedName": "getStudentEnrolments",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/marks/page": {
+          "moduleId": 831145,
+          "async": false,
+          "exportedName": "getStudentEnrolments",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/page": {
+          "moduleId": 195728,
+          "async": false,
+          "exportedName": "getStudentEnrolments",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/timetable/page": {
+          "moduleId": 612667,
+          "async": false,
+          "exportedName": "getStudentEnrolments",
+          "filename": "lib/actions/erp.ts"
+        }
+      },
+      "filename": "lib/actions/erp.ts",
+      "exportedName": "getStudentEnrolments"
+    },
+    "407ecd14a9f202cb693e273af3707ee61809e5932c": {
+      "workers": {
+        "app/student/assignments/page": {
+          "moduleId": 503402,
+          "async": false,
+          "exportedName": "getStudentFees",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/attendance/page": {
+          "moduleId": 257575,
+          "async": false,
+          "exportedName": "getStudentFees",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/marks/page": {
+          "moduleId": 831145,
+          "async": false,
+          "exportedName": "getStudentFees",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/page": {
+          "moduleId": 195728,
+          "async": false,
+          "exportedName": "getStudentFees",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/timetable/page": {
+          "moduleId": 612667,
+          "async": false,
+          "exportedName": "getStudentFees",
+          "filename": "lib/actions/erp.ts"
+        }
+      },
+      "filename": "lib/actions/erp.ts",
+      "exportedName": "getStudentFees"
+    },
+    "40c0f8cb9c7d6ab7ba1ca58f4d2168ef77439b764e": {
+      "workers": {
+        "app/student/assignments/page": {
+          "moduleId": 503402,
+          "async": false,
+          "exportedName": "getStudentTimetable",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/attendance/page": {
+          "moduleId": 257575,
+          "async": false,
+          "exportedName": "getStudentTimetable",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/marks/page": {
+          "moduleId": 831145,
+          "async": false,
+          "exportedName": "getStudentTimetable",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/page": {
+          "moduleId": 195728,
+          "async": false,
+          "exportedName": "getStudentTimetable",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/timetable/page": {
+          "moduleId": 612667,
+          "async": false,
+          "exportedName": "getStudentTimetable",
+          "filename": "lib/actions/erp.ts"
+        }
+      },
+      "filename": "lib/actions/erp.ts",
+      "exportedName": "getStudentTimetable"
+    },
+    "40cfffa49c446a5d363928329ab2c4f22804a61b82": {
+      "workers": {
+        "app/student/assignments/page": {
+          "moduleId": 503402,
+          "async": false,
+          "exportedName": "getStudentMarks",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/attendance/page": {
+          "moduleId": 257575,
+          "async": false,
+          "exportedName": "getStudentMarks",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/marks/page": {
+          "moduleId": 831145,
+          "async": false,
+          "exportedName": "getStudentMarks",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/page": {
+          "moduleId": 195728,
+          "async": false,
+          "exportedName": "getStudentMarks",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/timetable/page": {
+          "moduleId": 612667,
+          "async": false,
+          "exportedName": "getStudentMarks",
+          "filename": "lib/actions/erp.ts"
+        }
+      },
+      "filename": "lib/actions/erp.ts",
+      "exportedName": "getStudentMarks"
+    },
+    "40d4fcdc56ee46cac8c89f825be19fdc110710f1f8": {
+      "workers": {
+        "app/student/assignments/page": {
+          "moduleId": 503402,
+          "async": false,
+          "exportedName": "getStudentAttendance",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/attendance/page": {
+          "moduleId": 257575,
+          "async": false,
+          "exportedName": "getStudentAttendance",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/marks/page": {
+          "moduleId": 831145,
+          "async": false,
+          "exportedName": "getStudentAttendance",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/page": {
+          "moduleId": 195728,
+          "async": false,
+          "exportedName": "getStudentAttendance",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/timetable/page": {
+          "moduleId": 612667,
+          "async": false,
+          "exportedName": "getStudentAttendance",
+          "filename": "lib/actions/erp.ts"
+        }
+      },
+      "filename": "lib/actions/erp.ts",
+      "exportedName": "getStudentAttendance"
+    },
+    "60ba01321189f779e0d21563ce3dd67ae8b357d3f3": {
+      "workers": {
+        "app/student/assignments/page": {
+          "moduleId": 503402,
+          "async": false,
+          "exportedName": "getStudentAssignments",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/attendance/page": {
+          "moduleId": 257575,
+          "async": false,
+          "exportedName": "getStudentAssignments",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/marks/page": {
+          "moduleId": 831145,
+          "async": false,
+          "exportedName": "getStudentAssignments",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/page": {
+          "moduleId": 195728,
+          "async": false,
+          "exportedName": "getStudentAssignments",
+          "filename": "lib/actions/erp.ts"
+        },
+        "app/student/timetable/page": {
+          "moduleId": 612667,
+          "async": false,
+          "exportedName": "getStudentAssignments",
+          "filename": "lib/actions/erp.ts"
+        }
+      },
+      "filename": "lib/actions/erp.ts",
+      "exportedName": "getStudentAssignments"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "n/4Qg3J33SRHtG+lHIlvjgIfRew1vtb1Ft/VrregV8M="
+}

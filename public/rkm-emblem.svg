@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#E89820"/>
+    </radialGradient>
+    <radialGradient id="bgGrad" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#FFF8EF"/>
+      <stop offset="100%" stop-color="#F5E6CC"/>
+    </radialGradient>
+    <clipPath id="circle-clip">
+      <circle cx="100" cy="100" r="90"/>
+    </clipPath>
+  </defs>
+
+  <!-- Outer decorative ring -->
+  <circle cx="100" cy="100" r="97" fill="#B5461B" opacity="0.15"/>
+  <circle cx="100" cy="100" r="93" fill="#E89820" opacity="0.12"/>
+
+  <!-- Background fill -->
+  <circle cx="100" cy="100" r="90" fill="url(#bgGrad)"/>
+
+  <!-- Encircling serpent (Raja Yoga)  coiled border -->
+  <circle cx="100" cy="100" r="88" stroke="#8B2E0F" stroke-width="4" stroke-dasharray="8 4" fill="none" opacity="0.7"/>
+  <!-- Serpent head at top -->
+  <ellipse cx="100" cy="14" rx="6" ry="4" fill="#8B2E0F"/>
+  <path d="M96 14 Q100 8 104 14" stroke="#8B2E0F" stroke-width="1.5" fill="none"/>
+  <!-- Forked tongue -->
+  <line x1="100" y1="10" x2="97" y2="6" stroke="#B5461B" stroke-width="1"/>
+  <line x1="100" y1="10" x2="103" y2="6" stroke="#B5461B" stroke-width="1"/>
+
+  <!-- Rising sun (Jnana Yoga)  upper half -->
+  <g clip-path="url(#circle-clip)">
+    <!-- Sun rays -->
+    <line x1="100" y1="55" x2="100" y2="30" stroke="#E89820" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="100" y1="55" x2="122" y2="36" stroke="#E89820" stroke-width="2" stroke-linecap="round"/>
+    <line x1="100" y1="55" x2="78" y2="36" stroke="#E89820" stroke-width="2" stroke-linecap="round"/>
+    <line x1="100" y1="55" x2="135" y2="48" stroke="#E89820" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="100" y1="55" x2="65" y2="48" stroke="#E89820" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="100" y1="55" x2="138" y2="62" stroke="#E89820" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+    <line x1="100" y1="55" x2="62" y2="62" stroke="#E89820" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+    <!-- Sun semicircle -->
+    <path d="M68 55 A32 32 0 0 1 132 55" fill="url(#sunGrad)" stroke="#D4831A" stroke-width="1.5"/>
+    <!-- Sun core glow -->
+    <circle cx="100" cy="55" r="10" fill="#FFD700" opacity="0.9"/>
+  </g>
+
+  <!-- Swan / Hamsa (Paramatman)  center -->
+  <!-- Body -->
+  <ellipse cx="100" cy="115" rx="22" ry="13" fill="white" stroke="#C8A060" stroke-width="1"/>
+  <!-- Neck -->
+  <path d="M100 103 Q90 97 85 90 Q84 85 88 84 Q93 83 96 88 Q100 94 102 103" fill="white" stroke="#C8A060" stroke-width="1"/>
+  <!-- Head -->
+  <ellipse cx="87" cy="84" rx="7" ry="5.5" fill="white" stroke="#C8A060" stroke-width="1"/>
+  <!-- Beak -->
+  <path d="M81 84 L75 83 L76 86 Z" fill="#E89820"/>
+  <!-- Eye -->
+  <circle cx="85" cy="82" r="1.5" fill="#333"/>
+  <!-- Wing -->
+  <path d="M104 110 Q118 104 126 112 Q118 116 104 118Z" fill="white" stroke="#C8A060" stroke-width="1" opacity="0.9"/>
+  <!-- Tail -->
+  <path d="M120 118 Q128 120 130 116 Q126 123 118 122Z" fill="white" stroke="#C8A060" stroke-width="1"/>
+
+  <!-- Lotus (Bhakti Yoga)  below swan, above water -->
+  <!-- Petals -->
+  <path d="M100 132 Q94 124 100 120 Q106 124 100 132Z" fill="#E87070" opacity="0.9"/>
+  <path d="M100 132 Q108 124 115 128 Q112 135 100 132Z" fill="#E87070" opacity="0.8"/>
+  <path d="M100 132 Q92 124 85 128 Q88 135 100 132Z" fill="#E87070" opacity="0.8"/>
+  <path d="M100 132 Q114 130 118 137 Q110 140 100 132Z" fill="#D96060" opacity="0.7"/>
+  <path d="M100 132 Q86 130 82 137 Q90 140 100 132Z" fill="#D96060" opacity="0.7"/>
+  <!-- Lotus center -->
+  <circle cx="100" cy="130" r="5" fill="#E89820"/>
+
+  <!-- Wavy waters (Karma Yoga)  bottom band -->
+  <g clip-path="url(#circle-clip)">
+    <rect x="10" y="148" width="180" height="42" fill="#4A90C4" opacity="0.25" rx="2"/>
+    <!-- Wave 1 -->
+    <path d="M10 152 Q30 146 50 152 Q70 158 90 152 Q110 146 130 152 Q150 158 170 152 Q185 148 190 152" stroke="#3A7CB8" stroke-width="2" fill="none" opacity="0.8"/>
+    <!-- Wave 2 -->
+    <path d="M10 160 Q30 154 50 160 Q70 166 90 160 Q110 154 130 160 Q150 166 170 160 Q185 156 190 160" stroke="#3A7CB8" stroke-width="2" fill="none" opacity="0.7"/>
+    <!-- Wave 3 -->
+    <path d="M10 168 Q30 162 50 168 Q70 174 90 168 Q110 162 130 168 Q150 174 170 168 Q185 164 190 168" stroke="#3A7CB8" stroke-width="2" fill="none" opacity="0.6"/>
+  </g>
+
+  <!-- Outer gold ring -->
+  <circle cx="100" cy="100" r="90" stroke="#B5461B" stroke-width="3" fill="none"/>
+  <circle cx="100" cy="100" r="86" stroke="#E89820" stroke-width="1" fill="none" opacity="0.5"/>
+</svg>
