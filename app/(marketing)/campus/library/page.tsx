@@ -40,6 +40,15 @@ export default async function LibraryPage() {
             ))}
           </div>
 
+          <div className="flex flex-wrap gap-3 mb-10">
+            <Link
+              href="/campus/library/e-resources"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#0D2660] hover:text-[#C8201A]"
+            >
+              Surfing Zone — All E-Resources <ExternalLink className="h-4 w-4" />
+            </Link>
+          </div>
+
           <p className="text-gray-600 text-sm mb-12">
             The library supports the Four-Year Undergraduate Programme (FYUGP) under NEP 2020, with dedicated sections for Commerce, Computer Science, and Physics. For library membership queries, contact the college office.
           </p>

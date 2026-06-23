@@ -13,6 +13,7 @@ export function NewsEditor({ items }: { items: NewsEvent[] }) {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     title: "", slug: "", category: "Notice", body: "", is_published: false,
+    attachment_url: "", attachment_label: "", language: "",
   });
 
   async function publish(e: React.FormEvent) {
@@ -27,7 +28,7 @@ export function NewsEditor({ items }: { items: NewsEvent[] }) {
     setLoading(false);
     if (!result.ok) { toast.error(result.error); return; }
     toast.success("News item saved");
-    setForm({ title: "", slug: "", category: "Notice", body: "", is_published: false });
+    setForm({ title: "", slug: "", category: "Notice", body: "", is_published: false, attachment_url: "", attachment_label: "", language: "" });
     router.refresh();
   }
 
@@ -40,6 +41,14 @@ export function NewsEditor({ items }: { items: NewsEvent[] }) {
         <Input placeholder="Category" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
         <textarea className="w-full border rounded-md p-3 text-sm min-h-[100px]" placeholder="Body"
           value={form.body} onChange={(e) => setForm({ ...form, body: e.target.value })} />
+        <Input placeholder="Attachment URL (PDF or link)" value={form.attachment_url}
+          onChange={(e) => setForm({ ...form, attachment_url: e.target.value })} />
+        <div className="grid sm:grid-cols-2 gap-3">
+          <Input placeholder="Attachment label" value={form.attachment_label}
+            onChange={(e) => setForm({ ...form, attachment_label: e.target.value })} />
+          <Input placeholder="Language tag (EN / HI / EN+HI)" value={form.language}
+            onChange={(e) => setForm({ ...form, language: e.target.value })} />
+        </div>
         <label className="flex items-center gap-2 text-sm">
           <input type="checkbox" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} />
           Publish immediately

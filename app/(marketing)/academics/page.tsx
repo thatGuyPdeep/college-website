@@ -66,9 +66,18 @@ export default function AcademicsPage() {
             ))}
           </div>
 
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild className="w-full sm:w-auto bg-[#C8201A] hover:bg-[#9B1812] text-white font-semibold min-h-11">
               <Link href="/admissions/apply">Apply for Admission <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            </Button>
+            <Button asChild variant="outline" className="w-full sm:w-auto border-[#0D2660] text-[#0D2660] min-h-11">
+              <Link href="/academics/syllabus">Syllabus</Link>
+            </Button>
+            <Button asChild variant="outline" className="w-full sm:w-auto border-[#0D2660] text-[#0D2660] min-h-11">
+              <Link href="/academics/calendar">Academic Calendar</Link>
+            </Button>
+            <Button asChild variant="outline" className="w-full sm:w-auto border-[#0D2660] text-[#0D2660] min-h-11">
+              <Link href="/admissions/seats">Seats Availability</Link>
             </Button>
           </div>
         </div>

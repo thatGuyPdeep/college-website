@@ -1,4 +1,5 @@
 import type { DisclosureSection } from "@/lib/content/public-data";
+import { GOVERNANCE_DOCUMENTS } from "@/lib/content/governance-docs";
 
 /** Full UGC/AICTE disclosure structure — merged with DB overrides in getMergedDisclosure() */
 export const FULL_DISCLOSURE_SECTIONS: DisclosureSection[] = [
@@ -24,6 +25,8 @@ export const FULL_DISCLOSURE_SECTIONS: DisclosureSection[] = [
       { label: "List of Academic Programmes", href: "/academics" },
       { label: "Departments / Schools", href: "/academics/departments" },
       { label: "Faculty Details with Photographs", href: "/faculty" },
+      { label: "Academic Calendar", href: "/academics/calendar" },
+      { label: "UG Syllabus (FYUGP)", href: "/academics/syllabus" },
       { label: "Library", href: "/campus/library" },
     ],
   },
@@ -31,6 +34,7 @@ export const FULL_DISCLOSURE_SECTIONS: DisclosureSection[] = [
     id: "admissions_fee", label: "D) Admissions & Fee",
     items: [
       { label: "Admissions Overview", href: "/admissions" },
+      { label: "Seats Availability", href: "/admissions/seats" },
       { label: "How to Apply", href: "/admissions/how-to-apply" },
       { label: "Fee Structure", href: "/admissions/fees" },
       { label: "Scholarships & Reservation", href: "/admissions/scholarships" },
@@ -57,7 +61,14 @@ export const FULL_DISCLOSURE_SECTIONS: DisclosureSection[] = [
     id: "aicte", label: "G) AICTE / Regulatory",
     items: [
       { label: "Faculty Details – Department-wise", href: "/faculty" },
-      { label: "Programme-wise Intake", href: "/academics" },
+      { label: "Programme-wise Intake", href: "/admissions/seats" },
     ],
+  },
+  {
+    id: "governance", label: "H) Governance & Regulatory",
+    items: GOVERNANCE_DOCUMENTS.map((d) => ({
+      label: d.label,
+      href:  d.href,
+    })),
   },
 ];

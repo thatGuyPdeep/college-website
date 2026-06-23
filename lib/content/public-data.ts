@@ -14,6 +14,10 @@ export type PublicNewsItem = {
   body?: string | null;
   img: string;
   fromDb: boolean;
+  attachmentUrl?: string | null;
+  attachmentLabel?: string | null;
+  attachmentSize?: string | null;
+  language?: string | null;
 };
 
 const DEFAULT_IMG = "/images/school-1.jpg";
@@ -40,22 +44,37 @@ export async function getPublicNews(limit?: number): Promise<PublicNewsItem[]> {
         body:     n.body,
         img:      n.cover_url ?? DEFAULT_IMG,
         fromDb:   true,
+        attachmentUrl:   n.attachment_url ?? null,
+        attachmentLabel: n.attachment_label ?? (n.attachment_url ? "Download PDF" : null),
+        language:        n.language ?? null,
       }));
     }
   } catch {
     /* fallback */
   }
 
-  return NEWS_EVENTS.map((n) => ({
-    title:    n.title,
-    slug:     n.title.toLowerCase().replace(/\s+/g, "-").slice(0, 60),
-    category: n.category,
-    date:     n.date,
-    excerpt:  n.excerpt,
-    body:     n.excerpt,
-    img:      n.img,
-    fromDb:   false,
-  })).slice(0, limit ?? 50);
+  return NEWS_EVENTS.map((n) => {
+    const extra = n as typeof n & {
+      attachmentUrl?: string;
+      attachmentLabel?: string;
+      attachmentSize?: string;
+      language?: string;
+    };
+    return {
+      title:    n.title,
+      slug:     n.slug,
+      category: n.category,
+      date:     n.date,
+      excerpt:  n.excerpt,
+      body:     n.excerpt,
+      img:      n.img,
+      fromDb:   false,
+      attachmentUrl:   extra.attachmentUrl ?? null,
+      attachmentLabel: extra.attachmentLabel ?? null,
+      attachmentSize:  extra.attachmentSize ?? null,
+      language:        extra.language ?? null,
+    };
+  }).slice(0, limit ?? 50);
 }
 
 export async function getNewsBySlug(slug: string): Promise<PublicNewsItem | null> {

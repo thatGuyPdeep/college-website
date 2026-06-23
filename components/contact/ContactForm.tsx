@@ -9,7 +9,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { submitContactEnquiry } from "@/lib/actions/contact";
 import { DpdpConsent } from "@/components/legal/DpdpConsent";
 
-export function ContactForm() {
+export function ContactForm({
+  defaultSubject = "",
+  defaultMessage = "",
+}: {
+  defaultSubject?: string;
+  defaultMessage?: string;
+}) {
   const [loading, setLoading] = useState(false);
   const [sent, setSent]       = useState(false);
   const [consent, setConsent] = useState(false);
@@ -64,11 +70,11 @@ export function ContactForm() {
       </div>
       <div>
         <Label htmlFor="subject">Subject</Label>
-        <Input id="subject" name="subject" placeholder="How can we help?" className="mt-1.5 min-h-11" required />
+        <Input id="subject" name="subject" placeholder="How can we help?" className="mt-1.5 min-h-11" required defaultValue={defaultSubject} />
       </div>
       <div>
         <Label htmlFor="message">Message</Label>
-        <Textarea id="message" name="message" placeholder="Your message..." className="mt-1.5 min-h-[140px]" required />
+        <Textarea id="message" name="message" placeholder="Your message..." className="mt-1.5 min-h-[140px]" required defaultValue={defaultMessage} />
       </div>
       <div className="hidden" aria-hidden="true">
         <Label htmlFor="website">Website</Label>

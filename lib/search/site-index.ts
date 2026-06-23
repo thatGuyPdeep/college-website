@@ -22,7 +22,8 @@ export function buildSiteIndex(): SearchResult[] {
     { title: "Library", excerpt: "Library resources, timings, and e-resources", href: "/campus/library", category: "page" },
     { title: "Gallery", excerpt: "Photo albums from campus events", href: "/gallery", category: "page" },
     { title: "Placements", excerpt: "Placement statistics and recruiter information", href: "/placements", category: "page" },
-    { title: "Admissions Overview", excerpt: "Fees, scholarships, and how to apply for UG programmes", href: "/admissions", category: "admission" },
+    { title: "Syllabus", excerpt: "FYUGP semester-wise syllabus 2024–28", href: "/academics/syllabus", category: "page" },
+    { title: "Seats Availability", excerpt: "Programme-wise sanctioned intake for UG, ITI, and school", href: "/admissions/seats", category: "admission" },
     { title: "How to Apply", excerpt: "Step-by-step admission application guide", href: "/admissions/how-to-apply", category: "admission" },
     { title: "Fee Structure", excerpt: "Programme fees and refund policy", href: "/admissions/fees", category: "admission" },
     { title: "Scholarships", excerpt: "Government scholarships and reservation policy", href: "/admissions/scholarships", category: "admission" },
@@ -61,7 +62,7 @@ export function buildSiteIndex(): SearchResult[] {
   const news = NEWS_EVENTS.map((n) => ({
     title:    n.title,
     excerpt:  n.excerpt,
-    href:     "/news",
+    href:     `/news/${n.slug}`,
     category: "news" as const,
   }));
 

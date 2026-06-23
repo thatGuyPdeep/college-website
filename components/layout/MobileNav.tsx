@@ -12,7 +12,9 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 import { AuthNav } from "@/components/layout/AuthNav";
+import { FontSizeControl } from "@/components/layout/FontSizeControl";
 import { NAV_LINKS } from "@/lib/utils/constants";
+import { UTILITY_BAR_LINKS } from "@/lib/content/design-portal";
 import { cn } from "@/lib/utils";
 
 type MobileNavProps = {
@@ -111,7 +113,25 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
           </ul>
         </nav>
 
-        <div className="mt-auto border-t border-blue-100 p-4 space-y-2 bg-white">
+        <div className="mt-auto border-t border-blue-100 p-4 space-y-3 bg-white">
+          <div className="flex flex-wrap gap-2 pb-1">
+            {UTILITY_BAR_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={close}
+                className="text-xs px-2.5 py-1.5 rounded-md bg-gray-100 text-gray-700 hover:bg-blue-50 hover:text-[#0D2660]"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+          <div className="flex items-center justify-between gap-2">
+            <Link href="/" onClick={close} className="text-sm text-gray-600 font-devanagari hover:text-[#0D2660]">
+              हिन्दी
+            </Link>
+            <FontSizeControl variant="light" />
+          </div>
           <AuthNav variant="mobile" onNavigate={close} />
           <Button asChild className="w-full bg-[#C8201A] hover:bg-[#9B1812] text-white min-h-11">
             <Link href="/admissions/apply" onClick={close}>

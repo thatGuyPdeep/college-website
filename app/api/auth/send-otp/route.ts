@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { adminClient } from "@/lib/supabase/admin";
-import { RESEND_FROM, resendErrorMessage, usesResendTestSender } from "@/lib/email/resend-config";
+import {
+  RESEND_FROM,
+  resendErrorMessage,
+  usesResendTestSender,
+} from "@/lib/email/resend-config";
 import { sendSupabaseOtp } from "@/lib/email/supabase-otp";
+import { isSmtpConfigured, sendViaSmtp } from "@/lib/email/smtp";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
@@ -35,13 +40,15 @@ function otpEmailHtml(otp: string) {
   `;
 }
 
+const OTP_SUBJECT = "Your Sign-in Code — RKM College";
+
 async function sendViaResend(email: string, otp: string) {
   if (!resend) return { ok: false as const, error: "Resend is not configured" };
 
   const { error } = await resend.emails.send({
     from:    RESEND_FROM,
     to:      email,
-    subject: "Your Sign-in Code — RKM College",
+    subject: OTP_SUBJECT,
     html:    otpEmailHtml(otp),
   });
 
@@ -50,6 +57,64 @@ async function sendViaResend(email: string, otp: string) {
     return { ok: false as const, error: resendErrorMessage(error) };
   }
   return { ok: true as const };
+}
+
+function isResendTestRecipientError(error?: string): boolean {
+  if (!error) return false;
+  const lower = error.toLowerCase();
+  return (
+    lower.includes("only send testing emails") ||
+    lower.includes("verify a domain") ||
+    lower.includes("resend.dev")
+  );
+}
+
+function allowScreenFallback(): boolean {
+  return (
+    process.env.NODE_ENV === "development" ||
+    process.env.OTP_SCREEN_FALLBACK === "true" ||
+    usesResendTestSender()
+  );
+}
+
+async function persistCustomOtp(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  db: any,
+  email: string,
+  otp: string,
+  expires: string
+) {
+  await db.from("otp_codes").insert({ email, code: otp, expires_at: expires, used: false });
+}
+
+/** Try to email our custom 6-digit OTP via Resend, SMTP, or Resend test domain. */
+async function deliverCustomOtp(email: string, otp: string) {
+  const testSender = usesResendTestSender();
+
+  // 1. Verified Resend domain — delivers to any address
+  if (resend && !testSender) {
+    const result = await sendViaResend(email, otp);
+    if (result.ok) return { ok: true as const, channel: "resend" as const };
+    console.warn("[send-otp] Resend (verified domain) failed:", result.error);
+  }
+
+  // 2. SMTP (Gmail app password, etc.) — delivers to any address
+  if (isSmtpConfigured()) {
+    const result = await sendViaSmtp(email, OTP_SUBJECT, otpEmailHtml(otp));
+    if (result.ok) return { ok: true as const, channel: "smtp" as const };
+    console.warn("[send-otp] SMTP failed:", result.error);
+  }
+
+  // 3. Resend test domain — only the Resend account owner's inbox
+  if (resend && testSender) {
+    const result = await sendViaResend(email, otp);
+    if (result.ok) return { ok: true as const, channel: "resend-test" as const };
+    if (!isResendTestRecipientError(result.error)) {
+      console.warn("[send-otp] Resend test domain failed:", result.error);
+    }
+  }
+
+  return { ok: false as const };
 }
 
 export async function POST(req: NextRequest) {
@@ -81,17 +146,14 @@ export async function POST(req: NextRequest) {
     const otp     = generateOtp();
     const expires = new Date(Date.now() + OTP_EXPIRY_MS).toISOString();
 
-    // ── 1. Resend (best for production with a verified domain) ──────────
-    if (resend && !usesResendTestSender()) {
-      const resendResult = await sendViaResend(email, otp);
-      if (resendResult.ok) {
-        await db.from("otp_codes").insert({ email, code: otp, expires_at: expires, used: false });
-        return NextResponse.json({ ok: true, provider: "custom", message: "OTP sent" });
-      }
-      console.warn("[send-otp] Resend failed, trying Supabase OTP:", resendResult.error);
+    // ── Custom OTP (verify via /api/auth/verify-otp) ───────────────────
+    const customDelivery = await deliverCustomOtp(email, otp);
+    if (customDelivery.ok) {
+      await persistCustomOtp(db, email, otp, expires);
+      return NextResponse.json({ ok: true, provider: "custom", message: "OTP sent" });
     }
 
-    // ── 2. Supabase Auth email (works for any address; ~2/hour on free tier) ─
+    // ── Supabase Auth OTP (separate code; verify with provider "supabase") ─
     const supabaseResult = await sendSupabaseOtp(email);
     if (supabaseResult.ok) {
       return NextResponse.json({
@@ -100,45 +162,30 @@ export async function POST(req: NextRequest) {
         message:  "Sign-in code sent to your email",
       });
     }
-
     console.warn("[send-otp] Supabase OTP failed:", supabaseResult.error);
 
-    let resendError: string | undefined;
-
-    // ── 3. Resend test domain (only delivers to the Resend account owner) ─
-    if (resend && usesResendTestSender()) {
-      const resendResult = await sendViaResend(email, otp);
-      if (resendResult.ok) {
-        await db.from("otp_codes").insert({ email, code: otp, expires_at: expires, used: false });
-        return NextResponse.json({ ok: true, provider: "custom", message: "OTP sent" });
-      }
-      resendError = resendResult.error;
-      console.warn("[send-otp] Resend test domain failed:", resendError);
-    }
-
-    // ── 4. Local dev: show OTP on screen when mail delivery is unavailable ─
-    if (process.env.NODE_ENV === "development") {
-      await db.from("otp_codes").insert({
-        email,
-        code:       otp,
-        expires_at: expires,
-        used:       false,
-      });
-      console.log(`[send-otp] DEV ONLY — OTP for ${email}: ${otp}`);
+    // ── Screen fallback when email delivery is unavailable ───────────────
+    if (allowScreenFallback()) {
+      await persistCustomOtp(db, email, otp, expires);
+      console.log(`[send-otp] Screen fallback — OTP for ${email}: ${otp}`);
       return NextResponse.json({
         ok:       true,
         provider: "dev",
         devOtp:   otp,
-        message:  "Email delivery unavailable — code shown on screen (development only)",
+        message:
+          usesResendTestSender()
+            ? "Resend test mode only emails the account owner. Use the code below, or set SMTP_* / verify a domain in Resend."
+            : "Email delivery unavailable — code shown on screen (development only)",
       });
     }
 
-    const detail = supabaseResult.error ?? resendError;
+    const rateLimited = supabaseResult.error?.toLowerCase().includes("rate");
     return NextResponse.json(
       {
-        error:
-          detail ??
-          "Could not send sign-in code. Verify a domain in Resend (RESEND_FROM_EMAIL) or configure Supabase custom SMTP.",
+        error: rateLimited
+          ? "Email rate limit reached. Wait about an hour, or configure SMTP (SMTP_HOST/USER/PASSWORD) or verify a domain in Resend (RESEND_FROM_EMAIL)."
+          : supabaseResult.error ??
+            "Could not send sign-in code. Configure SMTP or verify a domain in Resend (RESEND_FROM_EMAIL).",
       },
       { status: 503 }
     );

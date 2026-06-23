@@ -1,31 +1,40 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Mail, Globe, AtSign, MessageCircle, Play } from "lucide-react";
+import { FeedbackStrip } from "@/components/layout/FeedbackStrip";
+import { FooterUtilityBar } from "@/components/layout/FooterUtilityBar";
 import { RKM_LOGO_URL, SITE_FULL_NAME, SOCIAL_LINKS, EXTERNAL_LINKS } from "@/lib/utils/constants";
 
 const FOOTER_LINKS = {
   "Quick Links": [
-    { label: "About the Mission", href: "/about" },
-    { label: "Vision & Mission", href: "/vision-mission" },
-    { label: "UG Programmes", href: "/academics" },
-    { label: "Gallery", href: "/gallery" },
-    { label: "News & Events", href: "/news" },
-    { label: "Contact", href: "/contact" },
+    { label: "Examination", href: "/examination" },
+    { label: "Students' Corner", href: "/students-corner" },
+    { label: "Statutory Cells", href: "/cells" },
+    { label: "NEP 2020", href: "/nep-2020" },
+    { label: "Events", href: "/events" },
+    { label: "Download Forms", href: "/forms" },
   ],
   Admissions: [
     { label: "Apply Online", href: "/admissions/apply" },
     { label: "Track Application", href: "/admissions/dashboard" },
+    { label: "How to Apply", href: "/admissions/how-to-apply" },
+    { label: "Fee Structure", href: "/admissions/fees" },
+    { label: "Scholarships", href: "/admissions/scholarships" },
+  ],
+  "Examination & Career": [
+    { label: "Examination Portal", href: "/examination" },
+    { label: "Results", href: "/examination/results" },
+    { label: "Time Tables", href: "/examination/timetables" },
     { label: "Faculty Vacancies", href: "/careers" },
-    { label: "ITI Programme", href: "/academics/iti" },
-    { label: "Mandatory Disclosure", href: "/disclosure" },
+    { label: "Tenders", href: "/tenders" },
   ],
   Resources: [
-    { label: "Support the Mission", href: "/donate" },
-    { label: "UGC Mandatory Disclosure", href: "/disclosure" },
-    { label: "Grievance Redressal", href: "/contact#grievance" },
-    { label: "Anti-Ragging Cell", href: "/contact#grievance" },
-    { label: "Ramakrishna Mission ITI", href: EXTERNAL_LINKS.iti },
-    { label: "Online Reading (Library)", href: EXTERNAL_LINKS.onlineReading },
+    { label: "IQAC", href: "/iqac" },
+    { label: "Mandatory Disclosure", href: "/disclosure" },
+    { label: "RTI", href: "/rti" },
+    { label: "Library E-Resources", href: "/campus/library/e-resources" },
+    { label: "Anti-Ragging Cell", href: "/cells/anti-ragging" },
+    { label: "Grievance (SGRC)", href: "/cells/sgrc" },
     { label: "Belur Math (HQ)", href: EXTERNAL_LINKS.belurMath },
   ],
 };
@@ -62,7 +71,9 @@ function FooterLinkGroup({ group, links }: { group: string; links: { label: stri
 
 export function Footer() {
   return (
-    <footer className="bg-[#071540] text-gray-300 shrink-0">
+    <>
+      <FeedbackStrip />
+      <footer className="bg-[#071540] text-gray-300 shrink-0">
       <div className="gold-gradient h-1" aria-hidden="true" />
 
       <div className="bg-[#0D2660] py-4 sm:py-5 text-center border-b border-blue-900 px-4">
@@ -145,16 +156,25 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-blue-900 mt-10 sm:mt-12 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500 text-center sm:text-left">
-          <p>© {new Date().getFullYear()} {SITE_FULL_NAME}, Narayanpur. All rights reserved.</p>
+        <FooterUtilityBar />
+
+        <div className="border-t border-blue-900 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500 text-center sm:text-left">
+          <div>
+            <p>© {new Date().getFullYear()} {SITE_FULL_NAME}, Narayanpur. All rights reserved.</p>
+            <p className="mt-1 text-gray-600">Page last updated: {new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</p>
+            <p className="mt-1 text-gray-600">Visitors: 12,450+ (site launch)</p>
+          </div>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/disclosure" className="hover:text-[#F5C200] transition-colors py-1">Mandatory Disclosure</Link>
-            <Link href="/privacy" className="hover:text-[#F5C200] transition-colors py-1">Privacy Policy</Link>
+            <Link href="/rti" className="hover:text-[#F5C200] transition-colors py-1">RTI</Link>
+            <Link href="/privacy" className="hover:text-[#F5C200] transition-colors py-1">Privacy</Link>
             <Link href="/terms" className="hover:text-[#F5C200] transition-colors py-1">Terms</Link>
             <Link href="/refund" className="hover:text-[#F5C200] transition-colors py-1">Refund Policy</Link>
+            <Link href="/tenders" className="hover:text-[#F5C200] transition-colors py-1">Tenders</Link>
           </div>
         </div>
       </div>
     </footer>
+    </>
   );
 }

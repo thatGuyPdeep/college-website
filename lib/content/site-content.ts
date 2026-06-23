@@ -8,6 +8,7 @@ import {
 } from "@/lib/content/publications";
 
 export type PublicLeadershipEntry = {
+  slug?: string;
   name: string;
   title: string;
   body: string;
@@ -38,7 +39,14 @@ export async function getPublicLeadership(): Promise<PublicLeadershipEntry[]> {
   } catch {
     /* fallback */
   }
-  return LEADERSHIP.map((p) => ({ ...p, fromDb: false }));
+  return LEADERSHIP.map((p) => ({
+    slug:       p.slug,
+    name:       p.name,
+    title:      p.title,
+    body:       p.body,
+    image_url:  p.image,
+    fromDb:     false,
+  }));
 }
 
 export async function getPublicPublications(): Promise<{

@@ -1,144 +1,133 @@
 "use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Menu, ChevronDown, Phone, Mail } from "lucide-react";
+import { Menu, ChevronDown, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AuthNav } from "@/components/layout/AuthNav";
 import { MobileNav } from "@/components/layout/MobileNav";
-import { NAV_LINKS, RKM_LOGO_URL, SITE_FULL_NAME, SITE_LOCATION } from "@/lib/utils/constants";
+import { NAV_LINKS, RKM_LOGO_URL, SITE_FULL_NAME, SITE_LOCATION, RKM_FACTS } from "@/lib/utils/constants";
 
+function MegaMenuPanel({ children }: { children: { label: string; href: string }[] }) {
+  const cols = children.length > 6 ? 2 : 1;
+  return (
+    <div className="absolute top-full left-0 pt-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all z-50">
+      <div
+        className={`rounded-b-lg border border-t-0 border-blue-100 bg-white shadow-lg overflow-hidden grid ${
+          cols === 2 ? "grid-cols-2 min-w-[22rem]" : "min-w-[13rem]"
+        }`}
+      >
+        {children.map((child) => (
+          <Link
+            key={child.href}
+            href={child.href}
+            className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0D2660] border-b border-blue-50 last:border-0 transition-colors"
+          >
+            {child.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * IIT Delhi–inspired header: compact branding + single nav row.
+ */
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full shadow-md supports-[backdrop-filter]:backdrop-blur-md">
-      {/* Top utility bar — compact */}
-      <div className="bg-[#0D2660] text-white text-[10px] leading-none">
-        <div className="container-site py-0.5 sm:py-1 flex items-center justify-between gap-2 min-h-6">
-          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-            <a
-              href="tel:+917781252251"
-              className="flex items-center gap-1 hover:text-[#F5C200] transition-colors shrink-0"
-              aria-label="Call 07781-252251"
-            >
-              <Phone className="h-3 w-3 shrink-0" aria-hidden="true" />
-              <span className="hidden sm:inline">07781-252251</span>
-            </a>
-            <a
-              href="mailto:rkm.narainpur@gmail.com"
-              className="hidden md:flex items-center gap-1 hover:text-[#F5C200] transition-colors min-w-0 truncate"
-            >
-              <Mail className="h-2.5 w-2.5 shrink-0" aria-hidden="true" />
-              <span className="truncate">rkm.narainpur@gmail.com</span>
-            </a>
-          </div>
-          <div className="devanagari text-[#F5C200] font-semibold tracking-wide text-[9px] sm:text-[10px] text-right leading-tight max-w-[55%] sm:max-w-none">
-            आत्मनो मोक्षार्थं जगद्धिताय च
-          </div>
-        </div>
-      </div>
-
-      <div className="gold-gradient h-px" aria-hidden="true" />
-
-      <div className="bg-white/95 border-b border-blue-100 supports-[backdrop-filter]:backdrop-blur-sm">
-        <div className="container-site">
-          <div className="flex h-12 sm:h-14 lg:h-[3.75rem] items-center justify-between gap-2 sm:gap-3">
+    <header className="sticky top-0 z-50 w-full bg-white shadow-sm">
+      {/* Branding — compact */}
+      <div className="border-b border-gray-200">
+        <div className="container-site py-2 sm:py-2.5">
+          <div className="flex items-center justify-between gap-3">
             <Link
               href="/"
-              className="flex items-center gap-2 sm:gap-3 group min-w-0 shrink lg:max-w-[14rem] xl:max-w-none"
+              className="flex items-center gap-2.5 sm:gap-3 group min-w-0"
               aria-label="Ramakrishna Mission College, Narayanpur — Home"
             >
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 shrink-0 drop-shadow-md">
+              <div className="relative w-10 h-10 sm:w-11 sm:h-11 shrink-0">
                 <Image
                   src={RKM_LOGO_URL}
-                  alt="Ramakrishna Mission Official Emblem"
+                  alt=""
                   fill
-                  className="object-contain group-hover:scale-105 transition-transform"
-                  sizes="(max-width: 640px) 36px, 44px"
+                  className="object-contain"
+                  sizes="44px"
                   priority
                 />
               </div>
               <div className="leading-tight min-w-0">
-                <div className="font-bold text-xs sm:text-sm text-[#0D2660] leading-tight truncate sm:whitespace-normal">
+                <div className="devanagari hidden sm:block font-semibold text-[11px] text-[#0D2660] leading-tight truncate">
+                  रामकृष्ण मिशन कॉलेज, नारायणपुर
+                </div>
+                <div className="font-bold text-sm sm:text-[15px] text-[#0D2660] leading-tight">
                   {SITE_FULL_NAME}
                 </div>
-                <div className="text-[10px] sm:text-[11px] text-[#C8201A] font-semibold truncate">
-                  {SITE_LOCATION}
-                </div>
-                <div className="text-[9px] text-gray-400 hidden md:block leading-snug">
-                  A Branch Centre of Belur Math
+                <div className="text-[10px] sm:text-[11px] text-gray-500 truncate">
+                  {SITE_LOCATION} · {RKM_FACTS.university}
                 </div>
               </div>
             </Link>
 
-            <nav className="hidden lg:flex flex-1 items-center justify-center flex-nowrap gap-0 min-w-0 mx-1" aria-label="Main navigation">
-              {NAV_LINKS.map((link) => (
-                <div key={link.href} className="relative group shrink-0">
-                  <Link
-                    href={link.href}
-                    className="flex items-center gap-0.5 px-2 xl:px-2.5 py-1 rounded-md text-[11px] xl:text-xs font-medium text-gray-700 hover:text-[#0D2660] hover:bg-blue-50 transition-colors whitespace-nowrap"
-                  >
-                    {link.label}
-                    {"children" in link && link.children && (
-                      <ChevronDown
-                        className="h-3 w-3 opacity-60 group-hover:rotate-180 transition-transform shrink-0"
-                        aria-hidden="true"
-                      />
-                    )}
-                  </Link>
-                  {"children" in link && link.children && (
-                    <div className="absolute top-full left-0 pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                      <div className="w-52 rounded-xl border border-blue-100 bg-white shadow-xl overflow-hidden">
-                        {link.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0D2660] border-b border-blue-50 last:border-0 transition-colors"
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </nav>
-
-            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-              <AuthNav />
+            <div className="flex items-center gap-2 shrink-0">
+              <Link
+                href="/search"
+                className="hidden sm:flex p-2 text-gray-500 hover:text-[#0D2660] rounded-md hover:bg-gray-100"
+                aria-label="Search"
+              >
+                <Search className="h-4 w-4" />
+              </Link>
+              <div className="hidden md:block">
+                <AuthNav />
+              </div>
               <Button
                 asChild
                 size="sm"
-                className="hidden sm:inline-flex h-8 bg-[#C8201A] hover:bg-[#9B1812] text-white font-semibold px-3 shadow-sm text-xs"
+                className="hidden sm:inline-flex h-8 bg-[#C8201A] hover:bg-[#9B1812] text-white text-xs font-semibold px-3"
               >
                 <Link href="/admissions/apply">Apply Now</Link>
               </Button>
-              <Button
-                asChild
-                size="icon-sm"
-                className="sm:hidden bg-[#C8201A] hover:bg-[#9B1812] text-white shrink-0"
-                aria-label="Apply for admission"
-              >
-                <Link href="/admissions/apply">+</Link>
-              </Button>
               <button
                 type="button"
-                className="lg:hidden p-1.5 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-[#0D2660] transition-colors"
+                className="lg:hidden p-2 rounded-md text-[#0D2660] hover:bg-gray-100"
                 onClick={() => setMobileOpen(true)}
                 aria-expanded={mobileOpen}
                 aria-controls="mobile-menu"
                 aria-label="Open menu"
               >
-                <Menu className="h-4 w-4" />
+                <Menu className="h-5 w-5" />
               </button>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="gold-gradient h-0.5" aria-hidden="true" />
+        {/* Single main navigation row — IITD mega-menu */}
+        <div className="bg-[#0D2660] hidden lg:block">
+          <div className="container-site">
+            <nav className="flex items-center flex-nowrap gap-0 h-10" aria-label="Main navigation">
+              {NAV_LINKS.map((link) => (
+                <div key={link.href} className="relative group h-full flex items-stretch">
+                  <Link
+                    href={link.href}
+                    className="flex items-center gap-0.5 px-2.5 xl:px-3 h-full text-[11px] xl:text-xs font-medium text-blue-100 hover:text-white hover:bg-white/10 transition-colors whitespace-nowrap"
+                  >
+                    {link.label}
+                    {"children" in link && link.children && (
+                      <ChevronDown className="h-3 w-3 opacity-70 shrink-0" aria-hidden="true" />
+                    )}
+                  </Link>
+                  {"children" in link && link.children && (
+                    <MegaMenuPanel children={[...link.children]} />
+                  )}
+                </div>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </div>
 
       <MobileNav open={mobileOpen} onOpenChange={setMobileOpen} />
     </header>

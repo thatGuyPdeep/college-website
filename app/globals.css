@@ -74,8 +74,40 @@ body {
   background: #F0F4FF;
 }
 
+/* IIT Delhi home page sections */
+.home-section {
+  padding-block: clamp(2rem, 5vw, 3rem);
+}
+
 .text-balance {
   text-wrap: balance;
+}
+
+/* Skip link — IITD/SMKV accessibility */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  background: #F5C200;
+  color: #0D2660;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+.font-devanagari {
+  font-family: var(--font-devanagari), "Noto Sans Devanagari", sans-serif;
+}
+
+/* Navy nav bar active feel */
+.nav-bar-dark {
+  background: linear-gradient(180deg, #0D2660 0%, #071540 100%);
 }
 
 .page-hero {
@@ -206,6 +238,32 @@ h1,h2,h3,h4,h5,h6 { line-height: 1.25; font-weight: 700; }
   transition: top 0.15s;
 }
 .skip-link:focus { top: 0; }
+
+/* ── FONT SIZE (accessibility) ───────────────────────────────────── */
+html[data-font-size="small"] { font-size: 90%; }
+html[data-font-size="large"] { font-size: 112.5%; }
+
+/* ── NEWS TICKER ───────────────────────────────────────────────── */
+@keyframes news-ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.news-ticker-track {
+  animation: news-ticker-scroll 45s linear infinite;
+}
+
+.news-ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .news-ticker-track {
+    animation: none;
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+}
 
 /* ── SMOOTH SCROLL ─────────────────────────────────────────────── */
 html { scroll-behavior: smooth; }

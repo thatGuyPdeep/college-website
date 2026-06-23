@@ -214,6 +214,9 @@ export interface NewsEvent {
   category: string | null;
   body: string | null;
   cover_url: string | null;
+  attachment_url: string | null;
+  attachment_label: string | null;
+  language: string | null;
   published_at: string | null;
   is_published: boolean;
 }

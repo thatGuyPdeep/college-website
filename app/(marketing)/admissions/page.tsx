@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, FileText, GraduationCap, IndianRupee, HelpCircle } from "lucide-react";
+import { ArrowRight, FileText, GraduationCap, IndianRupee, HelpCircle, LayoutGrid } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,6 +17,12 @@ const LINKS = [
     icon:  FileText,
     title: "How to Apply",
     desc:  "Step-by-step guide to the online application portal, documents, and deadlines.",
+  },
+  {
+    href:  "/admissions/seats",
+    icon:  LayoutGrid,
+    title: "Seats Availability",
+    desc:  "Programme-wise sanctioned intake for UG, ITI, and Vidyapeeth streams.",
   },
   {
     href:  "/admissions/fees",

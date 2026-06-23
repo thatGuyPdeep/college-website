@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/layout/PageHero";
+import { DeptQuickLinks } from "@/components/academics/SyllabusSemesterTables";
 import { getDepartmentBySlug } from "@/lib/content/departments";
 import { getExplorerPrograms } from "@/lib/content/programs";
+import { getSyllabusForDepartment } from "@/lib/content/syllabus";
+import { getPublicNews } from "@/lib/content/public-data";
 import { breadcrumbJsonLd } from "@/lib/seo/json-ld";
 import { SITE_URL } from "@/lib/utils/constants";
+import { Badge } from "@/components/ui/badge";
 
 export async function generateStaticParams() {
   const { DEPARTMENTS } = await import("@/lib/content/departments");
@@ -31,8 +35,13 @@ export default async function DepartmentDetailPage({
   const dept = getDepartmentBySlug(slug);
   if (!dept) notFound();
 
-  const allPrograms = await getExplorerPrograms();
+  const [allPrograms, news] = await Promise.all([
+    getExplorerPrograms(),
+    getPublicNews(8),
+  ]);
   const programs = allPrograms.filter((p) => dept.programSlugs.includes(p.slug));
+  const syllabus = getSyllabusForDepartment(slug);
+  const notices = news.filter((n) => n.category === "Notice").slice(0, 4);
 
   const base = SITE_URL.replace(/\/$/, "");
   const jsonLd = breadcrumbJsonLd([
@@ -52,10 +61,12 @@ export default async function DepartmentDetailPage({
             <Link href="/academics/departments">Departments</Link> / {dept.name}
           </nav>
 
+          <DeptQuickLinks deptSlug={slug} deptName={dept.name} />
+
           {programs.length > 0 && (
-            <>
+            <section className="mb-10">
               <h2 className="text-lg font-semibold text-[#0D2660] mb-4">Programmes Offered</h2>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3">
                 {programs.map((p) => (
                   <li key={p.id}>
                     <Link href={`/academics/courses/${p.slug}`} className="text-[#0D2660] font-medium hover:underline">
@@ -65,12 +76,60 @@ export default async function DepartmentDetailPage({
                   </li>
                 ))}
               </ul>
-            </>
+            </section>
           )}
 
-          <Link href="/faculty" className="text-sm text-[#C8201A] font-semibold hover:underline">
-            View faculty directory →
-          </Link>
+          {syllabus && (
+            <section className="mb-10">
+              <h2 className="text-lg font-semibold text-[#0D2660] mb-3">Syllabus</h2>
+              <p className="text-sm text-gray-600 mb-3">
+                FYUGP session {syllabus.session} — {syllabus.semesters.length} semesters under NEP 2020.
+              </p>
+              <Link
+                href={`/academics/syllabus/${syllabus.slug}`}
+                className="inline-flex text-sm font-semibold text-[#C8201A] hover:underline"
+              >
+                View full {dept.name} syllabus →
+              </Link>
+            </section>
+          )}
+
+          {notices.length > 0 && (
+            <section className="mb-10">
+              <h2 className="text-lg font-semibold text-[#0D2660] mb-4">Department Notices</h2>
+              <ul className="space-y-3">
+                {notices.map((n) => (
+                  <li key={n.slug} className="p-4 rounded-xl border border-blue-100 bg-[#F0F4FF]/50">
+                    <Badge variant="outline" className="mb-2 text-xs border-[#0D2660] text-[#0D2660]">
+                      {n.category}
+                    </Badge>
+                    <Link href={`/news/${n.slug}`} className="font-medium text-[#0D2660] hover:underline block">
+                      {n.title}
+                    </Link>
+                    <p className="text-xs text-gray-400 mt-1">{n.date}</p>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/news?category=Notice" className="inline-block mt-3 text-sm text-[#C8201A] font-semibold hover:underline">
+                All notices →
+              </Link>
+            </section>
+          )}
+
+          <section className="mb-8">
+            <h2 className="text-lg font-semibold text-[#0D2660] mb-3">Faculty</h2>
+            <Link href="/faculty" className="text-sm text-[#C8201A] font-semibold hover:underline">
+              View faculty directory →
+            </Link>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-[#0D2660] mb-3">Time Tables</h2>
+            <p className="text-sm text-gray-600 mb-2">Semester timetables are published on the examination portal.</p>
+            <Link href="/examination/timetables" className="text-sm text-[#C8201A] font-semibold hover:underline">
+              Examination time tables →
+            </Link>
+          </section>
         </div>
       </section>
     </>

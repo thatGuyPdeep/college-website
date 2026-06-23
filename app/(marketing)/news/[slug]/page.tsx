@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { PageHero } from "@/components/layout/PageHero";
+import { NewsPdfLink } from "@/components/marketing/NewsPdfLink";
 import { getNewsBySlug, getPublicNews } from "@/lib/content/public-data";
 
 export async function generateStaticParams() {
@@ -42,6 +43,16 @@ export default async function NewsDetailPage({
             <Image src={item.img} alt={item.title} fill className="object-cover" sizes="768px" />
           </div>
           <Badge variant="outline" className="mb-4">{item.category}</Badge>
+          {item.attachmentUrl && (
+            <div className="mb-6 p-4 rounded-xl border border-blue-100 bg-[#F0F4FF]">
+              <NewsPdfLink
+                href={item.attachmentUrl}
+                label={item.attachmentLabel ?? "Download attachment"}
+                size={item.attachmentSize ?? undefined}
+                language={item.language}
+              />
+            </div>
+          )}
           <div className="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap leading-relaxed">
             {item.body ?? item.excerpt}
           </div>

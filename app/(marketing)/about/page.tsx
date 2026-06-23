@@ -157,11 +157,29 @@ export default async function AboutPage() {
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {leadership.map((person) => (
-              <div key={person.name} className="bg-[#F0F4FF] rounded-xl p-6 border border-blue-100">
-                <h3 className="font-bold text-[#0D2660] text-lg">{person.name}</h3>
-                <p className="text-sm text-[#C8201A] font-medium mb-3">{person.title}</p>
-                <p className="text-sm text-gray-600 leading-relaxed">{person.body}</p>
-              </div>
+              <Link
+                key={person.name}
+                href={person.slug ? `/about/leadership/${person.slug}` : "/about#leadership"}
+                className="bg-[#F0F4FF] rounded-xl overflow-hidden border border-blue-100 card-lift group block"
+              >
+                {person.image_url && (
+                  <div className="relative h-40 bg-[#0D2660]/5">
+                    <Image
+                      src={person.image_url}
+                      alt=""
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="320px"
+                    />
+                  </div>
+                )}
+                <div className="p-6">
+                  <h3 className="font-bold text-[#0D2660] text-lg group-hover:text-[#C8201A] transition-colors">{person.name}</h3>
+                  <p className="text-sm text-[#C8201A] font-medium mb-3">{person.title}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">{person.body}</p>
+                  <span className="inline-block mt-3 text-xs font-semibold text-[#0D2660]">Read profile →</span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

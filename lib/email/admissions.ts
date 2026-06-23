@@ -1,6 +1,6 @@
 /**
  * Email utility for admissions notifications.
- * Uses Resend (https://resend.com) — set RESEND_API_KEY in .env.local
+ * Uses Resend (https://resend.com) — set RESEND_API_KEY in .env
  * Falls back to console.log in development when key is missing.
  */
 
