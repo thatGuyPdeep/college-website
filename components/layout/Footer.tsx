@@ -9,6 +9,9 @@ const FOOTER_LINKS = {
   "Quick Links": [
     { label: "Examination", href: "/examination" },
     { label: "Students' Corner", href: "/students-corner" },
+    { label: "Study Material", href: "/study-material" },
+    { label: "NSS", href: "/nss" },
+    { label: "Alumni", href: "/alumni" },
     { label: "Statutory Cells", href: "/cells" },
     { label: "NEP 2020", href: "/nep-2020" },
     { label: "Events", href: "/events" },

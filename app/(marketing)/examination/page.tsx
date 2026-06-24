@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FileText, Clock, Award, Download, ClipboardList } from "lucide-react";
+import { FileText, Clock, Award, Download, ClipboardList, ClipboardCheck, Phone } from "lucide-react";
 import { MarketingPage } from "@/components/layout/MarketingPage";
 import { EXAMINATION_SECTIONS } from "@/lib/content/reference-portal";
 import { EXAM_NOTICES } from "@/lib/content/examination-portal";
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Examination notices, enrollment, time tables, results, and forms — Ramakrishna Mission College, Narayanpur.",
 };
 
-const ICONS = [FileText, ClipboardList, Clock, Award, Download, FileText];
+const ICONS = [FileText, ClipboardList, Clock, Award, Download, ClipboardCheck, Phone];
 
 export default async function ExaminationPage() {
   const news = await getPublicNews(20);
@@ -81,9 +81,9 @@ export default async function ExaminationPage() {
           For examination-related queries contact the college office during working hours.
           Email: rkm.narainpur@gmail.com · Phone: 07781-252251
         </p>
-        <p className="text-xs text-amber-800">
-          Online enrollment and result modules are being integrated with the student ERP portal (Phase 2).
-        </p>
+        <Link href="/examination/helpline" className="text-sm font-semibold text-[#C8201A] hover:underline">
+          Full helpline details →
+        </Link>
       </section>
 
       {recentNotices.length > 0 && (

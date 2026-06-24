@@ -65,6 +65,9 @@ export const UTILITY_BAR_LINKS: UtilityLink[] = [
   { label: "Careers",   href: "/careers" },
   { label: "Donate",    href: "/donate" },
   { label: "Notices",   href: "/news?category=Notice" },
+  { label: "Alumni",    href: "/alumni" },
+  { label: "Forms",     href: "/forms" },
+  { label: "Events",    href: "/events" },
   { label: "Search",    href: "/search" },
 ];
 

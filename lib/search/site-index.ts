@@ -33,6 +33,14 @@ export function buildSiteIndex(): SearchResult[] {
     { title: "Contact", excerpt: `${CONTACT.address} · ${CONTACT.phones[0]}`, href: "/contact", category: "page" },
     { title: "Mandatory Disclosure", excerpt: "UGC/AICTE mandatory public disclosure documents", href: "/disclosure", category: "page" },
     { title: "News & Events", excerpt: "Latest news, notices and campus events", href: "/news", category: "news" },
+    { title: "Alumni Portal", excerpt: "Alumni registration and reconnect with the college", href: "/alumni", category: "page" },
+    { title: "NSS", excerpt: "National Service Scheme community outreach", href: "/nss", category: "page" },
+    { title: "Study Material", excerpt: "Syllabus, e-learning portals, and question papers", href: "/study-material", category: "page" },
+    { title: "Governance", excerpt: "Governing body and academic council", href: "/about/governance", category: "page" },
+    { title: "Examination Helpline", excerpt: "Examination control room contact and hours", href: "/examination/helpline", category: "page" },
+    { title: "Examination Portal", excerpt: "Notices, results, timetables, and forms", href: "/examination", category: "page" },
+    { title: "IQAC", excerpt: "Internal Quality Assurance Cell", href: "/iqac", category: "page" },
+    { title: "Statutory Cells", excerpt: "RTI, anti-ragging, grievance, and welfare cells", href: "/cells", category: "page" },
   ];
 
   for (const link of NAV_LINKS) {

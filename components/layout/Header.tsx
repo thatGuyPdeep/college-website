@@ -10,19 +10,14 @@ import { MobileNav } from "@/components/layout/MobileNav";
 import { NAV_LINKS, RKM_LOGO_URL, SITE_FULL_NAME, SITE_LOCATION, RKM_FACTS } from "@/lib/utils/constants";
 
 function MegaMenuPanel({ children }: { children: { label: string; href: string }[] }) {
-  const cols = children.length > 6 ? 2 : 1;
   return (
     <div className="absolute top-full left-0 pt-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all z-50">
-      <div
-        className={`rounded-b-lg border border-t-0 border-blue-100 bg-white shadow-lg overflow-hidden grid ${
-          cols === 2 ? "grid-cols-2 min-w-[22rem]" : "min-w-[13rem]"
-        }`}
-      >
+      <div className="rounded-b-lg border border-t-0 border-blue-100 bg-white shadow-lg overflow-hidden min-w-[13rem]">
         {children.map((child) => (
           <Link
             key={child.href}
             href={child.href}
-            className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0D2660] border-b border-blue-50 last:border-0 transition-colors"
+            className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0D2660] border-b border-blue-50 last:border-b-0 transition-colors"
           >
             {child.label}
           </Link>

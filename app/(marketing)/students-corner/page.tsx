@@ -48,10 +48,12 @@ export default function StudentsCornerPage() {
 
       <section id="nss" className="mt-8 rounded-xl border border-green-200 bg-green-50 p-6">
         <h2 className="font-bold text-green-900 mb-2">National Service Scheme (NSS)</h2>
-        <p className="text-sm text-green-800">
+        <p className="text-sm text-green-800 mb-4">
           NSS unit activities include community service, health camps, and literacy drives in tribal villages.
-          Annual reports and event photos will be published here.
         </p>
+        <Button asChild variant="outline" className="border-green-800 text-green-900 hover:bg-green-100">
+          <Link href="/nss">NSS Page →</Link>
+        </Button>
       </section>
 
       <section id="hostel-apply" className="mt-8 rounded-xl border border-blue-100 bg-[#F0F4FF] p-6">

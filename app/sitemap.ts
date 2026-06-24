@@ -13,14 +13,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticPages = [
-    "", "/about", "/about/history", "/about/awards", "/about/activities", "/donate", "/vision-mission",
+    "", "/about", "/about/history", "/about/awards", "/about/activities", "/about/governance", "/donate", "/vision-mission",
     "/academics", "/academics/iti", "/academics/departments", "/academics/calendar", "/academics/syllabus", "/nep-2020",
     "/faculty", "/campus/infrastructure", "/campus/library", "/campus/library/e-resources", "/campus/hostel",
     "/gallery", "/news", "/events", "/placements", "/contact", "/disclosure", "/iqac",
     "/careers", "/search", "/privacy", "/terms", "/refund",
     "/examination", "/examination/notices", "/examination/timetables", "/examination/results", "/examination/forms",
-    "/examination/enrollment", "/examination/merit", "/examination/revaluation", "/examination/admit-card",
-    "/cells", "/students-corner", "/forms", "/tenders", "/rti",
+    "/examination/enrollment", "/examination/merit", "/examination/revaluation", "/examination/admit-card", "/examination/helpline",
+    "/cells", "/students-corner", "/study-material", "/nss", "/alumni", "/forms", "/tenders", "/rti",
     "/admissions", "/admissions/how-to-apply", "/admissions/fees", "/admissions/scholarships", "/admissions/seats",
     "/admissions/apply", "/login",
   ];

@@ -27,6 +27,7 @@ export const NAV_LINKS = [
     { label: "History",           href: "/about/history" },
     { label: "Vision & Mission",  href: "/vision-mission" },
     { label: "Leadership",        href: "/about#leadership" },
+    { label: "Governance",        href: "/about/governance" },
     { label: "Awards",            href: "/about/awards" },
     { label: "Service Activities", href: "/about/activities" },
     { label: "Mandatory Disclosure", href: "/disclosure" },
@@ -37,6 +38,7 @@ export const NAV_LINKS = [
     { label: "Programmes (FYUGP)", href: "/academics" },
     { label: "Syllabus",             href: "/academics/syllabus" },
     { label: "Academic Calendar",    href: "/academics/calendar" },
+    { label: "Study Material",       href: "/study-material" },
     { label: "Departments",        href: "/academics/departments" },
     { label: "NEP 2020",           href: "/nep-2020" },
     { label: "ITI & Vocational",   href: "/academics/iti" },
@@ -49,6 +51,7 @@ export const NAV_LINKS = [
     { label: "E-Resources",      href: "/campus/library/e-resources" },
     { label: "Hostel",           href: "/campus/hostel" },
     { label: "Gallery",          href: "/gallery" },
+    { label: "Alumni",           href: "/alumni" },
   ]},
   { label: "Admission", href: "/admissions", children: [
     { label: "Overview",          href: "/admissions" },
@@ -62,15 +65,23 @@ export const NAV_LINKS = [
   { label: "Examination", href: "/examination", children: [
     { label: "Examination Home",  href: "/examination" },
     { label: "Notices",           href: "/examination/notices" },
+    { label: "Enrollment",        href: "/examination/enrollment" },
+    { label: "Forms",             href: "/examination/forms" },
     { label: "Time Tables",       href: "/examination/timetables" },
     { label: "Results",           href: "/examination/results" },
-    { label: "Forms & Enrollment", href: "/examination/forms" },
+    { label: "Merit Lists",       href: "/examination/merit" },
+    { label: "Revaluation",       href: "/examination/revaluation" },
+    { label: "Admit Card",        href: "/examination/admit-card" },
+    { label: "Helpline",          href: "/examination/helpline" },
   ]},
   { label: "Media", href: "/news", children: [
     { label: "News & Notices",    href: "/news" },
     { label: "Events",            href: "/events" },
     { label: "Photo Gallery",     href: "/gallery" },
+    { label: "Videos",            href: "/gallery#videos" },
     { label: "Press Releases",    href: "/news?category=Notice" },
+    { label: "Newsletter (RSS)",  href: "/news/feed" },
+    { label: "Annual Report",     href: "/disclosure" },
   ]},
   { label: "Career", href: "/careers", children: [
     { label: "Vacancies",         href: "/careers" },
@@ -80,9 +91,11 @@ export const NAV_LINKS = [
   { label: "Students", href: "/students-corner", children: [
     { label: "Students' Corner",  href: "/students-corner" },
     { label: "Student ERP Login", href: "/login?redirect=/student" },
+    { label: "Study Material",    href: "/study-material" },
+    { label: "NSS",               href: "/nss" },
     { label: "Hostel",            href: "/campus/hostel" },
     { label: "Anti-Ragging",      href: "/cells/anti-ragging" },
-    { label: "Study Material",    href: "/campus/library/e-resources" },
+    { label: "Alumni",            href: "/alumni" },
   ]},
   { label: "Cells", href: "/cells", children: [
     { label: "All Statutory Cells", href: "/cells" },
@@ -91,6 +104,10 @@ export const NAV_LINKS = [
     { label: "Grievance (SGRC)",  href: "/cells/sgrc" },
     { label: "Women Cell",        href: "/cells/women-cell" },
     { label: "SC & ST Cell",      href: "/cells/sc-st-cell" },
+    { label: "AISHE Cell",        href: "/cells/aishe" },
+    { label: "RUSA Cell",         href: "/cells/rusa" },
+    { label: "Research Promotion", href: "/cells/research-promotion" },
+    { label: "Women Empowerment", href: "/cells/women-empowerment" },
   ]},
 ] as const;
 
