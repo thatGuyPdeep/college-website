@@ -5,7 +5,7 @@ import { NEP_2020_POINTS } from "@/lib/content/reference-portal";
 
 export const metadata: Metadata = {
   title: "NEP 2020",
-  description: "National Education Policy 2020 implementation at Ramakrishna Mission College.",
+  description: "National Education Policy 2020 implementation at Ramakrishna Mission Vivekananda College.",
 };
 
 export default function Nep2020Page() {

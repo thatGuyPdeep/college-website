@@ -29,7 +29,7 @@ export async function sendViaSmtp(
   const from =
     process.env.SMTP_FROM?.trim() ||
     process.env.RESEND_FROM_EMAIL?.trim() ||
-    `Ramakrishna Mission College <${user}>`;
+    `Ramakrishna Mission Vivekananda College <${user}>`;
 
   try {
     const transport = nodemailer.createTransport({

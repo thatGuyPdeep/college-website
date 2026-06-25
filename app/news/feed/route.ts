@@ -11,7 +11,7 @@ export async function GET() {
   <channel>
     <title>${SITE_FULL_NAME} — News &amp; Events</title>
     <link>${base}/news</link>
-    <description>Latest news and notices from Ramakrishna Mission College, Narayanpur</description>
+    <description>Latest news and notices from Ramakrishna Mission Vivekananda College, Narayanpur</description>
     ${items.map((n) => `
     <item>
       <title><![CDATA[${n.title}]]></title>

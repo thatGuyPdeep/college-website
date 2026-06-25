@@ -5,6 +5,7 @@ import { Resend } from "resend";
 import { adminClient as _adminClient } from "@/lib/supabase/admin";
 import { RESEND_FROM } from "@/lib/email/resend-config";
 import { checkRateLimit } from "@/lib/security/rate-limit";
+import { notifyStaff } from "@/lib/actions/staff-notifications";
 import type { ActionResult } from "@/lib/supabase/types";
 import { z } from "zod";
 
@@ -50,6 +51,13 @@ export async function submitContactEnquiry(data: unknown): Promise<ActionResult<
     });
 
     if (error) throw error;
+
+    await notifyStaff({
+      type:        "contact_enquiry",
+      title:       `New enquiry: ${parsed.subject}`,
+      href:        "/admin/contact?status=new",
+      target_role: "admissions_staff",
+    });
 
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY);

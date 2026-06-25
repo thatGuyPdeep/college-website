@@ -86,7 +86,7 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
                           </Link>
                         </li>
                         {link.children.map((child) => (
-                          <li key={child.href}>
+                          <li key={`${child.href}-${child.label}`}>
                             <Link
                               href={child.href}
                               onClick={close}

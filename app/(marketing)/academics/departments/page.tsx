@@ -11,7 +11,7 @@ const DEPARTMENTS_LIST = DEPARTMENTS;
 export default function DepartmentsPage() {
   return (
     <>
-      <PageHero eyebrow="Academics" title="Departments" description="Academic departments at Ramakrishna Mission College, affiliated to Bastar University." />
+      <PageHero eyebrow="Academics" title="Departments" description="Academic departments at Ramakrishna Mission Vivekananda College, affiliated to Bastar University." />
       <section className="section bg-white">
         <div className="container-site max-w-4xl">
           <nav aria-label="Breadcrumb" className="text-sm text-gray-500 mb-8">

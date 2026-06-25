@@ -79,7 +79,7 @@ function buildHtml(
 <html lang="en"><head><meta charset="UTF-8" /><title>Admission — ${a.application_no ?? "Draft"}</title>
 <style>body{font-family:Arial,sans-serif;font-size:11pt;padding:24px;color:#111}h1{text-align:center;color:#0D2660}</style>
 </head><body>
-<h1>Ramakrishna Mission College, Narayanpur</h1>
+<h1>Ramakrishna Mission Vivekananda College, Narayanpur</h1>
 <p style="text-align:center"><strong>${a.application_no ?? "DRAFT"}</strong> · ${a.status.toUpperCase()}</p>
 <p><strong>Name:</strong> ${pd?.full_name ?? "—"}</p>
 <p><strong>Programme:</strong> ${pgd?.program_name ?? a.programs?.name ?? "—"}</p>

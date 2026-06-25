@@ -5,7 +5,7 @@ import { GOVERNANCE_CONTENT } from "@/lib/content/reference-portal";
 
 export const metadata: Metadata = {
   title: "Governance",
-  description: "Governing body, academic council, and institutional governance at Ramakrishna Mission College.",
+  description: "Governing body, academic council, and institutional governance at Ramakrishna Mission Vivekananda College.",
 };
 
 export default function GovernancePage() {
@@ -35,11 +35,18 @@ export default function GovernancePage() {
               key={doc.href}
               href={doc.href}
               className="p-4 rounded-xl border border-blue-100 hover:bg-blue-50 text-sm font-medium text-[#0D2660]"
+              {...(doc.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
               {doc.label} →
             </Link>
           ))}
         </div>
+      </section>
+
+      <section className="mt-10">
+        <Link href="/about/organization" className="text-sm font-semibold text-[#C8201A] hover:underline">
+          View full organizational structure →
+        </Link>
       </section>
     </MarketingPage>
   );

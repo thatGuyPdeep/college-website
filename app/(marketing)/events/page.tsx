@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
   title: "Events",
-  description: "Campus events, festivals, and programmes at Ramakrishna Mission College.",
+  description: "Campus events, festivals, and programmes at Ramakrishna Mission Vivekananda College.",
 };
 
 export default async function EventsPage() {

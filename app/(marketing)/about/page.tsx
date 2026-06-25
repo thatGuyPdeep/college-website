@@ -7,6 +7,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { SectionHeader } from "@/components/layout/SectionHeader";
 import { RKM_LOGO_URL, RKM_FACTS, MILESTONES, AWARDS, INSPIRATION, ASHRAMA_GALLERY } from "@/lib/utils/constants";
 import { getPublicLeadership } from "@/lib/content/site-content";
+import { AboutAtAGlance } from "@/components/marketing/AboutAtAGlance";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -29,6 +30,12 @@ export default async function AboutPage() {
         title="About the Mission"
         description="A spiritual and philanthropic centre rooted in the teachings of Sri Ramakrishna and Swami Vivekananda, dedicated to the upliftment of the Abujhmaria tribal community since 1985."
       />
+
+      <section className="section bg-white pt-0">
+        <div className="container-site">
+          <AboutAtAGlance />
+        </div>
+      </section>
 
       <section className="section bg-white">
         <div className="container-site grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">

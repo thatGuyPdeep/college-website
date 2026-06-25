@@ -157,30 +157,62 @@ export const SYLLABUS_SUBJECTS: SyllabusSubject[] = [
     electiveNote: "Elective groups: Group I Management · Group II Finance · Group III Marketing (COSE papers).",
   },
   {
-    slug: "physics",
-    name: "Physics",
-    programme: "B.Sc. — Physics (FYUGP)",
-    departmentSlug: "physics",
+    slug: "economics",
+    name: "Economics",
+    programme: "B.A. — Economics (FYUGP)",
+    departmentSlug: "economics",
     session: SYLLABUS_SESSION,
     university: "Bastar University",
     outcomes: [
-      "Classical and modern physics foundations",
-      "Laboratory skills in electronics and instrumentation",
-      "Preparation for higher studies and applied science careers",
+      "Microeconomics, macroeconomics, and Indian economy foundations",
+      "Quantitative methods, econometrics, and applied policy analysis",
+      "Development economics with focus on tribal and rural Chhattisgarh",
     ],
     semesters: [
-      { semester: 1, note: "Per Bastar University Physics syllabus 2024–28", courses: [
-        { code: "—", title: "Mechanics & Mathematical Physics", type: "DSC" },
-        { code: "—", title: "Electricity & Magnetism", type: "DSC" },
-        { code: "—", title: "Practical — General Physics", type: "Lab" },
+      { semester: 1, note: "Per Bastar University Economics syllabus 2024–28", courses: [
+        { code: "ECSC-01", title: "Basics of Economics", type: "DSC" },
+        { code: "ECSC-02", title: "Basics of Indian Economy", type: "DSC" },
       ]},
       { semester: 2, courses: [
-        { code: "—", title: "Oscillations, Waves & Optics", type: "DSC" },
-        { code: "—", title: "Thermal Physics", type: "DSC" },
-        { code: "—", title: "Practical — Optics & Thermodynamics", type: "Lab" },
+        { code: "ECSC-03", title: "Microeconomics", type: "DSC" },
+        { code: "ECSC-04", title: "Macroeconomics", type: "DSC" },
+      ]},
+      { semester: 3, courses: [
+        { code: "ECSC-05", title: "Developmental Economics", type: "DSC" },
+        { code: "ECSC-06", title: "Statistical Methods", type: "DSC" },
+      ]},
+      { semester: 4, courses: [
+        { code: "ECSE-04", title: "Money and Banking", type: "DSE" },
+        { code: "ECSE-05", title: "Public Finance", type: "DSE" },
+        { code: "ECSE-06", title: "Economics of Chhattisgarh", type: "DSE" },
       ]},
     ],
-    downloadNote: "Detailed semester-wise papers are published by Bastar University. Contact the Physics department for the latest PDF.",
+    electiveNote: "Full course list: ECSE papers in industrial economics, econometrics, demography, gender economics, and more.",
+    downloadNote: "Detailed semester-wise papers are published by Bastar University. Contact the Economics department for the latest PDF.",
+  },
+  {
+    slug: "physical-education",
+    name: "Sports Education",
+    programme: "B.P.Ed. — Sports Education (FYUGP)",
+    departmentSlug: "physical-education",
+    session: SYLLABUS_SESSION,
+    university: "Bastar University",
+    outcomes: [
+      "Sports coaching, fitness training, and physical education pedagogy",
+      "Sports science, anatomy, and health education",
+      "Practical training using campus sports grounds and indoor stadium",
+    ],
+    semesters: [
+      { semester: 1, note: "Per Bastar University B.P.Ed. syllabus 2024–28", courses: [
+        { code: "—", title: "Foundation of Physical Education", type: "DSC" },
+        { code: "—", title: "Anatomy & Physiology", type: "DSC" },
+      ]},
+      { semester: 2, courses: [
+        { code: "—", title: "Sports Psychology & Sociology", type: "DSC" },
+        { code: "—", title: "Health Education & Yoga", type: "DSC" },
+      ]},
+    ],
+    downloadNote: "Detailed semester-wise papers are published by Bastar University. Contact the Physical Education department for the latest PDF.",
   },
   {
     slug: "common-courses",

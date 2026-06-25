@@ -10,12 +10,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PASSWORD = encodeURIComponent("RKMN@2026;;");
 const CONNECTION = `postgresql://postgres:${PASSWORD}@db.ngccdhdnijrupubzbell.supabase.co:5432/postgres`;
 
-const MIGRATIONS = [
-  "001_initial_schema.sql",
-  "002_admissions_backend.sql",
-  "003_otp_codes.sql",
-  "004_programs_and_storage.sql",
-];
+const MIGRATIONS_DIR = path.join(__dirname, "..", "db", "migrations");
+const MIGRATIONS = fs
+  .readdirSync(MIGRATIONS_DIR)
+  .filter((f) => f.endsWith(".sql"))
+  .sort();
 
 // Errors we can safely skip (idempotent re-runs)
 const SKIP_PATTERNS = [
@@ -81,7 +80,7 @@ async function run() {
     console.log("Connected ✓\n");
 
     for (const file of MIGRATIONS) {
-      const filePath = path.join(__dirname, "..", "db", "migrations", file);
+      const filePath = path.join(MIGRATIONS_DIR, file);
       if (!fs.existsSync(filePath)) { console.log(`⚠  Skipping ${file} (not found)`); continue; }
 
       const sql = fs.readFileSync(filePath, "utf8");

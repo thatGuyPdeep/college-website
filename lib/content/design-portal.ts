@@ -6,6 +6,38 @@
 
 export type UtilityLink = { label: string; href: string; external?: boolean };
 
+/** IITD Revolution Slider — fullscreen hero slides */
+export const HERO_SLIDES = [
+  {
+    image: "/images/school-1.jpg",
+    title: "Welcome to RKM Vivekananda College",
+    subtitle: "Value-based education serving Abujhmarh since 1985",
+    cta: "Know More",
+    href: "/about",
+  },
+  {
+    image: "/images/ashrama-4.jpg",
+    title: "Follow Your Dreams",
+    subtitle: "NEP 2020 four-year undergraduate programmes",
+    cta: "Know More",
+    href: "/academics",
+  },
+  {
+    image: "/images/school-2.jpg",
+    title: "Excellence Through Service",
+    subtitle: "Education · Healthcare · Rural Development",
+    cta: "Know More",
+    href: "/about/activities",
+  },
+  {
+    image: "/images/ev-national-youth-day-2023.jpg",
+    title: "Adding Life to Events",
+    subtitle: "Campus life, festivals & youth programmes",
+    cta: "View Events",
+    href: "/events",
+  },
+] as const;
+
 /** IITD-style hero portal tiles (Research / Startups / News pattern) */
 export const HOME_HERO_PORTALS = [
   {
@@ -43,9 +75,9 @@ export const HOME_ACADEMIC_UNITS = [
 ] as const;
 
 export const HOME_ABOUT = {
-  title: "About Ramakrishna Mission College",
+  title: "About Ramakrishna Mission Vivekananda College",
   excerpt:
-    "Ramakrishna Mission College, Narayanpur is a branch centre of Ramakrishna Math & Ramakrishna Mission, Belur Math. Affiliated to Shaheed Mahendra Karma Vishwavidyalaya (Bastar University), the college offers NEP 2020 four-year undergraduate programmes while serving the Abujhmaria tribal community through value-based, man-making education.",
+    "Ramakrishna Mission Vivekananda College, Narayanpur is a branch centre of Ramakrishna Math & Ramakrishna Mission, Belur Math. Affiliated to Shaheed Mahendra Karma Vishwavidyalaya (Bastar University), the college offers NEP 2020 four-year undergraduate programmes while serving the Abujhmaria tribal community through value-based, man-making education.",
   readMoreHref: "/about",
   newsletterHref: "/news/feed",
 };
@@ -55,7 +87,7 @@ export const HOME_STATS = [
   { value: "2,730+", label: "Students" },
   { value: "25+", label: "Faculty & Staff" },
   { value: "10+", label: "Programmes" },
-  { value: "5", label: "Departments" },
+  { value: "7", label: "Departments" },
 ] as const;
 
 /** IITD-style top utility links — compact set (no duplicate quick-links bar) */

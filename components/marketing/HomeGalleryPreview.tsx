@@ -11,7 +11,9 @@ export function HomeGalleryPreview() {
     <section className="home-section bg-white">
       <div className="container-site">
         <HomeSectionHeading
-          title="Photo Gallery"
+          variant="centered"
+          title="Photo "
+          accent="Gallery"
           subtitle="Multi-hued reflections of campus life"
           viewAllHref="/gallery"
         />
@@ -20,7 +22,7 @@ export function HomeGalleryPreview() {
             <Link
               key={photo.src}
               href="/gallery"
-              className="group relative aspect-square rounded-lg overflow-hidden border border-gray-200"
+              className="group relative aspect-square overflow-hidden border border-gray-200"
             >
               <Image
                 src={photo.src}

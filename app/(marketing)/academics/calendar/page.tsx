@@ -10,7 +10,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Academic Calendar",
-  description: `Academic calendar for session ${ACADEMIC_SESSION} — Ramakrishna Mission College, Narayanpur.`,
+  description: `Academic calendar for session ${ACADEMIC_SESSION} — Ramakrishna Mission Vivekananda College, Narayanpur.`,
 };
 
 const CATEGORY_STYLES: Record<string, string> = {

@@ -29,7 +29,7 @@ export default function RtiPage() {
         </ol>
         <div className="not-prose rounded-xl border border-blue-100 bg-[#F0F4FF] p-6">
           <p className="font-bold text-[#0D2660]">Public Information Officer</p>
-          <p className="text-sm mt-2">Ramakrishna Mission College, Narayanpur</p>
+          <p className="text-sm mt-2">Ramakrishna Mission Vivekananda College, Narayanpur</p>
           <p className="text-sm">
             <a href="mailto:rkm.narainpur@gmail.com" className="text-[#C8201A] hover:underline">
               rkm.narainpur@gmail.com

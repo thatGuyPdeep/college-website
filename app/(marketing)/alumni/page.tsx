@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Alumni",
-  description: "Ramakrishna Mission College alumni network — register, reconnect, and support the Mission.",
+  description: "Ramakrishna Mission Vivekananda College alumni network — register, reconnect, and support the Mission.",
 };
 
 export default function AlumniPage() {
@@ -14,7 +14,7 @@ export default function AlumniPage() {
     <MarketingPage
       title="Alumni Portal"
       hindiTitle="पूर्व छात्र"
-      description="Stay connected with Ramakrishna Mission College, Narayanpur."
+      description="Stay connected with Ramakrishna Mission Vivekananda College, Narayanpur."
       breadcrumbs={[]}
     >
       <p className="text-gray-600 leading-relaxed mb-8 max-w-3xl">{ALUMNI_PORTAL.about}</p>

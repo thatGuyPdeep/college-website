@@ -8,7 +8,7 @@ import { getPublicNews } from "@/lib/content/public-data";
 
 export const metadata: Metadata = {
   title: "Examination",
-  description: "Examination notices, enrollment, time tables, results, and forms — Ramakrishna Mission College, Narayanpur.",
+  description: "Examination notices, enrollment, time tables, results, and forms — Ramakrishna Mission Vivekananda College, Narayanpur.",
 };
 
 const ICONS = [FileText, ClipboardList, Clock, Award, Download, ClipboardCheck, Phone];

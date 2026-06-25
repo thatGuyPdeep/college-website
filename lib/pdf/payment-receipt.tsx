@@ -36,7 +36,7 @@ export function PaymentReceiptDocument({ data }: { data: PaymentReceiptData }) {
     <Document title={`Payment Receipt ${data.applicationNo ?? ""}`}>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <Text style={styles.title}>Ramakrishna Mission College, Narayanpur</Text>
+          <Text style={styles.title}>Ramakrishna Mission Vivekananda College, Narayanpur</Text>
           <Text style={styles.subtitle}>Admission Application Fee — Payment Receipt</Text>
         </View>
         <Text style={styles.receiptNo}>RECEIPT</Text>

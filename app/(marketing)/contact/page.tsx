@@ -134,7 +134,7 @@ export default function ContactPage() {
               <div className="bg-[#F0F4FF] rounded-xl p-5 border border-blue-100">
                 <h3 className="font-semibold text-[#0D2660] mb-2">Anti-Ragging Cell</h3>
                 <p className="text-sm text-gray-600 leading-relaxed mb-3">
-                  Ramakrishna Mission College maintains a zero-tolerance policy on ragging as per UGC regulations.
+                  Ramakrishna Mission Vivekananda College maintains a zero-tolerance policy on ragging as per UGC regulations.
                   Report incidents confidentially to the Anti-Ragging Nodal Officer.
                 </p>
                 <p className="text-sm text-gray-600">

@@ -7,6 +7,18 @@ function sseLine(data: object) {
   return `data: ${JSON.stringify(data)}\n\n`;
 }
 
+function logChatSession(payload: {
+  session_id: string;
+  question: string;
+  answer: string;
+  sources: string[];
+}) {
+  void Promise.resolve(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (_adminClient as any).from("ai_chat_logs").insert(payload)
+  ).catch(() => {});
+}
+
 export async function POST(req: NextRequest) {
   try {
     const limited = await rateLimitResponse(`ai:chat:${clientIp(req)}`, 30, 60_000);
@@ -41,13 +53,12 @@ export async function POST(req: NextRequest) {
             console.error("[ai/chat stream]", err);
           } finally {
             controller.close();
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (_adminClient as any).from("ai_chat_logs").insert({
+            logChatSession({
               session_id: body.session_id ?? "anonymous",
               question:   body.message,
               answer:     finalAnswer,
               sources:    finalSources,
-            }).catch(() => {});
+            });
           }
         },
       });
@@ -62,13 +73,12 @@ export async function POST(req: NextRequest) {
     }
 
     const { answer, sources } = await generateAnswer(body.message);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (_adminClient as any).from("ai_chat_logs").insert({
+    logChatSession({
       session_id: body.session_id ?? "anonymous",
       question:   body.message,
       answer,
       sources,
-    }).catch(() => {});
+    });
 
     return Response.json({ answer, sources });
   } catch (err) {

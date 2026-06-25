@@ -56,7 +56,7 @@ export function AdmissionPaymentStep({ applicationId, amount, keyId, paid, onPai
           key:         keyId,
           amount:      amount * 100,
           currency:    "INR",
-          name:        "Ramakrishna Mission College",
+          name:        "Ramakrishna Mission Vivekananda College",
           description: "Admission application fee",
           order_id:    order.order_id,
           prefill:     { email: "", contact: "" },

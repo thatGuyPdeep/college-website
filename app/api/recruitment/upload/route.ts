@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { adminClient } from "@/lib/supabase/admin";
 import { clientIp, rateLimitResponse } from "@/lib/security/rate-limit";
+import { ensureStorageBucket, RECRUITMENT_FILES_BUCKET } from "@/lib/storage/ensure-bucket";
 
 const ALLOWED = ["application/pdf"];
 const MAX = 5 * 1024 * 1024;
@@ -33,6 +34,8 @@ export async function POST(req: NextRequest) {
     const ext  = file.name.split(".").pop() ?? "pdf";
     const path = `${user.id}/${vacancy_id}/${file_type}-${Date.now()}.${ext}`;
     const buf  = Buffer.from(await file.arrayBuffer());
+
+    await ensureStorageBucket(RECRUITMENT_FILES_BUCKET.id, RECRUITMENT_FILES_BUCKET.spec);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { error } = await (adminClient as any).storage

@@ -7,7 +7,7 @@
 import { RESEND_FROM } from "@/lib/email/resend-config";
 
 const FROM = RESEND_FROM;
-const COLLEGE = "Ramakrishna Mission College, Narayanpur";
+const COLLEGE = "Ramakrishna Mission Vivekananda College, Narayanpur";
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 type EmailPayload =

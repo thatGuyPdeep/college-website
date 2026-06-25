@@ -1,14 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Noto_Sans_Devanagari } from "next/font/google";
+import { Titillium_Web, Roboto_Slab, Noto_Sans_Devanagari } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { Toaster } from "@/components/ui/sonner";
 import { AdmissionChat } from "@/components/ai/AdmissionChat";
 import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
 import { SITE_FULL_NAME, SITE_LOCATION, SITE_TAGLINE_EN, SITE_URL } from "@/lib/utils/constants";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const titillium = Titillium_Web({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
+const robotoSlab = Roboto_Slab({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-heading",
+  display: "swap",
+});
 const notoDevanagari = Noto_Sans_Devanagari({
   subsets: ["devanagari"],
   weight: ["500", "600", "700"],
@@ -44,7 +56,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${notoDevanagari.variable}`}>
+    <html
+      lang="en"
+      className={`${titillium.variable} ${robotoSlab.variable} ${notoDevanagari.variable}`}
+    >
       <body className="min-h-screen flex flex-col antialiased bg-[#FFFDF9] text-base sm:text-[17px]">
         <a href="#main" className="skip-link">Skip to content</a>
         <ConditionalChrome
@@ -56,6 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
         </ConditionalChrome>
+        <ScrollToTop />
         <Toaster richColors position="top-right" />
       </body>
     </html>

@@ -4,11 +4,12 @@ import { ArrowRight, FileText, GraduationCap, IndianRupee, HelpCircle, LayoutGri
 import { PageHero } from "@/components/layout/PageHero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { AdmissionsStatsStrip } from "@/components/marketing/AdmissionsStatsStrip";
 import { RKM_FACTS } from "@/lib/utils/constants";
 
 export const metadata: Metadata = {
   title: "Admissions",
-  description: "Undergraduate admissions at Ramakrishna Mission College, Narayanpur — NEP 2020 FYUGP programmes affiliated to Bastar University.",
+  description: "Undergraduate admissions at Ramakrishna Mission Vivekananda College, Narayanpur — NEP 2020 FYUGP programmes affiliated to Bastar University.",
 };
 
 const LINKS = [
@@ -51,11 +52,13 @@ export default function AdmissionsHubPage() {
     <>
       <PageHero
         eyebrow="Admissions 2026–27"
-        title="Join Ramakrishna Mission College"
+        title="Join Ramakrishna Mission Vivekananda College"
         description={`Undergraduate programmes under NEP 2020, affiliated to ${RKM_FACTS.university}. Value-based education serving Narayanpur and the Abujhmarh region.`}
       />
       <section className="section bg-white">
         <div className="container-site max-w-4xl">
+          <AdmissionsStatsStrip compact />
+
           <div className="bg-blue-50 border border-blue-100 rounded-xl p-5 mb-10 text-sm text-gray-700">
             <HelpCircle className="inline h-4 w-4 mr-2 text-[#0D2660]" aria-hidden="true" />
             Application fee: <strong>₹{fee}</strong> (online payment). Track your application anytime from the applicant dashboard.

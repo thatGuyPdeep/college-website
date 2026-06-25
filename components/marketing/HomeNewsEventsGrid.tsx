@@ -1,6 +1,6 @@
 import type { PublicNewsItem } from "@/lib/content/public-data";
 import { HomeSectionHeading } from "@/components/marketing/HomeSectionHeading";
-import { HomeDatedList } from "@/components/marketing/HomeDatedList";
+import { HomeContentCarousel } from "@/components/marketing/HomeContentCarousel";
 import { PROGRAMS } from "@/lib/utils/constants";
 import Link from "next/link";
 
@@ -9,30 +9,36 @@ type HomeNewsEventsGridProps = {
   events: PublicNewsItem[];
 };
 
-/** IIT Delhi — Latest News · Upcoming Events · Programmes columns */
+/** IIT Delhi — Latest News · Upcoming Events · Programmes (carousels + static list) */
 export function HomeNewsEventsGrid({ news, events }: HomeNewsEventsGridProps) {
   const newsItems = news.filter((n) => n.category !== "Event").slice(0, 8);
-  const eventItems = events.slice(0, 6);
+  const eventItems = events.slice(0, 8);
   const programmes = PROGRAMS.slice(0, 6);
 
   return (
-    <section className="home-section bg-[#f5f5f5] border-y border-gray-200">
+    <section className="home-section iitd-silver-deep border-y border-gray-200">
       <div className="container-site">
+        <HomeSectionHeading
+          variant="centered"
+          title="News & "
+          accent="Events"
+          className="mb-6 sm:mb-8"
+        />
         <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
-          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-5">
+          <div className="bg-white border border-gray-200 p-4 sm:p-5 shadow-sm">
             <HomeSectionHeading title="Latest News" viewAllHref="/news" className="mb-4" />
-            <HomeDatedList items={newsItems} emptyMessage="No news at this time." />
+            <HomeContentCarousel items={newsItems} emptyMessage="No news at this time." />
           </div>
 
-          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-5">
+          <div className="bg-white border border-gray-200 p-4 sm:p-5 shadow-sm">
             <HomeSectionHeading title="Upcoming Events" viewAllHref="/events" className="mb-4" />
-            <HomeDatedList
+            <HomeContentCarousel
               items={eventItems}
               emptyMessage="No upcoming events. Please check back soon."
             />
           </div>
 
-          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-5">
+          <div className="bg-white border border-gray-200 p-4 sm:p-5 shadow-sm">
             <HomeSectionHeading title="Programmes" viewAllHref="/academics" className="mb-4" />
             <ul className="divide-y divide-gray-100">
               {programmes.map((p) => (

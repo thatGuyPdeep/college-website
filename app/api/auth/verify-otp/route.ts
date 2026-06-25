@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminClient } from "@/lib/supabase/admin";
+import { applyBootstrapAdminRole } from "@/lib/auth/resolve-redirect";
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,28 +32,26 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Mark OTP as used immediately
-    await db.from("otp_codes").update({ used: true }).eq("id", otpRow.id);
+    const normalizedEmail = email.toLowerCase();
 
     // ── 2. Ensure user exists in Supabase Auth ───────────────────────
-    const { data: existingData } = await db.auth.admin.getUserByEmail(email.toLowerCase());
-    const existingUser = existingData?.user;
-
-    if (!existingUser) {
-      // Create new confirmed user
-      const { error: createErr } = await db.auth.admin.createUser({
-        email:         email.toLowerCase(),
-        email_confirm: true,
-      });
-      if (createErr && !createErr.message.includes("already registered")) {
-        throw createErr;
-      }
+    const { error: createErr } = await db.auth.admin.createUser({
+      email: normalizedEmail,
+      email_confirm: true,
+    });
+    if (
+      createErr &&
+      !createErr.message.toLowerCase().includes("already registered") &&
+      !createErr.message.toLowerCase().includes("already been registered")
+    ) {
+      console.error("[verify-otp] createUser error:", createErr);
+      throw createErr;
     }
 
     // ── 3. Generate a magic link to get a valid hashed_token ─────────
     const { data: linkData, error: linkErr } = await db.auth.admin.generateLink({
-      type:  "magiclink",
-      email: email.toLowerCase(),
+      type: "magiclink",
+      email: normalizedEmail,
     });
 
     if (linkErr || !linkData?.properties?.hashed_token) {
@@ -60,9 +59,16 @@ export async function POST(req: NextRequest) {
       throw new Error("Could not create session token");
     }
 
+    // Mark OTP as used only after we have a valid session token
+    await db.from("otp_codes").update({ used: true }).eq("id", otpRow.id);
+
+    // First-time setup: promote bootstrap admin emails
+    const bootstrappedRole = await applyBootstrapAdminRole(db, normalizedEmail);
+
     return NextResponse.json({
-      ok:         true,
+      ok: true,
       token_hash: linkData.properties.hashed_token,
+      bootstrapped_role: bootstrappedRole,
     });
 
   } catch (err) {

@@ -19,7 +19,7 @@ export function AdmissionChat() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Namaste! I'm the RKM College Admission Assistant. Ask me about eligibility, documents, fees, or how to apply.",
+      content: "Namaste! I'm the RMVK College Admission Assistant. Ask me about eligibility, documents, fees, or how to apply.",
     },
   ]);
   const sessionId = useRef(typeof crypto !== "undefined" ? crypto.randomUUID() : "session");
@@ -99,6 +99,15 @@ export function AdmissionChat() {
         copy[assistantIdx] = { role: "assistant", content: content || "No response.", sources };
         return copy;
       });
+    } catch {
+      setMessages((m) => {
+        const copy = [...m];
+        copy[assistantIdx] = {
+          role: "assistant",
+          content: "Sorry, I couldn't reach the server. Please try again or email rkm.narainpur@gmail.com.",
+        };
+        return copy;
+      });
     } finally {
       setLoading(false);
     }
@@ -125,7 +134,7 @@ export function AdmissionChat() {
           <div className="navy-gradient text-white px-4 py-3 rounded-t-2xl flex items-center justify-between">
             <div>
               <div className="font-semibold text-sm">Admission Assistant</div>
-              <div className="text-xs text-blue-200">RKM College Narayanpur</div>
+              <div className="text-xs text-blue-200">RKM Vivekananda College Narayanpur</div>
             </div>
             <button type="button" onClick={() => setOpen(false)} aria-label="Close chat" className="p-1 hover:bg-white/10 rounded">
               <X className="h-4 w-4" />

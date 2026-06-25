@@ -5,6 +5,7 @@ import { adminClient } from "@/lib/supabase/admin";
 import { isPaymentRequired } from "@/lib/payments/razorpay";
 import { isApplicationPaid } from "@/lib/actions/payments";
 import { sendEmail } from "@/lib/email/admissions";
+import { notifyStaff } from "@/lib/actions/staff-notifications";
 import {
   hasPersonalData,
   hasAcademicData,
@@ -393,6 +394,17 @@ export async function submitApplication(
       to:            personalData.email ?? user.email ?? "",
       applicantName: personalData.full_name,
       applicationNo: updated.application_no,
+    });
+
+    const programName = (app.program_data as { program_name?: string } | null)?.program_name;
+    await notifyStaff({
+      type:        "application_submitted",
+      title:       `New application ${updated.application_no}`,
+      body:        programName ? `Programme: ${programName}` : undefined,
+      href:        `/admin/admissions/${applicationId}`,
+      entity_type: "application",
+      entity_id:   applicationId,
+      target_role: "admissions_staff",
     });
 
     revalidatePath("/admissions/dashboard");

@@ -1,7 +1,7 @@
 /** Shared Resend sender — set RESEND_FROM_EMAIL once a domain is verified in Resend. */
 export const RESEND_FROM =
   process.env.RESEND_FROM_EMAIL?.trim() ||
-  "Ramakrishna Mission College <onboarding@resend.dev>";
+  "Ramakrishna Mission Vivekananda College <onboarding@resend.dev>";
 
 export function usesResendTestSender(): boolean {
   return RESEND_FROM.includes("@resend.dev");

@@ -6,7 +6,7 @@ import { SYLLABUS_SUBJECTS, SYLLABUS_SESSION } from "@/lib/content/syllabus";
 
 export const metadata: Metadata = {
   title: "Syllabus",
-  description: `UG syllabus FYUGP session ${SYLLABUS_SESSION} — Bastar University programmes at RKM College.`,
+  description: `UG syllabus FYUGP session ${SYLLABUS_SESSION} — Bastar University programmes at RMVK College.`,
 };
 
 export default function SyllabusHubPage() {

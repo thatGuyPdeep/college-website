@@ -13,7 +13,7 @@ export default async function LibraryPage() {
 
   return (
     <>
-      <PageHero eyebrow="Campus Life" title="Library" description="Central library resources for students and faculty at Ramakrishna Mission College, Narayanpur." />
+      <PageHero eyebrow="Campus Life" title="Library" description="Central library resources for students and faculty at Ramakrishna Mission Vivekananda College, Narayanpur." />
       <section className="section bg-white">
         <div className="container-site max-w-4xl">
           <nav aria-label="Breadcrumb" className="text-sm text-gray-500 mb-8">

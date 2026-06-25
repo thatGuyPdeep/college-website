@@ -8,6 +8,7 @@ import {
   ITI_TRADES_ENGINEERING,
   ITI_TRADES_NON_ENGINEERING,
 } from "@/lib/content/iti";
+import { getAdmissionStatBySlug } from "@/lib/content/admissions-2026";
 
 export const ACADEMIC_SESSION = "2026–27";
 
@@ -101,22 +102,29 @@ export type SeatRow = {
   department?: string;
   duration: string;
   sanctioned: number | string;
+  applicationsReceived?: number | string;
   units?: number;
   shifts?: string;
   seatsPerUnit?: number;
   level: string;
   eligibility?: string;
+  slug?: string;
 };
 
 /** UG programmes — sanctioned intake as notified by affiliating university. */
-export const UG_SEAT_ROWS: SeatRow[] = PROGRAMS.map((p) => ({
-  programme:  p.name,
-  department: p.dept,
-  duration:   p.duration,
-  sanctioned: "As notified",
-  level:      "UG (FYUGP)",
-  eligibility: "12th pass (relevant stream)",
-}));
+export const UG_SEAT_ROWS: SeatRow[] = PROGRAMS.map((p) => {
+  const stats = getAdmissionStatBySlug(p.slug);
+  return {
+    programme:  p.name,
+    department: p.dept,
+    duration:   p.duration,
+    sanctioned: "As notified",
+    applicationsReceived: stats?.uniqueApplicants ?? "—",
+    level:      "UG (FYUGP)",
+    eligibility: "12th pass (relevant stream)",
+    slug:       p.slug,
+  };
+});
 
 export const ITI_SEAT_ROWS: SeatRow[] = [
   ...ITI_TRADES_ENGINEERING.map((t) => ({

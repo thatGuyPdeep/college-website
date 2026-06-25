@@ -3,6 +3,7 @@ import Image from "next/image";
 import { MapPin, Phone, Mail, Globe, AtSign, MessageCircle, Play } from "lucide-react";
 import { FeedbackStrip } from "@/components/layout/FeedbackStrip";
 import { FooterUtilityBar } from "@/components/layout/FooterUtilityBar";
+import { VisitorCounter } from "@/components/layout/VisitorCounter";
 import { RKM_LOGO_URL, SITE_FULL_NAME, SOCIAL_LINKS, EXTERNAL_LINKS } from "@/lib/utils/constants";
 
 const FOOTER_LINKS = {
@@ -33,6 +34,7 @@ const FOOTER_LINKS = {
   ],
   Resources: [
     { label: "IQAC", href: "/iqac" },
+    { label: "Policies", href: "/policies" },
     { label: "Mandatory Disclosure", href: "/disclosure" },
     { label: "RTI", href: "/rti" },
     { label: "Library E-Resources", href: "/campus/library/e-resources" },
@@ -52,15 +54,15 @@ const SOCIALS = [
 function FooterLinkGroup({ group, links }: { group: string; links: { label: string; href: string }[] }) {
   return (
     <div>
-      <h3 className="text-[#F5C200] font-semibold text-sm uppercase tracking-wide border-b border-blue-800 pb-2 mb-4">
+      <h3 className="text-[#F5C200] font-semibold text-xs uppercase tracking-wide border-b border-blue-800 pb-1 mb-2">
         {group}
       </h3>
-      <ul className="space-y-2.5">
+      <ul className="space-y-1">
         {links.map((link) => (
           <li key={`${group}-${link.label}`}>
             <Link
               href={link.href}
-              className="text-sm text-gray-400 hover:text-[#F5C200] transition-colors inline-block py-1 min-h-9 leading-9 sm:min-h-0 sm:leading-normal sm:py-0"
+              className="text-xs text-gray-400 hover:text-[#F5C200] transition-colors leading-snug"
               {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
               {link.label}
@@ -77,107 +79,109 @@ export function Footer() {
     <>
       <FeedbackStrip />
       <footer className="bg-[#071540] text-gray-300 shrink-0">
-      <div className="gold-gradient h-1" aria-hidden="true" />
+        <div className="gold-gradient h-0.5" aria-hidden="true" />
 
-      <div className="bg-[#0D2660] py-4 sm:py-5 text-center border-b border-blue-900 px-4">
-        <p className="devanagari text-base sm:text-lg font-semibold text-[#F5C200] tracking-wide leading-snug">
-          आत्मनो मोक्षार्थं जगद्धिताय च
-        </p>
-        <p className="text-xs sm:text-sm text-blue-300 mt-1 italic max-w-xl mx-auto leading-relaxed">
-          For one&apos;s own salvation and for the welfare of the world — Swami Vivekananda
-        </p>
-      </div>
+        <div className="bg-[#0D2660] py-2 text-center border-b border-blue-900 px-3">
+          <p className="devanagari text-sm font-semibold text-[#F5C200] tracking-wide leading-snug">
+            आत्मनो मोक्षार्थं जगद्धिताय च
+          </p>
+          <p className="text-[10px] text-blue-300 mt-0.5 italic max-w-xl mx-auto leading-snug">
+            For one&apos;s own salvation and for the welfare of the world — Swami Vivekananda
+          </p>
+        </div>
 
-      <div className="container-site py-10 sm:py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
-          <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-5 group">
-              <div className="relative w-14 h-14 sm:w-16 sm:h-16 shrink-0">
-                <Image
-                  src={RKM_LOGO_URL}
-                  alt="Ramakrishna Mission Emblem"
-                  fill
-                  className="object-contain group-hover:scale-105 transition-transform drop-shadow-lg"
-                  sizes="64px"
-                />
-              </div>
-              <div className="min-w-0">
-                <div className="font-bold text-white text-base leading-tight">{SITE_FULL_NAME}</div>
-                <div className="text-sm text-[#F5C200]">Narayanpur, Chhattisgarh</div>
-                <div className="text-xs text-blue-400/70 mt-0.5">A Branch Centre of Belur Math</div>
-              </div>
-            </Link>
+        <div className="container-site-compact py-5 sm:py-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
+            <div className="lg:col-span-2">
+              <Link href="/" className="flex items-center gap-2.5 mb-3 group">
+                <div className="relative w-10 h-10 shrink-0">
+                  <Image
+                    src={RKM_LOGO_URL}
+                    alt="Ramakrishna Mission Emblem"
+                    fill
+                    className="object-contain group-hover:scale-105 transition-transform"
+                    sizes="40px"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <div className="font-bold text-white text-sm leading-tight">{SITE_FULL_NAME}</div>
+                  <div className="text-xs text-[#F5C200]">Narayanpur, Chhattisgarh</div>
+                </div>
+              </Link>
 
-            <p className="text-sm leading-relaxed text-gray-400 mb-5">
-              Serving the Abujhmaria tribal community through education, healthcare, and rural
-              development since 1985 — 2,730+ students receiving free education across 200+ villages.
-            </p>
+              <p className="text-xs leading-relaxed text-gray-400 mb-3">
+                Serving the Abujhmaria tribal community through education, healthcare, and rural
+                development since 1985.
+              </p>
 
-            <div className="space-y-2.5 text-sm">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="h-4 w-4 mt-0.5 text-[#F5C200] shrink-0" aria-hidden="true" />
-                <span>Ramakrishna Mission Ashrama, Narayanpur, Dist. Narayanpur, Chhattisgarh – 494 661</span>
+              <div className="space-y-1.5 text-xs">
+                <div className="flex items-start gap-2">
+                  <MapPin className="h-3.5 w-3.5 mt-0.5 text-[#F5C200] shrink-0" aria-hidden="true" />
+                  <span>Narayanpur, Dist. Narayanpur, Chhattisgarh – 494 661</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Phone className="h-3.5 w-3.5 text-[#F5C200] shrink-0" aria-hidden="true" />
+                  <a href="tel:+917781252251" className="hover:text-white transition-colors">07781-252251</a>
+                </div>
+                <div className="flex items-center gap-2 min-w-0">
+                  <Mail className="h-3.5 w-3.5 text-[#F5C200] shrink-0" aria-hidden="true" />
+                  <a href="mailto:rkm.narainpur@gmail.com" className="hover:text-white transition-colors break-all">
+                    rkm.narainpur@gmail.com
+                  </a>
+                </div>
+                <div className="flex items-center gap-2 min-w-0">
+                  <Globe className="h-3.5 w-3.5 text-[#F5C200] shrink-0" aria-hidden="true" />
+                  <a href={EXTERNAL_LINKS.missionSite} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                    narainpur.rkmm.org
+                  </a>
+                </div>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-[#F5C200] shrink-0" aria-hidden="true" />
-                <a href="tel:+917781252251" className="hover:text-white transition-colors">07781-252251</a>
-              </div>
-              <div className="flex items-center gap-2.5 min-w-0">
-                <Mail className="h-4 w-4 text-[#F5C200] shrink-0" aria-hidden="true" />
-                <a href="mailto:rkm.narainpur@gmail.com" className="hover:text-white transition-colors break-all">
-                  rkm.narainpur@gmail.com
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5 min-w-0">
-                <Globe className="h-4 w-4 text-[#F5C200] shrink-0" aria-hidden="true" />
-                <a href={EXTERNAL_LINKS.missionSite} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors break-all">
-                  narainpur.rkmm.org
-                </a>
+
+              <div className="flex flex-wrap items-center gap-1.5 mt-3">
+                {SOCIALS.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="p-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-[#F5C200] hover:border-[#F5C200]/40 transition-colors"
+                  >
+                    <s.icon className="h-3.5 w-3.5" aria-hidden="true" />
+                  </a>
+                ))}
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-6">
-              {SOCIALS.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="tap-target p-2.5 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-[#F5C200] hover:border-[#F5C200]/40 transition-colors"
-                >
-                  <s.icon className="h-4 w-4" aria-hidden="true" />
-                </a>
+            <div className="md:col-span-2 lg:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-3">
+              {Object.entries(FOOTER_LINKS).map(([group, links]) => (
+                <FooterLinkGroup key={group} group={group} links={links} />
               ))}
             </div>
           </div>
 
-          <div className="md:col-span-2 lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-6 lg:gap-8">
-            {Object.entries(FOOTER_LINKS).map(([group, links]) => (
-              <FooterLinkGroup key={group} group={group} links={links} />
-            ))}
+          <FooterUtilityBar />
+
+          <div className="iitd-footer-bottom -mx-[clamp(0.75rem,2vw,1.25rem)] px-[clamp(0.75rem,2vw,1.25rem)] py-2.5 mt-2">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-[10px] sm:text-xs text-center sm:text-left">
+              <div>
+                <p>© {new Date().getFullYear()} {SITE_FULL_NAME}, Narayanpur. All rights reserved.</p>
+                <p className="mt-0.5 opacity-70">
+                  <VisitorCounter />
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-x-3 gap-y-1 justify-center">
+                <Link href="/disclosure" className="hover:text-[#F5C200] transition-colors">Mandatory Disclosure</Link>
+                <Link href="/rti" className="hover:text-[#F5C200] transition-colors">RTI</Link>
+                <Link href="/privacy" className="hover:text-[#F5C200] transition-colors">Privacy</Link>
+                <Link href="/terms" className="hover:text-[#F5C200] transition-colors">Terms</Link>
+                <Link href="/refund" className="hover:text-[#F5C200] transition-colors">Refund</Link>
+                <Link href="/tenders" className="hover:text-[#F5C200] transition-colors">Tenders</Link>
+              </div>
+            </div>
           </div>
         </div>
-
-        <FooterUtilityBar />
-
-        <div className="border-t border-blue-900 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500 text-center sm:text-left">
-          <div>
-            <p>© {new Date().getFullYear()} {SITE_FULL_NAME}, Narayanpur. All rights reserved.</p>
-            <p className="mt-1 text-gray-600">Page last updated: {new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</p>
-            <p className="mt-1 text-gray-600">Visitors: 12,450+ (site launch)</p>
-          </div>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/disclosure" className="hover:text-[#F5C200] transition-colors py-1">Mandatory Disclosure</Link>
-            <Link href="/rti" className="hover:text-[#F5C200] transition-colors py-1">RTI</Link>
-            <Link href="/privacy" className="hover:text-[#F5C200] transition-colors py-1">Privacy</Link>
-            <Link href="/terms" className="hover:text-[#F5C200] transition-colors py-1">Terms</Link>
-            <Link href="/refund" className="hover:text-[#F5C200] transition-colors py-1">Refund Policy</Link>
-            <Link href="/tenders" className="hover:text-[#F5C200] transition-colors py-1">Tenders</Link>
-          </div>
-        </div>
-      </div>
-    </footer>
+      </footer>
     </>
   );
 }

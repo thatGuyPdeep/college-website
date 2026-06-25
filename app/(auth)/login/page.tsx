@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -18,6 +18,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
+import { MFA_REQUIRED_ROLES } from "@/lib/auth/roles";
+import { resolveRedirectForRole } from "@/lib/auth/resolve-redirect";
+import type { UserRole } from "@/lib/supabase/types";
 import {
   RKM_LOGO_URL,
   SITE_FULL_NAME,
@@ -37,15 +40,109 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") ?? "/admissions/dashboard";
+  const isStaffLogin = redirectTo.startsWith("/admin");
+  const inviteToken = searchParams.get("invite");
 
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
-  const [provider, setProvider] = useState<"custom" | "supabase" | "dev">("custom");
+  const [provider, setProvider] = useState<"custom" | "dev">("custom");
   const [devOtp, setDevOtp] = useState<string | null>(null);
 
   const supabase = createClient();
+  const authError = searchParams.get("error");
+
+  const finishLogin = useCallback(async (bootstrappedRole?: UserRole) => {
+    if (inviteToken) {
+      const inviteRes = await fetch("/api/auth/accept-invite", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: inviteToken }),
+      });
+      const inviteData = (await inviteRes.json()) as { ok?: boolean; error?: string; role?: string };
+      if (!inviteRes.ok) {
+        toast.error(inviteData.error ?? "Could not accept staff invitation");
+      } else {
+        toast.success(`Welcome — ${inviteData.role?.replace(/_/g, " ") ?? "staff"} access granted`);
+      }
+    }
+
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.user) {
+      toast.error("Session was not created. Please try again.");
+      return;
+    }
+
+    // Read role from client session (reliable right after verifyOtp)
+    let role: UserRole = bootstrappedRole ?? "applicant";
+    if (!bootstrappedRole) {
+      for (let attempt = 0; attempt < 5; attempt++) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", session.user.id)
+          .single();
+        const profileRole = (profile as { role?: UserRole } | null)?.role;
+        if (profileRole) {
+          role = profileRole;
+          break;
+        }
+        await new Promise((r) => setTimeout(r, 150));
+      }
+    }
+
+    let needsMfa = false;
+    if (MFA_REQUIRED_ROLES.includes(role)) {
+      const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+      needsMfa = Boolean(aal?.nextLevel === "aal2" && aal.currentLevel !== "aal2");
+    }
+
+    const dest = resolveRedirectForRole(role, redirectTo, { needsMfa });
+
+    if (dest.error === "staff_required") {
+      toast.error(
+        "No staff role on this account. Add ADMIN_BOOTSTRAP_EMAILS in .env or run the SQL in Supabase to set super_admin.",
+        { duration: 10000 },
+      );
+    }
+
+    window.location.assign(dest.redirect);
+  }, [inviteToken, redirectTo, supabase]);
+
+  useEffect(() => {
+    if (authError === "auth_failed") {
+      toast.error("Sign-in link expired or was already used. Request a new code and try again.");
+    }
+    if (authError === "deactivated") {
+      toast.error("Your account has been deactivated. Contact the college IT office.");
+    }
+    if (authError === "staff_required") {
+      toast.error("Staff role required for the admin portal. Contact your super admin.");
+    }
+  }, [authError]);
+
+  // Complete sign-in when Supabase redirects with tokens in the URL hash (implicit flow).
+  useEffect(() => {
+    let cancelled = false;
+
+    async function completeHashSignIn() {
+      const hash = window.location.hash;
+      if (!hash.includes("access_token")) return;
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (cancelled || !session) return;
+
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+      toast.success("Logged in successfully!");
+      await finishLogin();
+    }
+
+    void completeHashSignIn();
+    return () => {
+      cancelled = true;
+    };
+  }, [redirectTo, router, supabase.auth, inviteToken, finishLogin]);
 
   function resetOtpFlow() {
     setSent(false);
@@ -67,7 +164,7 @@ function LoginForm() {
       const data = (await res.json()) as {
         ok?: boolean;
         error?: string;
-        provider?: "custom" | "supabase" | "dev";
+        provider?: "custom" | "dev";
         devOtp?: string;
       };
       if (!res.ok) {
@@ -97,41 +194,33 @@ function LoginForm() {
     }
     setLoading(true);
     try {
-      if (provider === "supabase") {
-        const { error: sessionErr } = await supabase.auth.verifyOtp({
-          email: email.trim().toLowerCase(),
-          token: otp,
-          type: "email",
-        });
-        if (sessionErr) {
-          toast.error(sessionErr.message);
-          return;
-        }
-      } else {
-        const res = await fetch("/api/auth/verify-otp", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: email.trim(), code: otp }),
-        });
-        const data = (await res.json()) as { ok?: boolean; token_hash?: string; error?: string };
-        if (!res.ok) {
-          toast.error(data.error ?? "Invalid code");
-          return;
-        }
+      const res = await fetch("/api/auth/verify-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim(), code: otp }),
+      });
+      const data = (await res.json()) as {
+        ok?: boolean;
+        token_hash?: string;
+        error?: string;
+        bootstrapped_role?: UserRole;
+      };
+      if (!res.ok) {
+        toast.error(data.error ?? "Invalid code");
+        return;
+      }
 
-        const { error: sessionErr } = await supabase.auth.verifyOtp({
-          token_hash: data.token_hash!,
-          type: "magiclink" as const,
-        });
-        if (sessionErr) {
-          toast.error(sessionErr.message);
-          return;
-        }
+      const { error: sessionErr } = await supabase.auth.verifyOtp({
+        token_hash: data.token_hash!,
+        type: "magiclink" as const,
+      });
+      if (sessionErr) {
+        toast.error(sessionErr.message);
+        return;
       }
 
       toast.success("Logged in successfully!");
-      router.push(redirectTo);
-      router.refresh();
+      await finishLogin(data.bootstrapped_role);
     } finally {
       setLoading(false);
     }
@@ -249,14 +338,16 @@ function LoginForm() {
               </span>
               <div>
                 <h1 className="text-xl sm:text-2xl font-bold text-[#0D2660] leading-tight">
-                  {sent ? "Verify your email" : "Sign in to your account"}
+                  {sent ? "Verify your email" : isStaffLogin ? "Staff portal sign-in" : "Sign in to your account"}
                 </h1>
                 <p className="text-gray-500 text-sm mt-1 leading-relaxed">
                   {sent
                     ? provider === "dev"
                       ? `Enter the code for ${email}`
                       : `We sent a 6-digit code to ${email}`
-                    : "Applicants and students — use the email linked to your application."}
+                    : isStaffLogin
+                      ? "College staff — use the email your admin invited or bootstrapped for you."
+                      : "Applicants and students — use the email linked to your application."}
                 </p>
               </div>
             </div>
@@ -349,12 +440,21 @@ function LoginForm() {
               >
                 New applicant? Apply now
               </Link>
-              <Link
-                href="/careers"
-                className="rounded-xl border border-blue-100 px-4 py-3 text-gray-600 font-medium hover:bg-gray-50 transition-colors"
-              >
-                Faculty careers
-              </Link>
+              {isStaffLogin ? (
+                <Link
+                  href="/login"
+                  className="rounded-xl border border-blue-100 px-4 py-3 text-gray-600 font-medium hover:bg-gray-50 transition-colors"
+                >
+                  Applicant sign-in
+                </Link>
+              ) : (
+                <Link
+                  href="/login?redirect=/admin"
+                  className="rounded-xl border border-blue-100 px-4 py-3 text-gray-600 font-medium hover:bg-gray-50 transition-colors"
+                >
+                  Staff / Admin login
+                </Link>
+              )}
             </div>
           </div>
 

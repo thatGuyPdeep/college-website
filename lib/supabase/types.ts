@@ -5,8 +5,13 @@ export type UserRole =
   | "student"
   | "faculty"
   | "admissions_staff"
+  | "examination_staff"
   | "hr_staff"
   | "content_editor"
+  | "accounts_staff"
+  | "iqac_coordinator"
+  | "principal"
+  | "hod"
   | "admin"
   | "super_admin";
 
@@ -32,6 +37,10 @@ export interface Profile {
   email: string | null;
   phone: string | null;
   role: UserRole;
+  department_slug: string | null;
+  hindi_name: string | null;
+  is_active: boolean;
+  last_login_at: string | null;
   created_at: string;
   updated_at: string;
 }

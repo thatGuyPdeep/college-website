@@ -37,13 +37,19 @@ export default function StudentsCornerPage() {
       </div>
 
       <section id="welfare" className="mt-10 rounded-2xl navy-gradient text-white p-8">
-        <h2 className="text-xl font-bold mb-2">Dean / Student Welfare</h2>
+        <h2 className="text-xl font-bold mb-2">Dean / Student Welfare & Ombudsperson</h2>
         <p className="text-blue-100 text-sm mb-4 max-w-2xl">
-          For counselling, discipline, and student welfare matters, contact the college office.
+          For counselling, discipline, anti-ragging, and student welfare matters — contact the college office.
+          Grievances may also be filed through the SGRC or Anti-Ragging Cell.
         </p>
-        <Button asChild className="bg-[#F5C200] text-[#0D2660] hover:bg-[#D4A800]">
-          <Link href="/contact">Contact Student Services</Link>
-        </Button>
+        <div className="flex flex-wrap gap-3">
+          <Button asChild className="bg-[#F5C200] text-[#0D2660] hover:bg-[#D4A800]">
+            <Link href="/contact?subject=Student%20Welfare">Contact Student Services</Link>
+          </Button>
+          <Button asChild variant="outline" className="border-white/40 text-white hover:bg-white/10">
+            <Link href="/cells/sgrc">Grievance Redressal</Link>
+          </Button>
+        </div>
       </section>
 
       <section id="nss" className="mt-8 rounded-xl border border-green-200 bg-green-50 p-6">

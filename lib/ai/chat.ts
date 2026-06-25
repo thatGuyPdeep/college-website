@@ -57,7 +57,7 @@ function ruleBasedAnswer(query: string, chunks: { text: string; source: string }
   return {
     answer: context
       ? `Based on our official information:\n\n${context}\n\nFor more details, visit ${sources.join(" or ")} or contact us at rkm.narainpur@gmail.com.`
-      : `I'm the RKM College Admission Assistant. I can help with eligibility, required documents, how to apply, fees, and application status. What would you like to know?`,
+      : `I'm the RMVK College Admission Assistant. I can help with eligibility, required documents, how to apply, fees, and application status. What would you like to know?`,
     sources,
   };
 }
@@ -81,7 +81,7 @@ async function openAiAnswer(query: string): Promise<{ answer: string; sources: s
         messages: [
           {
             role:    "system",
-            content: `You are the admission assistant for Ramakrishna Mission College, Narayanpur. Answer ONLY using the provided context. If unsure, say you don't know and suggest contacting rkm.narainpur@gmail.com or 07781-252251. Never guarantee admission. Include relevant page paths like /admissions/apply when helpful.\n\nContext:\n${context}`,
+            content: `You are the admission assistant for Ramakrishna Mission Vivekananda College, Narayanpur. Answer ONLY using the provided context. If unsure, say you don't know and suggest contacting rkm.narainpur@gmail.com or 07781-252251. Never guarantee admission. Include relevant page paths like /admissions/apply when helpful.\n\nContext:\n${context}`,
           },
           { role: "user", content: query },
         ],
@@ -135,7 +135,7 @@ export async function* streamAnswer(query: string): AsyncGenerator<StreamChunk> 
           messages: [
             {
               role:    "system",
-              content: `You are the admission assistant for Ramakrishna Mission College, Narayanpur. Answer ONLY using the provided context. If unsure, say you don't know and suggest contacting rkm.narainpur@gmail.com or 07781-252251. Never guarantee admission. Include relevant page paths when helpful.\n\nContext:\n${context}`,
+              content: `You are the admission assistant for Ramakrishna Mission Vivekananda College, Narayanpur. Answer ONLY using the provided context. If unsure, say you don't know and suggest contacting rkm.narainpur@gmail.com or 07781-252251. Never guarantee admission. Include relevant page paths when helpful.\n\nContext:\n${context}`,
             },
             { role: "user", content: query },
           ],

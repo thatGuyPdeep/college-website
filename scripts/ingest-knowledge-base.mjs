@@ -28,7 +28,7 @@ if (!OPENAI_KEY) {
 }
 
 const CHUNKS = [
-  { source: "/about", text: "Ramakrishna Mission College, Narayanpur, Chhattisgarh is a branch centre of Ramakrishna Math & Ramakrishna Mission, Belur Math. Affiliated to Bastar University. NEP 2020 FYUGP undergraduate programmes." },
+  { source: "/about", text: "Ramakrishna Mission Vivekananda College, Narayanpur, Chhattisgarh is a branch centre of Ramakrishna Math & Ramakrishna Mission, Belur Math. Affiliated to Bastar University. NEP 2020 FYUGP undergraduate programmes." },
   { source: "/about/history", text: "Ramakrishna Mission Ashrama Narainpur established 1985. Serves Abujhmarh tribal region — 34000 population, 233 villages, 4000 sq km. PVTG Hill Marias. Education healthcare tribal welfare since inception." },
   { source: "/about/awards", text: "National awards: Bhagwan Mahaveer Foundation 1996, Indira Gandhi Social Service 1998, Dr Ambedkar National Award 2000, Indira Gandhi National Integration 2009, Rajya Khel Alankaran 2018." },
   { source: "/about#leadership", text: "Leadership: Secretary Swami Vyaptananda heads Ramakrishna Mission Ashrama Narayanpur. College Principal leads UG programmes. Contact rkm.narainpur@gmail.com 07781-252251." },
@@ -44,7 +44,7 @@ const CHUNKS = [
   { source: "/careers", text: "Faculty vacancies at /careers. Apply online with CV. Track at /careers/dashboard." },
   { source: "/contact", text: "Contact: rkm.narainpur@gmail.com, phone 07781-252251. Narayanpur, Chhattisgarh." },
   { source: "/disclosure", text: "UGC/AICTE mandatory disclosure at /disclosure including programmes, faculty, fees, and policies." },
-  { source: "/campus/hostel", text: "Residential hostel facilities for students at Ramakrishna Mission College campus." },
+  { source: "/campus/hostel", text: "Residential hostel facilities for students at Ramakrishna Mission Vivekananda College campus." },
   { source: "/placements", text: "Placement cell supports UG graduates with career guidance and recruiter connections." },
   { source: "/academics/iti", text: "Ramakrishna Mission ITI Narayanpur NCVT trades Electrician Fitter Turner Wireman COPA Mason Welder Mechanic Diesel Mechanic Tractor Draughtsman Civil. Admission priority Abujhmarh tribal youth. Contact 07781-252360 info@rkmitinpr.org" },
 ];

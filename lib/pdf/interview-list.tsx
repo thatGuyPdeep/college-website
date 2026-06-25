@@ -41,7 +41,7 @@ export function InterviewListDocument({ rows, generatedAt }: { rows: InterviewLi
     <Document title="Recruitment Interview List">
       <Page size="A4" orientation="landscape" style={styles.page}>
         <View style={styles.header}>
-          <Text style={styles.title}>Ramakrishna Mission College, Narayanpur</Text>
+          <Text style={styles.title}>Ramakrishna Mission Vivekananda College, Narayanpur</Text>
           <Text style={styles.subtitle}>Faculty Recruitment — Interview List</Text>
         </View>
         <Text style={styles.meta}>Generated {generatedAt} · {rows.length} candidate(s)</Text>

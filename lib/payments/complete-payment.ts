@@ -1,4 +1,5 @@
 import { adminClient as _adminClient } from "@/lib/supabase/admin";
+import { notifyStaff } from "@/lib/actions/staff-notifications";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const admin = _adminClient as any;
@@ -65,6 +66,22 @@ export async function markPaymentPaid(
   void import("@/lib/email/payment-receipt")
     .then(({ sendPaymentReceiptEmail }) => sendPaymentReceiptEmail(updated.application_id))
     .catch(() => undefined);
+
+  void notifyStaff({
+    type:        "application_payment",
+    title:       "Application fee payment received",
+    href:        "/admin/payments",
+    entity_type: "application",
+    entity_id:   updated.application_id,
+    target_role: "admissions_staff",
+  });
+
+  void notifyStaff({
+    type:        "application_payment",
+    title:       "Application fee payment received",
+    href:        "/admin/payments",
+    target_role: "accounts_staff",
+  });
 
   return { ok: true, applicationId: updated.application_id };
 }

@@ -1,5 +1,9 @@
-export const SITE_NAME = "RKM College Narayanpur";
-export const SITE_FULL_NAME = "Ramakrishna Mission College";
+export const SITE_NAME = "RKM Vivekananda College Narayanpur";
+export const SITE_SHORT_NAME = "RMVK College";
+export const SITE_FULL_NAME = "Ramakrishna Mission Vivekananda College";
+export const SITE_HINDI_NAME = "रामकृष्ण मिशन विवेकानन्द कॉलेज";
+/** College name with city — for letters, PDFs, emails */
+export const SITE_COLLEGE_LINE = `${SITE_FULL_NAME}, Narayanpur`;
 export const SITE_LOCATION = "Narayanpur, Chhattisgarh";
 export const SITE_TAGLINE = "आत्मनो मोक्षार्थं जगद्धिताय च";
 export const SITE_TAGLINE_EN = "For one's own salvation and for the welfare of the world";
@@ -25,9 +29,12 @@ export const NAV_LINKS = [
   { label: "About", href: "/about", children: [
     { label: "About the College", href: "/about" },
     { label: "History",           href: "/about/history" },
+    { label: "Milestones",        href: "/about/milestones" },
     { label: "Vision & Mission",  href: "/vision-mission" },
     { label: "Leadership",        href: "/about#leadership" },
     { label: "Governance",        href: "/about/governance" },
+    { label: "Organization",      href: "/about/organization" },
+    { label: "Policies",          href: "/policies" },
     { label: "Awards",            href: "/about/awards" },
     { label: "Service Activities", href: "/about/activities" },
     { label: "Mandatory Disclosure", href: "/disclosure" },
@@ -47,6 +54,7 @@ export const NAV_LINKS = [
   ]},
   { label: "Facilities", href: "/campus/infrastructure", children: [
     { label: "Infrastructure",   href: "/campus/infrastructure" },
+    { label: "Sports",           href: "/campus/sports" },
     { label: "Library",          href: "/campus/library" },
     { label: "E-Resources",      href: "/campus/library/e-resources" },
     { label: "Hostel",           href: "/campus/hostel" },
@@ -84,8 +92,8 @@ export const NAV_LINKS = [
     { label: "Annual Report",     href: "/disclosure" },
   ]},
   { label: "Career", href: "/careers", children: [
-    { label: "Vacancies",         href: "/careers" },
-    { label: "Recruitment Portal", href: "/careers" },
+    { label: "Vacancies",          href: "/careers" },
+    { label: "Recruitment Portal", href: "/careers/dashboard" },
     { label: "Forms & Guidelines", href: "/forms" },
   ]},
   { label: "Students", href: "/students-corner", children: [
@@ -208,14 +216,24 @@ export const PROGRAMS = [
     highlights: ["C++ · Java · Python", "AI/ML, IoT, Cloud, Cyber Security", "Major Project in final year"],
   },
   {
-    name: "B.Sc — Physics",
+    name: "B.A. — Economics",
     level: "ug",
-    dept: "Physics",
+    dept: "Economics",
     mode: "full_time",
     duration: "4 years (FYUGP)",
-    slug: "bsc-physics",
-    short: "Mechanics, electromagnetism, thermodynamics, quantum & solid-state physics, electronics.",
-    highlights: ["Modern & classical physics", "Digital electronics & microprocessors", "Renewable energy (VAC)"],
+    slug: "ba-economics",
+    short: "Micro & macroeconomics, Indian economy, econometrics, development economics, and public finance.",
+    highlights: ["Quantitative & applied economics", "Chhattisgarh & tribal development focus", "NEP 2020 flexible exits"],
+  },
+  {
+    name: "B.P.Ed. — Sports Education",
+    level: "ug",
+    dept: "Physical Education",
+    mode: "full_time",
+    duration: "4 years (FYUGP)",
+    slug: "bped",
+    short: "Physical education, sports science, coaching methodology, and fitness training under NEP 2020.",
+    highlights: ["Sports coaching & training", "Indoor stadium & grounds on campus", "Rajya Khel Alankaran award-winning sports programme"],
   },
 ] as const;
 
@@ -290,10 +308,21 @@ export const NEWS_EVENTS = [
     date: "1 May 2026",
     category: "Admissions",
     img: "/images/school-1.jpg",
-    excerpt: "Applications invited for UG (FYUGP) programmes and NCVT-affiliated ITI trades for the new academic session.",
+    excerpt: "Applications invited for UG (FYUGP) programmes and NCVT-affiliated ITI trades. 80 unique applicants received so far for session 2026–27.",
     attachmentUrl: "/admissions/apply",
     attachmentLabel: "Apply Online",
     language: "EN",
+  },
+  {
+    title: "प्रवेश सूचना 2026–27 — स्नातक (FYUGP) कार्यक्रम",
+    slug: "admissions-notice-hi-2026-27",
+    date: "1 May 2026",
+    category: "Notice",
+    img: "/images/school-1.jpg",
+    excerpt: "नारायणपुर रामकृष्ण मिशन विवेकानन्द कॉलेज में सत्र 2026–27 हेतु स्नातक (FYUGP) कार्यक्रमों में ऑनलाइन प्रवेश आवेदन आमंत्रित।",
+    attachmentUrl: "/admissions/apply",
+    attachmentLabel: "ऑनलाइन आवेदन",
+    language: "HI",
   },
   {
     title: "ITI Admission — Sessions 2026–27 & 2026–28",

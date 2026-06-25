@@ -55,7 +55,7 @@ export function PaymentButton({ applicationId, amount, keyId, applicantEmail, ap
           key:         orderData.key_id ?? keyId,
           amount:      (orderData.amount ?? amount) * 100,
           currency:    "INR",
-          name:        "RKM College Narayanpur",
+          name:        "RKM Vivekananda College Narayanpur",
           description: "Admission Application Fee",
           order_id:    orderData.order_id,
           prefill:     { email: applicantEmail, name: applicantName },

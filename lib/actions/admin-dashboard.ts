@@ -2,13 +2,14 @@
 
 import { adminClient as _adminClient } from "@/lib/supabase/admin";
 import type { ActionResult, UserRole } from "@/lib/supabase/types";
+import { can } from "@/lib/auth/permissions";
 
 export type DashboardWidget = {
   label: string;
   value: string;
   href: string;
   color: string;
-  group: "admissions" | "recruitment" | "contact" | "payments" | "content" | "erp";
+  group: "admissions" | "recruitment" | "contact" | "payments" | "content" | "erp" | "examination" | "iqac" | "compliance";
 };
 
 export type AdminDashboardData = {
@@ -23,16 +24,9 @@ export async function getAdminDashboard(role: UserRole): Promise<ActionResult<Ad
     const db = _adminClient as any;
     const widgets: DashboardWidget[] = [];
 
-    const showAdmissions = ["admissions_staff", "admin", "super_admin"].includes(role);
-    const showRecruitment = ["hr_staff", "admin", "super_admin"].includes(role);
-    const showContact = ["admissions_staff", "admin", "super_admin"].includes(role);
-    const showPayments = ["admissions_staff", "admin", "super_admin"].includes(role);
-    const showContent = ["content_editor", "admin", "super_admin"].includes(role);
-    const showErp = ["faculty", "admin", "super_admin"].includes(role);
-
     const queries: Promise<void>[] = [];
 
-    if (showAdmissions) {
+    if (can(role, "admissions", "view")) {
       queries.push(
         db.from("applications").select("status").then(({ data }: { data: { status: string }[] | null }) => {
           const list = data ?? [];
@@ -57,7 +51,7 @@ export async function getAdminDashboard(role: UserRole): Promise<ActionResult<Ad
       );
     }
 
-    if (showRecruitment) {
+    if (can(role, "recruitment", "view")) {
       queries.push(
         Promise.all([
           db.from("vacancies").select("id").eq("status", "open"),
@@ -66,13 +60,7 @@ export async function getAdminDashboard(role: UserRole): Promise<ActionResult<Ad
           const apps = appRes.data ?? [];
           widgets.push(
             { label: "Open Vacancies", value: String(vacRes.data?.length ?? 0), href: "/admin/recruitment", color: "text-purple-700 bg-purple-100", group: "recruitment" },
-            {
-              label: "Applications",
-              value: String(apps.length),
-              href: "/admin/recruitment",
-              color: "text-blue-700 bg-blue-100",
-              group: "recruitment",
-            },
+            { label: "Applications", value: String(apps.length), href: "/admin/recruitment", color: "text-blue-700 bg-blue-100", group: "recruitment" },
             {
               label: "Shortlisted",
               value: String(apps.filter((a) => a.status === "shortlisted" || a.status === "interview").length),
@@ -85,41 +73,23 @@ export async function getAdminDashboard(role: UserRole): Promise<ActionResult<Ad
       );
     }
 
-    if (showContact) {
+    if (can(role, "contact", "view")) {
       queries.push(
         db.from("contact_enquiries").select("status, subject, message").then(
           ({ data }: { data: { status: string; subject: string; message: string }[] | null }) => {
             const list = data ?? [];
             const grievance = list.filter((e) => /grievance|ragging/i.test(`${e.subject} ${e.message}`)).length;
             widgets.push(
-              {
-                label: "Contact Enquiries",
-                value: String(list.length),
-                href: "/admin/contact",
-                color: "text-blue-700 bg-blue-100",
-                group: "contact",
-              },
-              {
-                label: "Unread Messages",
-                value: String(list.filter((e) => e.status === "new").length),
-                href: "/admin/contact?status=new",
-                color: "text-amber-700 bg-amber-100",
-                group: "contact",
-              },
-              {
-                label: "Grievance / Ragging",
-                value: String(grievance),
-                href: "/admin/contact?grievance=1",
-                color: "text-red-700 bg-red-100",
-                group: "contact",
-              },
+              { label: "Contact Enquiries", value: String(list.length), href: "/admin/contact", color: "text-blue-700 bg-blue-100", group: "contact" },
+              { label: "Unread Messages", value: String(list.filter((e) => e.status === "new").length), href: "/admin/contact?status=new", color: "text-amber-700 bg-amber-100", group: "contact" },
+              { label: "Grievance / Ragging", value: String(grievance), href: "/admin/contact?grievance=1", color: "text-red-700 bg-red-100", group: "contact" },
             );
           },
         ),
       );
     }
 
-    if (showPayments) {
+    if (can(role, "payments", "view")) {
       queries.push(
         db.from("payments").select("status, amount").then(
           ({ data }: { data: { status: string; amount: number }[] | null }) => {
@@ -130,20 +100,14 @@ export async function getAdminDashboard(role: UserRole): Promise<ActionResult<Ad
             widgets.push(
               { label: "Paid Transactions", value: String(paid.length), href: "/admin/payments", color: "text-green-700 bg-green-100", group: "payments" },
               { label: "Pending Payments", value: String(pending.length), href: "/admin/payments", color: "text-amber-700 bg-amber-100", group: "payments" },
-              {
-                label: "Revenue (paid)",
-                value: `₹${paidTotal.toLocaleString("en-IN")}`,
-                href: "/admin/payments",
-                color: "text-emerald-700 bg-emerald-100",
-                group: "payments",
-              },
+              { label: "Revenue (paid)", value: `₹${paidTotal.toLocaleString("en-IN")}`, href: "/admin/payments", color: "text-emerald-700 bg-emerald-100", group: "payments" },
             );
           },
         ),
       );
     }
 
-    if (showContent) {
+    if (can(role, "content", "view")) {
       queries.push(
         Promise.all([
           db.from("news_events").select("id", { count: "exact", head: true }),
@@ -159,7 +123,35 @@ export async function getAdminDashboard(role: UserRole): Promise<ActionResult<Ad
       );
     }
 
-    if (showErp) {
+    if (can(role, "examination", "view")) {
+      queries.push(
+        db.from("news_events").select("id, is_published").or("category.eq.examination,category.eq.Examination").then(
+          ({ data }: { data: { is_published: boolean }[] | null }) => {
+            const list = data ?? [];
+            widgets.push(
+              { label: "Exam Notices", value: String(list.length), href: "/admin/examination", color: "text-blue-700 bg-blue-100", group: "examination" },
+              { label: "Published", value: String(list.filter((n) => n.is_published).length), href: "/admin/examination", color: "text-green-700 bg-green-100", group: "examination" },
+            );
+          },
+        ),
+      );
+    }
+
+    if (can(role, "iqac", "view")) {
+      queries.push(
+        db.from("iqac_documents").select("id, is_published").then(
+          ({ data }: { data: { is_published: boolean }[] | null }) => {
+            const list = data ?? [];
+            widgets.push(
+              { label: "IQAC Documents", value: String(list.length), href: "/admin/iqac", color: "text-indigo-700 bg-indigo-100", group: "iqac" },
+              { label: "Published", value: String(list.filter((d) => d.is_published).length), href: "/admin/iqac", color: "text-green-700 bg-green-100", group: "iqac" },
+            );
+          },
+        ).catch(() => undefined),
+      );
+    }
+
+    if (can(role, "erp", "view")) {
       queries.push(
         Promise.all([
           db.from("student_enrolments").select("id", { count: "exact", head: true }).eq("is_active", true),
@@ -178,16 +170,19 @@ export async function getAdminDashboard(role: UserRole): Promise<ActionResult<Ad
 
     await Promise.all(queries);
 
-    const { data: audit } = await db
-      .from("audit_logs")
-      .select("action, note, created_at, entity_type")
-      .order("created_at", { ascending: false })
-      .limit(8);
+    let recentActivity: { text: string; at: string }[] = [];
+    if (can(role, "audit", "view")) {
+      const { data: audit } = await db
+        .from("audit_logs")
+        .select("action, note, created_at, entity_type")
+        .order("created_at", { ascending: false })
+        .limit(8);
 
-    const recentActivity = (audit ?? []).map((a: { action: string; note: string | null; created_at: string; entity_type: string }) => ({
-      text: `${a.entity_type} ${a.action.replace("_", " ")}${a.note ? `: ${a.note}` : ""}`,
-      at:   a.created_at,
-    }));
+      recentActivity = (audit ?? []).map((a: { action: string; note: string | null; created_at: string; entity_type: string }) => ({
+        text: `${a.entity_type} ${a.action.replace(/_/g, " ")}${a.note ? `: ${a.note}` : ""}`,
+        at:   a.created_at,
+      }));
+    }
 
     return { ok: true, data: { widgets, recentActivity, role } };
   } catch (err) {

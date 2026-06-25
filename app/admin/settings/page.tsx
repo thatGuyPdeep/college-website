@@ -1,5 +1,7 @@
-import { requireRole } from "@/lib/auth/helpers";
+import { requirePermission, getUserProfile } from "@/lib/auth/helpers";
 import { getSystemConfig } from "@/lib/actions/admin-settings";
+import { canEditSettings } from "@/lib/auth/permissions";
+import type { UserRole } from "@/lib/supabase/types";
 
 function StatusBadge({ ok, label }: { ok: boolean; label?: string }) {
   return (
@@ -10,7 +12,11 @@ function StatusBadge({ ok, label }: { ok: boolean; label?: string }) {
 }
 
 export default async function AdminSettingsPage() {
-  await requireRole(["admin", "super_admin"]);
+  await requirePermission("settings", "view");
+  const profile = await getUserProfile();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const role = (profile as any)?.role as UserRole;
+  const canEdit = canEditSettings(role);
   const cfg = await getSystemConfig();
 
   const rows: { label: string; value: React.ReactNode }[] = [
@@ -72,7 +78,9 @@ export default async function AdminSettingsPage() {
     <div className="max-w-2xl mx-auto px-4 py-10">
       <h1 className="text-2xl font-bold text-[#0D2660] mb-2">System Settings</h1>
       <p className="text-sm text-gray-500 mb-8">
-        Read-only overview of environment configuration. Update values in Vercel or <code className="text-xs">.env.local</code>.
+        {canEdit
+          ? "Super admin can update env vars in Netlify or .env.local."
+          : "Read-only overview. Only super admin can change system configuration."}
       </p>
 
       <dl className="bg-white border border-blue-100 rounded-xl divide-y divide-blue-50">

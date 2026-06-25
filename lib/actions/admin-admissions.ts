@@ -1,13 +1,17 @@
 "use server";
+
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { adminClient as _adminClient } from "@/lib/supabase/admin";
+import { sendEmail } from "@/lib/email/admissions";
+import { writeAudit } from "@/lib/audit/log";
+import { notifyStaff } from "@/lib/actions/staff-notifications";
+import type { ActionResult, ApplicationStatus, ApplicationView } from "@/lib/supabase/types";
+import { can } from "@/lib/auth/permissions";
+import type { UserRole } from "@/lib/supabase/types";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const adminClient = _adminClient as any;
-import { sendEmail } from "@/lib/email/admissions";
-import type { ActionResult, ApplicationStatus, ApplicationView } from "@/lib/supabase/types";
-
-const STAFF_ROLES = ["admissions_staff", "admin", "super_admin"];
 
 async function requireStaff() {
   const _supabase = await createClient();
@@ -21,13 +25,12 @@ async function requireStaff() {
     .single();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if (!profile || !STAFF_ROLES.includes((profile as any).role)) {
+  const role = (profile as any)?.role as UserRole;
+  if (!profile || !can(role, "admissions", "view")) {
     throw new Error("Insufficient permissions");
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const supabase = _supabase as any;
-  return { supabase, user };
+  return { supabase: _supabase, user, role };
 }
 
 // ── LIST APPLICATIONS ─────────────────────────────────────────────
@@ -132,10 +135,15 @@ export async function updateApplicationStatus(
     }
 
     // Audit log
-    await adminClient.from("audit_logs").insert({
+    const auditAction =
+      newStatus === "approved" ? "application_approve" :
+      newStatus === "rejected" ? "application_reject" :
+      "status_change";
+
+    await writeAudit({
       entity_type: "application",
       entity_id:   applicationId,
-      action:      "status_change",
+      action:      auditAction,
       actor_id:    user.id,
       old_value:   { status: current.status },
       new_value:   { status: newStatus },
@@ -293,5 +301,23 @@ export async function getAdmissionStats(): Promise<ActionResult<{
     return { ok: true, data: stats };
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : "Failed to fetch stats" };
+  }
+}
+
+export async function getNextPendingApplication(): Promise<ActionResult<{ id: string; application_no: string | null } | null>> {
+  try {
+    await requireStaff();
+    const { data, error } = await adminClient
+      .from("applications")
+      .select("id, application_no")
+      .in("status", ["submitted", "under_review"])
+      .order("submitted_at", { ascending: true })
+      .limit(1)
+      .maybeSingle();
+
+    if (error) throw error;
+    return { ok: true, data: data ?? null };
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : "Failed to find next application" };
   }
 }

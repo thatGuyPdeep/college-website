@@ -16,6 +16,9 @@ export const FULL_DISCLOSURE_SECTIONS: DisclosureSection[] = [
     id: "administration", label: "B) Administration",
     items: [
       { label: "Leadership & Functionaries", href: "/about#leadership" },
+      { label: "Organizational Structure", href: "/about/organization" },
+      { label: "Policies & Guidelines", href: "/policies" },
+      { label: "Governance", href: "/about/governance" },
       { label: "Contact & Grievance Redressal", href: "/contact#grievance" },
     ],
   },
@@ -52,6 +55,7 @@ export const FULL_DISCLOSURE_SECTIONS: DisclosureSection[] = [
     id: "student_life", label: "F) Student Life",
     items: [
       { label: "Infrastructure & Sports", href: "/campus/infrastructure" },
+      { label: "Sports", href: "/campus/sports" },
       { label: "Hostel Details", href: "/campus/hostel" },
       { label: "Placement Cell", href: "/placements" },
       { label: "Anti-Ragging / Grievance", href: "/contact#grievance" },

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "NSS",
-  description: "National Service Scheme unit — community service and outreach at Ramakrishna Mission College.",
+  description: "National Service Scheme unit — community service and outreach at Ramakrishna Mission Vivekananda College.",
 };
 
 export default function NssPage() {

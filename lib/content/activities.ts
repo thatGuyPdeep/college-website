@@ -17,7 +17,7 @@ export const ACTIVITY_SECTIONS: ActivitySection[] = [
       "Six free residential Vivekananda Vidyamandirs in interior Abujhmarh (Akabeda, Kutul, Kachchapal, Irakbhatti, Kundla, Orchha) — 1,351 students",
       "Vivekananda Computer Training Center and modern science laboratories",
       "Chhattisgarh Board results consistently near 100% pass rate in recent years",
-      "Ramakrishna Mission College offers UG (FYUGP) programmes affiliated to Bastar University",
+      "Ramakrishna Mission Vivekananda College offers UG (FYUGP) programmes affiliated to Bastar University",
     ],
   },
   {

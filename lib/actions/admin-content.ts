@@ -5,7 +5,10 @@ import { createClient } from "@/lib/supabase/server";
 import { adminClient as _adminClient } from "@/lib/supabase/admin";
 import type { ActionResult, NewsEvent, DisclosureItem } from "@/lib/supabase/types";
 import { indexNewsForRag, indexProgramForRag, indexFacultyForRag, indexDisclosureForRag, deleteContentChunk } from "@/lib/ai/index-content";
-const EDITOR_ROLES = ["content_editor", "admin", "super_admin"];
+import { writeAudit } from "@/lib/audit/log";
+import { can } from "@/lib/auth/permissions";
+import type { UserRole } from "@/lib/supabase/types";
+
 const adminClient = _adminClient as ReturnType<typeof import("@supabase/supabase-js").createClient>;
 
 async function requireEditor() {
@@ -14,8 +17,9 @@ async function requireEditor() {
   if (error || !user) throw new Error("Not authenticated");
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if (!profile || !EDITOR_ROLES.includes((profile as any).role)) throw new Error("Insufficient permissions");
-  return { user };
+  const role = (profile as any)?.role as UserRole;
+  if (!profile || !can(role, "content", "edit")) throw new Error("Insufficient permissions");
+  return { user, role };
 }
 
 export async function listNewsEvents(): Promise<ActionResult<NewsEvent[]>> {
@@ -35,10 +39,21 @@ export async function listNewsEvents(): Promise<ActionResult<NewsEvent[]>> {
 
 export async function upsertNewsEvent(item: Partial<NewsEvent> & { title: string; slug: string }): Promise<ActionResult<void>> {
   try {
-    await requireEditor();
+    const { user } = await requireEditor();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { error } = await (adminClient as any).from("news_events").upsert(item, { onConflict: "slug" });
     if (error) throw error;
+
+    if (item.is_published) {
+      await writeAudit({
+        entity_type: "news_event",
+        entity_id:   item.slug,
+        action:      "news_publish",
+        actor_id:    user.id,
+        new_value:   { title: item.title },
+      });
+    }
+
     revalidatePath("/news");
     revalidatePath("/admin/content");
     if (item.is_published !== false) {

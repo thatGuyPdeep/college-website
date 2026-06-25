@@ -1,16 +1,28 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { MFA_REQUIRED_ROLES } from "@/lib/auth/roles";
+import { MFA_REQUIRED_ROLES, STAFF_ROLES } from "@/lib/auth/roles";
 
 const PROTECTED_ROUTES: { prefix: string; roles: string[] | null }[] = [
-  { prefix: "/admin/erp", roles: ["faculty", "admin", "super_admin"] },
-  { prefix: "/admin/ai",  roles: ["admin", "super_admin"] },
-  { prefix: "/admin",     roles: ["admissions_staff", "hr_staff", "content_editor", "admin", "super_admin"] },
-  { prefix: "/admissions/apply",     roles: null },
+  { prefix: "/admin/erp", roles: ["faculty", "hod", "admin", "super_admin"] },
+  { prefix: "/admin/users", roles: ["admin", "super_admin"] },
+  { prefix: "/admin/settings", roles: ["admin", "super_admin"] },
+  { prefix: "/admin/ai", roles: ["admin", "super_admin", "principal"] },
+  { prefix: "/admin/examination", roles: ["examination_staff", "admin", "super_admin"] },
+  { prefix: "/admin/iqac", roles: ["iqac_coordinator", "principal", "admin", "super_admin"] },
+  { prefix: "/admin/compliance", roles: ["principal", "admin", "super_admin"] },
+  { prefix: "/admin/payments", roles: ["admissions_staff", "accounts_staff", "admin", "super_admin"] },
+  { prefix: "/admin/admissions", roles: ["admissions_staff", "hod", "admin", "super_admin"] },
+  { prefix: "/admin/contact", roles: ["admissions_staff", "examination_staff", "admin", "super_admin", "principal"] },
+  { prefix: "/admin/recruitment", roles: ["hr_staff", "admin", "super_admin"] },
+  { prefix: "/admin/content", roles: ["content_editor", "admin", "super_admin"] },
+  { prefix: "/admin/audit", roles: ["admissions_staff", "principal", "admin", "super_admin"] },
+  { prefix: "/admin/notifications", roles: STAFF_ROLES as string[] },
+  { prefix: "/admin", roles: STAFF_ROLES as string[] },
+  { prefix: "/admissions/apply", roles: null },
   { prefix: "/admissions/dashboard", roles: null },
-  { prefix: "/careers/apply",        roles: null },
-  { prefix: "/careers/dashboard",    roles: null },
-  { prefix: "/student",              roles: ["student", "faculty", "admin", "super_admin"] },
+  { prefix: "/careers/apply", roles: null },
+  { prefix: "/careers/dashboard", roles: null },
+  { prefix: "/student", roles: ["student", "faculty", "hod", "admin", "super_admin"] },
 ];
 
 export async function proxy(request: NextRequest) {
@@ -37,6 +49,7 @@ export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   let userRole: string | null = null;
+  let isActive = true;
 
   for (const { prefix, roles } of PROTECTED_ROUTES) {
     if (!path.startsWith(prefix)) continue;
@@ -49,25 +62,35 @@ export async function proxy(request: NextRequest) {
     }
 
     if (roles) {
-      const { data: profile } = await supabase
+      const { data: profile, error: profileErr } = await supabase
         .from("profiles")
         .select("role")
         .eq("id", user.id)
         .single();
+
+      if (profileErr) {
+        console.error("[proxy] profile lookup failed:", profileErr.message);
+      }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       userRole = (profile as any)?.role ?? null;
 
       if (!userRole || !roles.includes(userRole)) {
         const url = request.nextUrl.clone();
-        url.pathname = "/";
+        if (path.startsWith("/admin")) {
+          url.pathname = "/login";
+          url.searchParams.set("error", "staff_required");
+          url.searchParams.set("redirect", path);
+        } else {
+          url.pathname = "/login";
+          url.searchParams.set("error", "staff_required");
+        }
         return NextResponse.redirect(url);
       }
     }
     break;
   }
 
-  // MFA gate for admin/super_admin on admin routes
   if (
     user &&
     path.startsWith("/admin") &&
@@ -81,6 +104,22 @@ export async function proxy(request: NextRequest) {
         .single();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       userRole = (profile as any)?.role ?? null;
+    }
+
+    // Deactivated check (optional column — only block when explicitly false)
+    const { data: activeRow } = await supabase
+      .from("profiles")
+      .select("is_active")
+      .eq("id", user.id)
+      .maybeSingle();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    isActive = (activeRow as any)?.is_active !== false;
+
+    if (!isActive) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      url.searchParams.set("error", "deactivated");
+      return NextResponse.redirect(url);
     }
 
     if (userRole && MFA_REQUIRED_ROLES.includes(userRole as typeof MFA_REQUIRED_ROLES[number])) {

@@ -37,7 +37,7 @@ export function AdmissionReceiptDocument({ app }: Props) {
     <Document title={`Admission ${app.application_no ?? "Draft"}`}>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <Text style={styles.title}>Ramakrishna Mission College, Narayanpur</Text>
+          <Text style={styles.title}>Ramakrishna Mission Vivekananda College, Narayanpur</Text>
           <Text style={styles.subtitle}>Narayanpur, Chhattisgarh — A Branch Centre of Belur Math</Text>
         </View>
         <Text style={styles.appNo}>
@@ -76,7 +76,7 @@ export function AdmissionReceiptDocument({ app }: Props) {
         </View>
 
         <Text style={styles.footer}>
-          Generated {new Date().toLocaleString("en-IN")} · Ramakrishna Mission College, Narayanpur · आत्मनो मोक्षार्थं जगद्धिताय च
+          Generated {new Date().toLocaleString("en-IN")} · Ramakrishna Mission Vivekananda College, Narayanpur · आत्मनो मोक्षार्थं जगद्धिताय च
         </Text>
       </Page>
     </Document>

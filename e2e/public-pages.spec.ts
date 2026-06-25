@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 const PUBLIC_PAGES = [
-  { path: "/", title: /Ramakrishna Mission|RKM College/i },
+  { path: "/", title: /Ramakrishna Mission Vivekananda|RMVK College|RKM Vivekananda/i },
   { path: "/about", title: /About/i },
   { path: "/about/history", title: /History/i },
   { path: "/about/awards", title: /Awards/i },

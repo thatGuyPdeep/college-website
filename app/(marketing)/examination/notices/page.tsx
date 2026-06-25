@@ -10,7 +10,7 @@ export default function ExaminationNoticesPage() {
       title="Examination Notices"
       hindiTitle="परीक्षा अधिसूचनाएँ"
       description="Circulars and notifications related to semester and annual examinations."
-      intro="Examination circulars for Ramakrishna Mission College students affiliated to Bastar University. Final notifications are also published on the university website."
+      intro="Examination circulars for Ramakrishna Mission Vivekananda College students affiliated to Bastar University. Final notifications are also published on the university website."
       items={EXAM_NOTICES}
     />
   );

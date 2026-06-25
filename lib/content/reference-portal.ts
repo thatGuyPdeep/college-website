@@ -1,5 +1,5 @@
 /**
- * SMKV Bastar (smkvbastar.ac.in) reference structure — adapted for RKM College.
+ * SMKV Bastar (smkvbastar.ac.in) reference structure — adapted for RMVK College.
  * Content is institution-specific; layout/feature classes mirror the reference site.
  */
 
@@ -17,7 +17,7 @@ export const QUICK_LINKS: PortalLink[] = [
 export const HOME_ANNOUNCEMENTS = [
   {
     title: "Admissions Open 2026–27",
-    subtitle: "UG (FYUGP), ITI trades & vocational programmes",
+    subtitle: "80+ applications received · UG FYUGP & ITI programmes",
     href: "/admissions/apply",
     cta: "Apply Now",
     variant: "primary" as const,
@@ -288,7 +288,7 @@ export const STUDENTS_CORNER_LINKS: {
 ];
 
 export const ALUMNI_PORTAL = {
-  about: "The Ramakrishna Mission College alumni network connects graduates serving across Bastar, India, and abroad — in education, healthcare, government, and social service.",
+  about: "The Ramakrishna Mission Vivekananda College alumni network connects graduates serving across Bastar, India, and abroad — in education, healthcare, government, and social service.",
   registrationNote: "Alumni may register contact details with the college office for reunions, mentorship, and institutional updates.",
   links: [
     { label: "Register / Update Details", href: "/contact?subject=Alumni%20Registration" },
@@ -299,7 +299,7 @@ export const ALUMNI_PORTAL = {
 };
 
 export const NSS_CONTENT = {
-  about: "The National Service Scheme (NSS) unit at Ramakrishna Mission College organises community service, health camps, literacy drives, and tribal village outreach in Narayanpur and Abujhmarh.",
+  about: "The National Service Scheme (NSS) unit at Ramakrishna Mission Vivekananda College organises community service, health camps, literacy drives, and tribal village outreach in Narayanpur and Abujhmarh.",
   activities: [
     "Blood donation and health awareness camps",
     "Literacy programmes in interior villages",
@@ -351,7 +351,7 @@ export const MEDIA_SECTIONS: PortalLink[] = [
 ];
 
 export const GOVERNANCE_CONTENT = {
-  intro: "Ramakrishna Mission College functions under the governance framework of Ramakrishna Math & Ramakrishna Mission, Belur Math, and is affiliated to Shaheed Mahendra Karma Vishwavidyalaya (Bastar University).",
+  intro: "Ramakrishna Mission Vivekananda College functions under the governance framework of Ramakrishna Math & Ramakrishna Mission, Belur Math, and is affiliated to Shaheed Mahendra Karma Vishwavidyalaya (Bastar University).",
   bodies: [
     {
       title: "Governing Body",
@@ -367,6 +367,9 @@ export const GOVERNANCE_CONTENT = {
     },
   ],
   documents: [
+    { label: "Organizational Structure", href: "/about/organization" },
+    { label: "Policies & Guidelines", href: "/policies" },
+    { label: "Chhattisgarh Raj Bhavan", href: "https://rajbhavancg.gov.in", external: true },
     { label: "Mandatory Disclosure", href: "/disclosure" },
     { label: "IQAC & AQAR", href: "/iqac" },
     { label: "RTI", href: "/rti" },
@@ -380,7 +383,7 @@ export const EXAMINATION_HELPLINE = {
   hours: "Monday–Saturday, 10:00 AM – 4:00 PM (working days)",
   email: "rkm.narainpur@gmail.com",
   phone: "07781-252251",
-  address: "Ramakrishna Mission College, Narayanpur, Chhattisgarh 494661",
+  address: "Ramakrishna Mission Vivekananda College, Narayanpur, Chhattisgarh 494661",
   notes: [
     "For enrollment, admit card, and result queries — bring enrollment number and valid ID.",
     "Revaluation and retotalling applications follow Bastar University schedules.",

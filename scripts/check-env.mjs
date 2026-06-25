@@ -9,14 +9,30 @@ const required = [
 ];
 
 const recommended = [
-  "RESEND_API_KEY",
-  "RESEND_FROM_EMAIL",
   "OPENAI_API_KEY",
   "RAZORPAY_KEY_ID",
   "RAZORPAY_KEY_SECRET",
   "RAZORPAY_WEBHOOK_SECRET",
   "NEXT_PUBLIC_RAZORPAY_KEY_ID",
 ];
+
+function usesResendTestSender() {
+  const from =
+    process.env.RESEND_FROM_EMAIL?.trim() ||
+    "Ramakrishna Mission Vivekananda College <onboarding@resend.dev>";
+  return from.includes("@resend.dev");
+}
+
+function hasProductionOtpEmail() {
+  const verifiedResend =
+    Boolean(process.env.RESEND_API_KEY?.trim()) && !usesResendTestSender();
+  const smtp = Boolean(
+    process.env.SMTP_HOST?.trim() &&
+      process.env.SMTP_USER?.trim() &&
+      process.env.SMTP_PASSWORD?.trim()
+  );
+  return verifiedResend || smtp;
+}
 
 let failed = false;
 
@@ -33,8 +49,29 @@ for (const key of recommended) {
   }
 }
 
-if (process.env.NEXT_PUBLIC_SITE_URL?.includes("localhost") && process.env.CI) {
-  console.warn("NEXT_PUBLIC_SITE_URL still points to localhost in CI/production context");
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim() ?? "";
+const isProductionDeploy =
+  process.env.CI === "true" ||
+  process.env.VERCEL === "1" ||
+  process.env.NETLIFY === "true" ||
+  (!siteUrl.includes("localhost") && siteUrl.startsWith("https://"));
+
+if (isProductionDeploy && !hasProductionOtpEmail()) {
+  console.error(
+    "Production OTP email is not configured. Set RESEND_API_KEY + RESEND_FROM_EMAIL (verified domain), " +
+      "or SMTP_HOST / SMTP_USER / SMTP_PASSWORD."
+  );
+  failed = true;
+}
+
+if (siteUrl.includes("localhost") && isProductionDeploy) {
+  console.warn("NEXT_PUBLIC_SITE_URL still points to localhost in a production deploy context");
+}
+
+if (!hasProductionOtpEmail()) {
+  console.warn(
+    "OTP email: using dev fallbacks only. For hosting, verify a Resend domain or configure SMTP."
+  );
 }
 
 if (failed) {

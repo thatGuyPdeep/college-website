@@ -23,7 +23,7 @@ export default async function CareersPage() {
       </nav>
       <h1 className="text-3xl font-bold text-gray-900 mb-2">Faculty Vacancies</h1>
       <p className="text-gray-500 mb-4">
-        Join our team of distinguished educators committed to academic excellence at Ramakrishna Mission College, Narayanpur.
+        Join our team of distinguished educators committed to academic excellence at Ramakrishna Mission Vivekananda College, Narayanpur.
       </p>
       <p className="text-sm mb-10">
         <Link href="/careers/dashboard" className="text-[#C8201A] font-semibold hover:underline">

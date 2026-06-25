@@ -3,6 +3,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme inline {
+  --font-heading: var(--font-heading), "Roboto Slab", Georgia, serif;
+  --font-body: var(--font-body), "Titillium Web", system-ui, sans-serif;
+}
+
 :root {
   /* ─────────────────────────────────────────────────────────────
      Ramakrishna Mission colour palette — extracted from the official logo
@@ -52,9 +57,100 @@
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-body), var(--font-sans), system-ui, sans-serif;
   line-height: 1.6;
-  overflow-x: clip;
+  overflow-x: hidden;
+}
+
+.font-heading {
+  font-family: var(--font-heading), "Roboto Slab", Georgia, serif;
+}
+
+/* ── IIT DELHI VISUAL LANGUAGE ─────────────────────────────────── */
+
+.iitd-utility-bar {
+  background: linear-gradient(180deg, #9B1812 0%, #B80F0A 100%);
+}
+
+.iitd-brand-bar {
+  background: linear-gradient(180deg, #fafbfc 0%, #f0f2f5 100%);
+}
+
+.iitd-nav-bar {
+  border-top: 3px solid #B80F0A;
+}
+
+.iitd-hero-slider {
+  margin-top: 0;
+}
+
+.iitd-hero-title {
+  font-size: clamp(1.25rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.iitd-section-title {
+  font-size: clamp(1.125rem, 2.5vw, 1.625rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.iitd-double-line {
+  width: 4rem;
+  height: 3px;
+  background: #B80F0A;
+  position: relative;
+}
+
+.iitd-double-line::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2rem;
+  height: 2px;
+  background: #0D2660;
+}
+
+.iitd-silver-deep {
+  background: #eef1f5;
+}
+
+.iitd-unit-box {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .iitd-unit-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(13, 38, 96, 0.12);
+  }
+}
+
+.iitd-footer-bottom {
+  background: #2b2d3b;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Portal tiles — fade up instead of left for dock overlap */
+.portal-tile {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+
+.portal-tiles-visible .portal-tile {
+  animation: portal-fade-in-up 0.55s ease forwards;
+}
+
+@keyframes portal-fade-in-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── LAYOUT UTILITIES ──────────────────────────────────────────── */
@@ -63,6 +159,26 @@ body {
   max-width: 80rem; /* max-w-7xl */
   margin-inline: auto;
   padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.container-site-compact {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+/* Accessibility sheet — solid panel background */
+.a11y-sheet-content,
+.a11y-sheet-content [data-slot="sheet-content"] {
+  background-color: #ffffff !important;
+}
+
+/* Header scroll collapse — grid rows animate smoothly without max-height flicker */
+@media (prefers-reduced-motion: reduce) {
+  header [style*="grid-template-rows"] {
+    transition: none !important;
+  }
 }
 
 .section {
@@ -172,7 +288,18 @@ body {
   min-width: 2.75rem;
 }
 
-/* ── GRADIENTS ─────────────────────────────────────────────────── */
+/* Admin sidebar scrollbar */
+.admin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+.admin-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.admin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
 
 /* Deep navy → rich navy — hero/primary backgrounds */
 .navy-gradient {
@@ -263,6 +390,123 @@ html[data-font-size="large"] { font-size: 112.5%; }
     flex-wrap: wrap;
     white-space: normal;
   }
+}
+
+/* ── IIT DELHI ANNOUNCEMENT CARDS ──────────────────────────────── */
+.announcement-section {
+  background: #f9fbfd;
+}
+
+.announcement-card {
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+  border-left: 5px solid #C8201A;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .announcement-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.announcement-card--highlight {
+  border-left-width: 6px;
+  background: #fff8f8;
+}
+
+.announcement-card h3 {
+  transition: color 0.2s ease;
+}
+
+.announcement-card:hover h3 {
+  color: #C8201A;
+}
+
+@keyframes announcement-border-blink {
+  0%, 100% { border-color: #C8201A; }
+  50% { border-color: transparent; }
+}
+
+.announcement-blink-border {
+  animation: announcement-border-blink 1.5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-blink-border {
+    animation: none;
+    border-color: #C8201A;
+  }
+
+  .announcement-card:hover {
+    transform: none;
+  }
+}
+
+/* ── HERO PORTAL TILE STAGGER (IITD fadeInLeft) ────────────────── */
+.portal-tiles-visible .portal-tile-delay-1 { animation-delay: 0.05s; }
+.portal-tiles-visible .portal-tile-delay-2 { animation-delay: 0.12s; }
+.portal-tiles-visible .portal-tile-delay-3 { animation-delay: 0.19s; }
+.portal-tiles-visible .portal-tile-delay-4 { animation-delay: 0.26s; }
+
+/* ── CONTENT CAROUSEL CARDS ────────────────────────────────────── */
+.home-carousel-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-carousel-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -8px rgba(13, 38, 96, 0.15);
+  }
+}
+
+/* ── STATS PARALLAX BAND ───────────────────────────────────────── */
+.parallax-stats {
+  background: linear-gradient(135deg, #071540 0%, #0D2660 60%, #1A3A8F 100%);
+}
+
+/* ── ACCESSIBILITY BODY MODES (IITD panel) ─────────────────────── */
+body.a11y-high-contrast {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+body.a11y-high-contrast a {
+  color: #ffff00 !important;
+}
+
+body.a11y-grayscale {
+  filter: grayscale(100%);
+}
+
+body.a11y-underline-links a {
+  text-decoration: underline !important;
+}
+
+body.a11y-big-cursor,
+body.a11y-big-cursor * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='10' fill='%230D2660'/%3E%3C/svg%3E") 16 16, auto !important;
+}
+
+body.a11y-dyslexia-font,
+body.a11y-dyslexia-font * {
+  font-family: Verdana, "Comic Sans MS", Arial, sans-serif !important;
+  letter-spacing: 0.05em;
+  word-spacing: 0.1em;
+}
+
+#rkm-reading-guide {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #C8201A;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translateY(-50%);
 }
 
 /* ── SMOOTH SCROLL ─────────────────────────────────────────────── */

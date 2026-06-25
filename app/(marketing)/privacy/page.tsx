@@ -16,7 +16,7 @@ export default function PrivacyPage() {
           </nav>
 
           <p className="text-gray-600">
-            Ramakrishna Mission College, Narayanpur (&ldquo;we&rdquo;, &ldquo;the Institution&rdquo;) is committed to protecting your privacy
+            Ramakrishna Mission Vivekananda College, Narayanpur (&ldquo;we&rdquo;, &ldquo;the Institution&rdquo;) is committed to protecting your privacy
             in alignment with the Digital Personal Data Protection Act, 2023 (India).
           </p>
 

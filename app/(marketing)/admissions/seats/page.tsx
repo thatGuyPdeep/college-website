@@ -9,6 +9,8 @@ import {
   ACADEMIC_SESSION,
 } from "@/lib/content/academic-ops";
 import { ITI_ADMISSION_PRIORITY } from "@/lib/content/iti";
+import { AdmissionsStatsStrip } from "@/components/marketing/AdmissionsStatsStrip";
+import { ADMISSIONS_STATS_AS_OF } from "@/lib/content/admissions-2026";
 
 export const metadata: Metadata = {
   title: "Seats Availability",
@@ -64,13 +66,16 @@ export default function SeatsAvailabilityPage() {
       description={`Programme-wise sanctioned intake for session ${ACADEMIC_SESSION}. ITI figures are NCVT-affiliated; UG intake follows Bastar University notification.`}
       breadcrumbs={[{ label: "Admissions", href: "/admissions" }]}
     >
+      <AdmissionsStatsStrip compact />
+
       <section className="mb-12">
         <h2 className="text-lg font-bold text-[#0D2660] mb-4">
           Undergraduate Programmes (FYUGP)
         </h2>
         <p className="text-sm text-gray-600 mb-4">
           Affiliated to Bastar University. Sanctioned intake is published in the university admission
-          notification — contact the admissions office for the latest figures.
+          notification. Applications received column reflects paid online applications as of{" "}
+          {ADMISSIONS_STATS_AS_OF} (unique applicants per programme).
         </p>
         <SeatTable
           rows={UG_SEAT_ROWS}
@@ -79,6 +84,7 @@ export default function SeatsAvailabilityPage() {
             { key: "department", label: "Department", hideSm: true },
             { key: "duration", label: "Duration", hideSm: true },
             { key: "sanctioned", label: "Sanctioned Intake" },
+            { key: "applicationsReceived", label: "Applications Received" },
             { key: "eligibility", label: "Eligibility", hideSm: true },
           ]}
         />

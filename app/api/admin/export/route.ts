@@ -94,7 +94,7 @@ async function exportAdmissions(status: string | null) {
 
   const wb = new ExcelJS.Workbook();
 
-  wb.creator = "RKM College Admissions System";
+  wb.creator = "RMVK College Admissions System";
 
   const ws = wb.addWorksheet("Applications");
 

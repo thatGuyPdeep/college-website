@@ -10,7 +10,7 @@ import type { PersonalData } from "@/lib/supabase/types";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const admin = _adminClient as any;
 
-const COLLEGE = "Ramakrishna Mission College, Narayanpur";
+const COLLEGE = "Ramakrishna Mission Vivekananda College, Narayanpur";
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export async function sendPaymentReceiptEmail(applicationId: string): Promise<void> {

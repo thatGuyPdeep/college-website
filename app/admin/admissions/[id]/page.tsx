@@ -4,8 +4,10 @@ import { ArrowLeft, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getApplicationForStaff } from "@/lib/actions/admin-admissions";
-import { requireRole } from "@/lib/auth/helpers";
+import { listApplicationNotes } from "@/lib/actions/admin-application-notes";
+import { requirePermission } from "@/lib/auth/helpers";
 import { ApplicationReviewActions } from "@/components/admin/ApplicationReviewActions";
+import { ApplicationInternalNotes } from "@/components/admin/ApplicationInternalNotes";
 import { REQUIRED_DOCUMENTS } from "@/lib/utils/constants";
 import type { ApplicationStatus, DocsChecklist, PersonalData, AcademicData } from "@/lib/supabase/types";
 
@@ -23,9 +25,12 @@ export default async function AdminApplicationDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requireRole(["admissions_staff", "admin", "super_admin"]);
+  await requirePermission("admissions", "view");
   const { id } = await params;
-  const result = await getApplicationForStaff(id);
+  const [result, notesRes] = await Promise.all([
+    getApplicationForStaff(id),
+    listApplicationNotes(id),
+  ]);
   if (!result.ok) notFound();
 
   const app = result.data;
@@ -127,6 +132,10 @@ export default async function AdminApplicationDetailPage({
           )}
         </div>
       </div>
+
+      {notesRes.ok && (
+        <ApplicationInternalNotes applicationId={app.id} initialNotes={notesRes.data} />
+      )}
     </div>
   );
 }
