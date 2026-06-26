@@ -42,20 +42,22 @@ export function HomeHeroSlider() {
         ))}
 
         <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 min-h-[280px] sm:min-h-[380px] lg:min-h-[480px] xl:min-h-[520px] pt-8 pb-24 sm:pb-28">
-          <h1 className="iitd-hero-title font-heading text-white uppercase max-w-4xl">
-            {slide.title}
-          </h1>
-          {slide.subtitle && (
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base text-blue-100 max-w-2xl font-light">
-              {slide.subtitle}
-            </p>
-          )}
-          <Link
-            href={slide.href}
-            className="mt-6 sm:mt-8 inline-flex items-center px-8 py-2.5 bg-[#B80F0A] hover:bg-[#9B1812] text-white text-sm font-semibold uppercase tracking-wide transition-colors shadow-lg"
-          >
-            {slide.cta}
-          </Link>
+          <div key={active} className="hero-caption-enter">
+            <h1 className="iitd-hero-title font-heading text-white uppercase max-w-4xl">
+              {slide.title}
+            </h1>
+            {slide.subtitle && (
+              <p className="mt-3 sm:mt-4 text-sm sm:text-base text-blue-100 max-w-2xl font-light">
+                {slide.subtitle}
+              </p>
+            )}
+            <Link
+              href={slide.href}
+              className="mt-6 sm:mt-8 inline-flex items-center px-8 py-2.5 bg-[#B80F0A] hover:bg-[#9B1812] text-white text-sm font-semibold uppercase tracking-wide shadow-lg micro-lift micro-press"
+            >
+              {slide.cta}
+            </Link>
+          </div>
         </div>
 
         <div className="absolute bottom-[5.5rem] sm:bottom-[6.5rem] left-0 right-0 z-20 flex justify-center gap-2">

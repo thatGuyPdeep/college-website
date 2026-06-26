@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 type HomeSectionHeadingProps = {
   title: string;
@@ -25,7 +26,7 @@ export function HomeSectionHeading({
   if (variant === "centered") {
     const parts = accent ? title.split(accent) : [title];
     return (
-      <div className={`text-center mb-8 sm:mb-10 ${className}`}>
+      <RevealOnScroll className={`text-center mb-8 sm:mb-10 ${className}`}>
         <h2 className="iitd-section-title font-heading text-[#0D2660] uppercase tracking-wide">
           {parts[0]}
           {accent && <span className="text-[#B80F0A]">{accent}</span>}
@@ -36,13 +37,13 @@ export function HomeSectionHeading({
         {viewAllHref && (
           <Link
             href={viewAllHref}
-            className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-[#B80F0A] hover:text-[#9B1812]"
+            className="micro-link-arrow inline-flex items-center gap-1 mt-4 text-sm font-semibold text-[#B80F0A] hover:text-[#9B1812] transition-colors"
           >
             {viewAllLabel}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         )}
-      </div>
+      </RevealOnScroll>
     );
   }
 
@@ -57,7 +58,7 @@ export function HomeSectionHeading({
       {viewAllHref && (
         <Link
           href={viewAllHref}
-          className="inline-flex items-center gap-1 text-sm font-semibold text-[#B80F0A] hover:text-[#9B1812] shrink-0"
+          className="micro-link-arrow inline-flex items-center gap-1 text-sm font-semibold text-[#B80F0A] hover:text-[#9B1812] shrink-0 transition-colors"
         >
           {viewAllLabel}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />

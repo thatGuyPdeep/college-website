@@ -24,7 +24,7 @@ function MegaMenuPanel({
 
   return (
     <div className="absolute top-full left-0 pt-1 z-50">
-      <div className="min-w-[13rem] max-w-[16rem] rounded-b-md border border-gray-200 bg-white shadow-2xl overflow-hidden animate-in fade-in duration-150">
+      <div className="min-w-[13rem] max-w-[16rem] rounded-b-md border border-gray-200 bg-white shadow-2xl overflow-hidden nav-dropdown-enter">
         {items.map((child) => (
           <Link
             key={`${child.href}-${child.label}`}
@@ -233,7 +233,7 @@ export function Header() {
                       href={link.href}
                       role="menuitem"
                       aria-expanded={"children" in link && link.children ? openMenu === link.href : undefined}
-                      className={`flex items-center gap-0.5 px-2.5 xl:px-3 h-full text-[11px] font-medium transition-colors whitespace-nowrap uppercase tracking-wide ${
+                      className={`flex items-center gap-0.5 px-2.5 xl:px-3 h-full text-[11px] font-medium transition-colors whitespace-nowrap uppercase tracking-wide micro-press ${
                         openMenu === link.href
                           ? "text-white bg-[#B80F0A]"
                           : "text-white/90 hover:text-white hover:bg-[#B80F0A]"

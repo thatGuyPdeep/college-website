@@ -1,8 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import { FileText } from "lucide-react";
 import type { PublicNewsItem } from "@/lib/content/public-data";
 import { HomeSectionHeading } from "@/components/marketing/HomeSectionHeading";
 import { NewsPdfLink } from "@/components/marketing/NewsPdfLink";
+import { StaggerReveal } from "@/components/ui/RevealOnScroll";
 
 /** IIT Delhi — “Important Announcements” card list with highlight + hover slide */
 export function HomeImportantAnnouncements({ items }: { items: PublicNewsItem[] }) {
@@ -24,16 +27,15 @@ export function HomeImportantAnnouncements({ items }: { items: PublicNewsItem[] 
           viewAllHref="/news"
         />
 
-        <div className="announcement-list space-y-3 sm:space-y-4">
-          {/* Highlight first announcement — IITD Research Impact pattern */}
-          <article className="announcement-card announcement-card--highlight">
+        <StaggerReveal className="announcement-list space-y-3 sm:space-y-4">
+          <article className="announcement-card announcement-card--highlight micro-lift">
             <Link
               href={`/news/${featured.slug}`}
               className="block p-4 sm:p-5"
             >
               <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
                 <div className="shrink-0 flex items-center justify-center w-full sm:w-28 h-16 sm:h-20 rounded-md bg-[#0D2660]/10 border-2 border-[#C8201A] announcement-blink-border">
-                  <FileText className="h-8 w-8 text-[#C8201A]" aria-hidden="true" />
+                  <FileText className="h-8 w-8 text-[#C8201A] micro-icon-pop" aria-hidden="true" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <h3 className="text-base sm:text-lg font-semibold text-[#0D2660] leading-snug">
@@ -58,7 +60,7 @@ export function HomeImportantAnnouncements({ items }: { items: PublicNewsItem[] 
           </article>
 
           {rest.map((n) => (
-            <article key={n.slug} className="announcement-card">
+            <article key={n.slug} className="announcement-card micro-lift">
               <Link href={`/news/${n.slug}`} className="block p-4 sm:px-5 sm:py-4">
                 <h3 className="text-sm sm:text-[15px] font-medium text-[#003366] leading-snug">
                   {n.title}
@@ -85,7 +87,7 @@ export function HomeImportantAnnouncements({ items }: { items: PublicNewsItem[] 
               </Link>
             </article>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

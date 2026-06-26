@@ -31,14 +31,14 @@ export function HomeHeroPortals() {
               <Link
                 key={portal.href}
                 href={portal.href}
-                className={`portal-tile portal-tile-delay-${i + 1} group flex flex-col items-center justify-center text-center px-3 py-5 sm:py-6 min-h-[7rem] sm:min-h-[8.5rem] transition-colors ${
+                className={`portal-tile portal-tile-delay-${i + 1} group flex flex-col items-center justify-center text-center px-3 py-5 sm:py-6 min-h-[7rem] sm:min-h-[8.5rem] transition-colors micro-lift micro-press ${
                   isDark
                     ? "bg-[#2b2d3b] text-white hover:bg-[#0D2660]"
                     : "bg-[#f0f2f5] text-[#0D2660] hover:bg-white"
                 }`}
               >
                 <div
-                  className={`flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-3 transition-transform group-hover:scale-110 ${
+                  className={`flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-3 micro-icon-pop ${
                     isDark
                       ? "bg-[#B80F0A] text-white"
                       : "bg-[#0D2660] text-white"

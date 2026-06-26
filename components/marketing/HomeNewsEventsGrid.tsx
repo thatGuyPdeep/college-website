@@ -1,7 +1,10 @@
+"use client";
+
 import type { PublicNewsItem } from "@/lib/content/public-data";
 import { HomeSectionHeading } from "@/components/marketing/HomeSectionHeading";
 import { HomeContentCarousel } from "@/components/marketing/HomeContentCarousel";
 import { PROGRAMS } from "@/lib/utils/constants";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import Link from "next/link";
 
 type HomeNewsEventsGridProps = {
@@ -25,37 +28,39 @@ export function HomeNewsEventsGrid({ news, events }: HomeNewsEventsGridProps) {
           className="mb-6 sm:mb-8"
         />
         <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
-          <div className="bg-white border border-gray-200 p-4 sm:p-5 shadow-sm">
+          <RevealOnScroll className="bg-white border border-gray-200 p-4 sm:p-5 shadow-sm micro-lift" delay={0}>
             <HomeSectionHeading title="Latest News" viewAllHref="/news" className="mb-4" />
             <HomeContentCarousel items={newsItems} emptyMessage="No news at this time." />
-          </div>
+          </RevealOnScroll>
 
-          <div className="bg-white border border-gray-200 p-4 sm:p-5 shadow-sm">
+          <RevealOnScroll className="bg-white border border-gray-200 p-4 sm:p-5 shadow-sm micro-lift" delay={100}>
             <HomeSectionHeading title="Upcoming Events" viewAllHref="/events" className="mb-4" />
             <HomeContentCarousel
               items={eventItems}
               emptyMessage="No upcoming events. Please check back soon."
             />
-          </div>
+          </RevealOnScroll>
 
-          <div className="bg-white border border-gray-200 p-4 sm:p-5 shadow-sm">
+          <RevealOnScroll className="bg-white border border-gray-200 p-4 sm:p-5 shadow-sm micro-lift" delay={200}>
             <HomeSectionHeading title="Programmes" viewAllHref="/academics" className="mb-4" />
             <ul className="divide-y divide-gray-100">
               {programmes.map((p) => (
                 <li key={p.slug}>
                   <Link
                     href={`/academics/courses/${p.slug}`}
-                    className="block py-3 sm:py-3.5 group hover:bg-blue-50/50 -mx-2 px-2 rounded transition-colors"
+                    className="block py-3 sm:py-3.5 group hover:bg-blue-50/50 -mx-2 px-2 rounded transition-all duration-200"
                   >
-                    <p className="text-sm font-medium text-gray-800 group-hover:text-[#0D2660] leading-snug">
+                    <p className="text-sm font-medium text-gray-800 group-hover:text-[#0D2660] leading-snug transition-colors">
                       {p.name}
                     </p>
-                    <p className="text-[11px] text-gray-400 mt-1 uppercase">{p.level} · Read more →</p>
+                    <p className="text-[11px] text-gray-400 mt-1 uppercase group-hover:text-[#B80F0A] transition-colors">
+                      {p.level} · Read more →
+                    </p>
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </RevealOnScroll>
         </div>
       </div>
     </section>

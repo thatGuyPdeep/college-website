@@ -62,7 +62,7 @@ export function HomeContentCarousel({
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <div className="grid sm:grid-cols-2 gap-3 min-h-[9rem]">
+      <div key={index} className="grid sm:grid-cols-2 gap-3 min-h-[9rem] carousel-slide-enter">
         {padded.map((item) => {
           const { day, month } = parseDateParts(item.date);
           return (
@@ -80,7 +80,7 @@ export function HomeContentCarousel({
                     <h4 className="text-sm font-medium text-gray-800 group-hover:text-[#0D2660] line-clamp-3 leading-snug">
                       {item.title}
                     </h4>
-                    <span className="text-[11px] text-[#0D2660] mt-2 inline-block">Read more →</span>
+                    <span className="text-[11px] text-[#0D2660] mt-2 inline-block transition-transform duration-200 group-hover:translate-x-1">Read more →</span>
                   </div>
                 </div>
               </Link>
@@ -108,7 +108,7 @@ export function HomeContentCarousel({
             <button
               type="button"
               onClick={prev}
-              className="p-1.5 rounded-md border border-gray-200 text-[#0D2660] hover:bg-blue-50"
+              className="micro-carousel-btn p-1.5 rounded-md border border-gray-200 text-[#0D2660]"
               aria-label="Previous"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -116,7 +116,7 @@ export function HomeContentCarousel({
             <button
               type="button"
               onClick={next}
-              className="p-1.5 rounded-md border border-gray-200 text-[#0D2660] hover:bg-blue-50"
+              className="micro-carousel-btn p-1.5 rounded-md border border-gray-200 text-[#0D2660]"
               aria-label="Next"
             >
               <ChevronRight className="h-4 w-4" />

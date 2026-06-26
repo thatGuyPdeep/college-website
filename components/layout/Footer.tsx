@@ -145,7 +145,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="p-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-[#F5C200] hover:border-[#F5C200]/40 transition-colors"
+                    className="p-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-[#F5C200] hover:border-[#F5C200]/40 transition-all micro-lift micro-press hover:scale-110"
                   >
                     <s.icon className="h-3.5 w-3.5" aria-hidden="true" />
                   </a>

@@ -32,7 +32,7 @@ export function UtilityTopBar() {
               <Link
                 key={href}
                 href={href}
-                className="inline-flex items-center gap-1.5 hover:text-[#F5C200] transition-colors whitespace-nowrap"
+                className="micro-nav-link inline-flex items-center gap-1.5 hover:text-[#F5C200] transition-colors whitespace-nowrap"
               >
                 <Icon className="h-3.5 w-3.5 opacity-90" aria-hidden="true" />
                 {label}
