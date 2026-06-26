@@ -1,23 +1,22 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Briefcase } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getMyFacultyApplications } from "@/lib/actions/recruitment";
 import { createClient } from "@/lib/supabase/server";
-import type { FacultyAppStatus } from "@/lib/supabase/types";
+import { CareersStatusTracker } from "@/components/recruitment/CareersStatusTracker";
 
-const STATUS_COLORS: Record<FacultyAppStatus, string> = {
-  submitted:   "bg-blue-100 text-blue-800",
-  shortlisted: "bg-green-100 text-green-800",
-  interview:   "bg-purple-100 text-purple-800",
-  rejected:    "bg-red-100 text-red-800",
-};
-
-export default async function CareersDashboardPage() {
+export default async function CareersDashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ submitted?: string }>;
+}) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login?redirect=/careers/dashboard");
+
+  const params = await searchParams;
+  const justSubmitted = params.submitted === "1";
 
   const result = await getMyFacultyApplications();
   const apps = result.ok ? result.data : [];
@@ -41,19 +40,7 @@ export default async function CareersDashboardPage() {
           <Button asChild variant="outline"><Link href="/careers">Browse Vacancies</Link></Button>
         </div>
       ) : (
-        <ul className="space-y-4">
-          {apps.map((app) => (
-            <li key={app.id} className="bg-white rounded-xl border border-blue-100 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
-                <h2 className="font-semibold text-gray-900">{app.vacancy?.title ?? "Faculty Position"}</h2>
-                <p className="text-xs text-gray-400 mt-1">
-                  Applied {new Date(app.created_at).toLocaleDateString("en-IN")}
-                </p>
-              </div>
-              <Badge className={STATUS_COLORS[app.status]}>{app.status}</Badge>
-            </li>
-          ))}
-        </ul>
+        <CareersStatusTracker initialApps={apps} justSubmitted={justSubmitted} />
       )}
     </div>
   );

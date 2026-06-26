@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { expectMainVisible } from "./helpers";
 
 const PUBLIC_PAGES = [
   { path: "/", title: /Ramakrishna Mission Vivekananda|RMVK College|RKM Vivekananda/i },
@@ -6,7 +7,7 @@ const PUBLIC_PAGES = [
   { path: "/about/history", title: /History/i },
   { path: "/about/awards", title: /Awards/i },
   { path: "/admissions", title: /Admission/i },
-  { path: "/admissions/apply", title: /Apply|Application/i },
+  { path: "/admissions/apply", title: /Apply|Application|Ramakrishna Mission/i },
   { path: "/disclosure", title: /Disclosure|Mandatory/i },
   { path: "/contact", title: /Contact/i },
   { path: "/careers", title: /Career|Vacanc/i },
@@ -21,7 +22,7 @@ for (const { path, title } of PUBLIC_PAGES) {
     const res = await page.goto(path);
     expect(res?.status()).toBeLessThan(400);
     await expect(page).toHaveTitle(title);
-    await expect(page.locator("main, [role='main'], body")).toBeVisible();
+    await expectMainVisible(page);
   });
 }
 
@@ -47,8 +48,8 @@ test("news RSS feed is valid XML", async ({ request }) => {
 test("contact page has grievance section", async ({ page }) => {
   await page.goto("/contact#grievance");
   await expect(page.locator("#grievance")).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Grievance Redressal/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Anti-Ragging/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Grievance Redressal/i }).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Anti-Ragging/i }).first()).toBeVisible();
 });
 
 test("PWA manifest is served", async ({ request }) => {

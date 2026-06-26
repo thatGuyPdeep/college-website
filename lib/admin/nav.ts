@@ -15,6 +15,8 @@ import {
   Shield,
   Bell,
   BookOpen,
+  ListTodo,
+  Search,
 } from "lucide-react";
 import type { UserRole } from "@/lib/supabase/types";
 import { STAFF_ROLES } from "@/lib/auth/roles";
@@ -30,7 +32,9 @@ export type AdminNavItem = {
 
 const NAV_DEFS: Omit<AdminNavItem, "roles">[] = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard, module: "dashboard", exact: true },
+  { label: "Search", href: "/admin/search", icon: Search, module: "dashboard" },
   { label: "Notifications", href: "/admin/notifications", icon: Bell, module: "notifications" },
+  { label: "Tasks", href: "/admin/tasks", icon: ListTodo, module: "tasks" },
   { label: "Admissions", href: "/admin/admissions", icon: FileCheck, module: "admissions" },
   { label: "Recruitment", href: "/admin/recruitment", icon: Briefcase, module: "recruitment" },
   { label: "Contact", href: "/admin/contact", icon: Mail, module: "contact" },

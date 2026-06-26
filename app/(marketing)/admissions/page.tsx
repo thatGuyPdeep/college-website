@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AdmissionsStatsStrip } from "@/components/marketing/AdmissionsStatsStrip";
 import { RKM_FACTS } from "@/lib/utils/constants";
+import { getOperationalSettings } from "@/lib/config/operational-settings";
 
 export const metadata: Metadata = {
   title: "Admissions",
@@ -45,8 +46,9 @@ const LINKS = [
   },
 ];
 
-export default function AdmissionsHubPage() {
-  const fee = process.env.APPLICATION_FEE_INR ?? "500";
+export default async function AdmissionsHubPage() {
+  const { application_fee_inr: feeInr } = await getOperationalSettings();
+  const fee = String(feeInr || process.env.APPLICATION_FEE_INR || "500");
 
   return (
     <>

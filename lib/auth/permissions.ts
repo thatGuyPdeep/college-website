@@ -15,7 +15,8 @@ export type AdminModule =
   | "settings"
   | "ai"
   | "compliance"
-  | "notifications";
+  | "notifications"
+  | "tasks";
 
 export type AdminAction = "view" | "edit" | "approve" | "export" | "admin";
 
@@ -113,6 +114,14 @@ const MATRIX: Record<AdminModule, Partial<Record<AdminAction, UserRole[]>>> = {
   compliance: {
     view: ["principal", "admin", "super_admin"],
     edit: ["admin", "super_admin"],
+  },
+  tasks: {
+    view: [
+      "admissions_staff", "examination_staff", "hr_staff", "content_editor",
+      "accounts_staff", "iqac_coordinator", "principal", "hod", "faculty",
+      "admin", "super_admin",
+    ],
+    edit: ["principal", "admin", "super_admin"],
   },
 };
 

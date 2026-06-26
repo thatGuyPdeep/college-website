@@ -1,30 +1,24 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingPage } from "@/components/layout/MarketingPage";
-import {
-  UG_SEAT_ROWS,
-  ITI_SEAT_ROWS,
-  VIDYAPEETH_SEAT_ROWS,
-  ITI_TOTAL_SEATS,
-  ACADEMIC_SESSION,
-} from "@/lib/content/academic-ops";
 import { ITI_ADMISSION_PRIORITY } from "@/lib/content/iti";
 import { AdmissionsStatsStrip } from "@/components/marketing/AdmissionsStatsStrip";
 import { ADMISSIONS_STATS_AS_OF } from "@/lib/content/admissions-2026";
+import { getPublicSeatMatrix } from "@/lib/content/seat-matrix-data";
+import type { SeatRow } from "@/lib/content/academic-ops";
 
 export const metadata: Metadata = {
   title: "Seats Availability",
-  description: `Programme-wise seat availability for session ${ACADEMIC_SESSION} — UG, ITI, and Vidyapeeth.`,
+  description: "Programme-wise seat availability for the current academic session.",
 };
 
 function SeatTable({
   rows,
   columns,
 }: {
-  rows: typeof UG_SEAT_ROWS;
-  columns: { key: keyof (typeof UG_SEAT_ROWS)[0]; label: string; hideSm?: boolean }[];
-}) {
-  return (
+  rows: SeatRow[];
+  columns: { key: keyof SeatRow; label: string; hideSm?: boolean }[];
+}) {  return (
     <div className="overflow-x-auto rounded-2xl border border-blue-100 mb-10">
       <table className="w-full text-sm">
         <thead>
@@ -58,15 +52,23 @@ function SeatTable({
   );
 }
 
-export default function SeatsAvailabilityPage() {
+export default async function SeatsAvailabilityPage() {
+  const matrix = await getPublicSeatMatrix();
+
   return (
     <MarketingPage
       title="Seats Availability"
       hindiTitle="सीट उपलब्धता"
-      description={`Programme-wise sanctioned intake for session ${ACADEMIC_SESSION}. ITI figures are NCVT-affiliated; UG intake follows Bastar University notification.`}
+      description={`Programme-wise sanctioned intake for session ${matrix.session}. ITI figures are NCVT-affiliated; UG intake follows Bastar University notification.`}
       breadcrumbs={[{ label: "Admissions", href: "/admissions" }]}
     >
       <AdmissionsStatsStrip compact />
+
+      {matrix.notes && (
+        <p className="text-sm text-amber-800 bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 mb-8">
+          {matrix.notes}
+        </p>
+      )}
 
       <section className="mb-12">
         <h2 className="text-lg font-bold text-[#0D2660] mb-4">
@@ -78,8 +80,7 @@ export default function SeatsAvailabilityPage() {
           {ADMISSIONS_STATS_AS_OF} (unique applicants per programme).
         </p>
         <SeatTable
-          rows={UG_SEAT_ROWS}
-          columns={[
+          rows={matrix.ug}          columns={[
             { key: "programme", label: "Programme" },
             { key: "department", label: "Department", hideSm: true },
             { key: "duration", label: "Duration", hideSm: true },
@@ -95,11 +96,10 @@ export default function SeatsAvailabilityPage() {
           ITI Trades (NCVT)
         </h2>
         <p className="text-sm text-gray-500 mb-4">
-          Total sanctioned seats across all trades: <strong>{ITI_TOTAL_SEATS}</strong> (2 units × 2 shifts).
+          Total sanctioned seats across all trades: <strong>{matrix.itiTotal}</strong> (2 units × 2 shifts).
         </p>
         <SeatTable
-          rows={ITI_SEAT_ROWS}
-          columns={[
+          rows={matrix.iti}          columns={[
             { key: "programme", label: "Trade" },
             { key: "duration", label: "Duration" },
             { key: "seatsPerUnit", label: "Seats/Unit" },
@@ -131,8 +131,7 @@ export default function SeatsAvailabilityPage() {
           merit and residential capacity.
         </p>
         <SeatTable
-          rows={VIDYAPEETH_SEAT_ROWS}
-          columns={[
+          rows={matrix.vidyapeeth}          columns={[
             { key: "programme", label: "Stream" },
             { key: "level", label: "Level" },
             { key: "duration", label: "Duration" },

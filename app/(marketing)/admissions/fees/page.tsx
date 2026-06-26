@@ -2,12 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/layout/PageHero";
 import { getExplorerPrograms } from "@/lib/content/programs";
+import { getOperationalSettings } from "@/lib/config/operational-settings";
 
 export const metadata: Metadata = { title: "Fee Structure" };
 
 export default async function FeesPage() {
-  const programs = await getExplorerPrograms();
+  const [programs, operational] = await Promise.all([
+    getExplorerPrograms(),
+    getOperationalSettings(),
+  ]);
   const withFees = programs.filter((p) => p.fees != null);
+  const appFee = operational.application_fee_inr || Number(process.env.APPLICATION_FEE_INR ?? "500");
 
   return (
     <>
@@ -44,7 +49,7 @@ export default async function FeesPage() {
           )}
 
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 text-sm text-gray-700 space-y-2">
-            <p><strong>Application fee:</strong> ₹{process.env.APPLICATION_FEE_INR ?? "500"} (non-refundable, paid online during application).</p>
+            <p><strong>Application fee:</strong> ₹{appFee} (non-refundable, paid online during application).</p>
             <p><strong>Refund policy:</strong> Tuition fee refunds follow university and state government norms. Withdrawal before commencement may qualify for partial refund; no refund after classes begin except as per policy.</p>
             <p>Enquiries: <Link href="/contact" className="text-[#C8201A] font-semibold hover:underline">Contact us</Link></p>
           </div>

@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { upsertProgramAdmin } from "@/lib/actions/admin-content";
+import { ContentPreviewLink } from "@/components/admin/ContentPreviewLink";
 import type { Department, Program, ProgramLevel, StudyMode } from "@/lib/supabase/types";
 
 type DeptOption = Pick<Department, "id" | "name">;
@@ -135,7 +136,10 @@ export function ProgramEditor({
                 {p.level.toUpperCase()} · {p.mode.replace("_", " ")} · {p.is_active ? "Active" : "Hidden"}
               </div>
             </div>
-            <Button type="button" size="sm" variant="outline" onClick={() => loadItem(p)}>Edit</Button>
+            <div className="flex flex-col items-end gap-2 shrink-0">
+              {p.is_active && p.slug && <ContentPreviewLink href={`/academics/courses/${p.slug}`} />}
+              <Button type="button" size="sm" variant="outline" onClick={() => loadItem(p)}>Edit</Button>
+            </div>
           </li>
         ))}
         {items.length === 0 && <p className="text-sm text-gray-400">No programmes in database — static list shown on /academics</p>}

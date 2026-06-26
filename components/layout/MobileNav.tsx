@@ -29,7 +29,11 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent id="mobile-menu" side="right" className="w-full sm:max-w-sm p-0 gap-0 border-l border-blue-100">
+      <SheetContent
+        id="mobile-menu"
+        side="right"
+        className="mobile-nav-sheet w-full sm:max-w-sm p-0 gap-0 border-l border-blue-100 bg-white text-gray-900 shadow-2xl"
+      >
         <SheetHeader className="border-b border-blue-100 bg-[#F0F4FF] px-5 py-4 text-left">
           <SheetTitle className="text-[#0D2660] font-bold text-lg">Menu</SheetTitle>
           <SheetDescription className="sr-only">Site navigation links</SheetDescription>
@@ -51,7 +55,7 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
           </div>
         </SheetHeader>
 
-        <nav className="flex-1 overflow-y-auto px-4 py-4" aria-label="Mobile navigation">
+        <nav className="flex-1 overflow-y-auto px-4 py-4 bg-white" aria-label="Mobile navigation">
           <ul className="space-y-1">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>

@@ -1,4 +1,4 @@
-import { requireRole } from "@/lib/auth/helpers";
+import { requirePermission } from "@/lib/auth/helpers";
 import {
   listNewsEvents,
   listDisclosureItems,
@@ -15,9 +15,10 @@ import { LeadershipEditor } from "@/components/admin/LeadershipEditor";
 import { PublicationsEditor } from "@/components/admin/PublicationsEditor";
 import { listGalleryItems } from "@/lib/actions/admin-gallery";
 import { listLeadershipEntries, listPublicationLinks } from "@/lib/actions/admin-site-content";
+import { ContentPreviewBar } from "@/components/admin/ContentPreviewBar";
 
 export default async function AdminContentPage() {
-  await requireRole(["content_editor", "admin", "super_admin"]);
+  await requirePermission("content", "view");
   const [newsResult, discResult, facultyResult, programsResult, deptResult, galleryResult, leadershipResult, pubsResult] = await Promise.all([
     listNewsEvents(),
     listDisclosureItems(),
@@ -40,7 +41,9 @@ export default async function AdminContentPage() {
   return (
     <div className="max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold text-[#0D2660] mb-2">Content Management</h1>
-      <p className="text-sm text-gray-500 mb-8">Manage news, programmes, faculty, gallery, leadership, publications, and disclosure</p>
+      <p className="text-sm text-gray-500 mb-4">Manage news, programmes, faculty, gallery, leadership, publications, and disclosure</p>
+
+      <ContentPreviewBar />
 
       <section className="mb-12">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">News & Events</h2>

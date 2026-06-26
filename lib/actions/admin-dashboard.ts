@@ -3,22 +3,15 @@
 import { adminClient as _adminClient } from "@/lib/supabase/admin";
 import type { ActionResult, UserRole } from "@/lib/supabase/types";
 import { can } from "@/lib/auth/permissions";
+import { getScopedApplicationStatuses, getDashboardExtras } from "@/lib/actions/admin-reports";
+import type { AdminDashboardData, DashboardWidget } from "@/lib/admin/dashboard-types";
 
-export type DashboardWidget = {
-  label: string;
-  value: string;
-  href: string;
-  color: string;
-  group: "admissions" | "recruitment" | "contact" | "payments" | "content" | "erp" | "examination" | "iqac" | "compliance";
-};
+export type { AdminDashboardData, DashboardWidget } from "@/lib/admin/dashboard-types";
 
-export type AdminDashboardData = {
-  widgets: DashboardWidget[];
-  recentActivity: { text: string; at: string }[];
-  role: UserRole;
-};
-
-export async function getAdminDashboard(role: UserRole): Promise<ActionResult<AdminDashboardData>> {
+export async function getAdminDashboard(
+  role: UserRole,
+  userId?: string,
+): Promise<ActionResult<AdminDashboardData>> {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const db = _adminClient as any;
@@ -28,8 +21,10 @@ export async function getAdminDashboard(role: UserRole): Promise<ActionResult<Ad
 
     if (can(role, "admissions", "view")) {
       queries.push(
-        db.from("applications").select("status").then(({ data }: { data: { status: string }[] | null }) => {
-          const list = data ?? [];
+        (userId && role === "hod"
+          ? getScopedApplicationStatuses(userId, role)
+          : db.from("applications").select("status").then((r: { data: { status: string }[] | null }) => r.data ?? [])
+        ).then((list: { status: string }[]) => {
           widgets.push(
             { label: "Total Applications", value: String(list.length), href: "/admin/admissions", color: "text-blue-700 bg-blue-100", group: "admissions" },
             {
@@ -100,6 +95,7 @@ export async function getAdminDashboard(role: UserRole): Promise<ActionResult<Ad
             widgets.push(
               { label: "Paid Transactions", value: String(paid.length), href: "/admin/payments", color: "text-green-700 bg-green-100", group: "payments" },
               { label: "Pending Payments", value: String(pending.length), href: "/admin/payments", color: "text-amber-700 bg-amber-100", group: "payments" },
+              { label: "Failed Payments", value: String(list.filter((p) => p.status === "failed").length), href: "/admin/payments?status=failed", color: "text-red-700 bg-red-100", group: "payments" },
               { label: "Revenue (paid)", value: `₹${paidTotal.toLocaleString("en-IN")}`, href: "/admin/payments", color: "text-emerald-700 bg-emerald-100", group: "payments" },
             );
           },
@@ -170,21 +166,16 @@ export async function getAdminDashboard(role: UserRole): Promise<ActionResult<Ad
 
     await Promise.all(queries);
 
-    let recentActivity: { text: string; at: string }[] = [];
-    if (can(role, "audit", "view")) {
-      const { data: audit } = await db
-        .from("audit_logs")
-        .select("action, note, created_at, entity_type")
-        .order("created_at", { ascending: false })
-        .limit(8);
-
-      recentActivity = (audit ?? []).map((a: { action: string; note: string | null; created_at: string; entity_type: string }) => ({
-        text: `${a.entity_type} ${a.action.replace(/_/g, " ")}${a.note ? `: ${a.note}` : ""}`,
-        at:   a.created_at,
-      }));
+    let openTasks = 0;
+    let unreadNotifications = 0;
+    if (userId) {
+      const extras = await getDashboardExtras(userId, role);
+      openTasks = extras.openTasks;
+      unreadNotifications = extras.unreadNotifications;
+      widgets.push(...extras.extraWidgets);
     }
 
-    return { ok: true, data: { widgets, recentActivity, role } };
+    return { ok: true, data: { widgets, role, openTasks, unreadNotifications } };
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : "Failed to load dashboard" };
   }

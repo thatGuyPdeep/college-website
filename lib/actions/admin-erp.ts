@@ -3,8 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { adminClient as _adminClient } from "@/lib/supabase/admin";
+import { writeAudit } from "@/lib/audit/log";
 import type { ActionResult } from "@/lib/supabase/types";
-
 import { ERP_ADMIN_ROLES } from "@/lib/auth/roles";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -362,7 +362,7 @@ export async function gradeSubmission(
   grade: string
 ): Promise<ActionResult<void>> {
   try {
-    await requireErpAdmin();
+    const { user } = await requireErpAdmin();
     const trimmed = grade.trim();
     if (!trimmed) throw new Error("Grade is required");
 
@@ -371,6 +371,14 @@ export async function gradeSubmission(
       .update({ grade: trimmed })
       .eq("id", submissionId);
     if (error) throw error;
+
+    await writeAudit({
+      entity_type: "erp_submission",
+      entity_id:   submissionId,
+      action:      "grade_update",
+      actor_id:    user.id,
+      new_value:   { grade: trimmed },
+    });
 
     revalidatePath("/student/assignments");
     revalidatePath("/admin/erp");
@@ -617,7 +625,7 @@ export async function recordFeePayment(
   amountPaid: number,
 ): Promise<ActionResult<void>> {
   try {
-    await requireErpAdmin();
+    const { user } = await requireErpAdmin();
     const { data: row, error: fetchErr } = await admin
       .from("student_fee_records")
       .select("amount, amount_paid")
@@ -634,6 +642,15 @@ export async function recordFeePayment(
       .update({ amount_paid: paid, status })
       .eq("id", feeId);
     if (error) throw error;
+
+    await writeAudit({
+      entity_type: "erp_fee",
+      entity_id:   feeId,
+      action:      "fee_payment",
+      actor_id:    user.id,
+      new_value:   { amount_paid: amountPaid, status },
+    });
+
     revalidatePath("/admin/erp");
     revalidatePath("/student");
     return { ok: true, data: undefined };

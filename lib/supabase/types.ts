@@ -26,7 +26,7 @@ export type ApplicationStatus =
 export type DocumentStatus  = "pending" | "submitted" | "approved" | "rejected";
 export type PaymentStatus   = "created" | "paid" | "failed" | "refunded";
 export type VacancyStatus   = "open" | "closed";
-export type FacultyAppStatus = "submitted" | "shortlisted" | "rejected" | "interview";
+export type FacultyAppStatus = "submitted" | "shortlisted" | "rejected" | "interview" | "accepted";
 export type ProgramLevel    = "ug" | "pg" | "diploma" | "phd";
 export type StudyMode       = "full_time" | "part_time" | "odl";
 
@@ -41,6 +41,7 @@ export interface Profile {
   hindi_name: string | null;
   is_active: boolean;
   last_login_at: string | null;
+  dashboard_prefs?: Record<string, unknown> | null;
   created_at: string;
   updated_at: string;
 }
@@ -141,6 +142,8 @@ export interface ApplicationView extends Application {
   applicant_phone: string | null;
   program_name: string | null;
   program_level: ProgramLevel | null;
+  program_slug?: string | null;
+  department_slug?: string | null;
 }
 
 // ── DOCUMENT ─────────────────────────────────────────────────────
@@ -227,6 +230,7 @@ export interface NewsEvent {
   attachment_label: string | null;
   language: string | null;
   published_at: string | null;
+  scheduled_publish_at?: string | null;
   is_published: boolean;
 }
 

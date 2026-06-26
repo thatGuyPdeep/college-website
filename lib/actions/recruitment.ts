@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { adminClient as _adminClient } from "@/lib/supabase/admin";
-import { notifyStaff } from "@/lib/actions/staff-notifications";
+import { writeAudit } from "@/lib/audit/log";
 import type { ActionResult, FacultyAppStatus, Vacancy } from "@/lib/supabase/types";
 import { facultyApplicantSchema } from "@/lib/validation/recruitment";
 
@@ -94,11 +94,12 @@ export async function submitFacultyApplication(
 
     await adminClient.from("profiles").update({ role: "faculty_applicant" }).eq("id", user.id);
 
-    await notifyStaff({
-      type:        "faculty_application",
-      title:       "New faculty application submitted",
-      href:        "/admin/recruitment",
-      target_role: "hr_staff",
+    await writeAudit({
+      entity_type: "faculty_application",
+      entity_id:   app.id,
+      action:      "submitted",
+      actor_id:    user.id,
+      new_value:   { vacancy_id: vacancyId, full_name: parsed.full_name },
     });
 
     revalidatePath("/careers/dashboard");

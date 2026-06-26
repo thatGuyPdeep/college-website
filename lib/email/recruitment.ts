@@ -52,6 +52,10 @@ function statusMessage(status: FacultyAppStatus, vacancyTitle: string) {
       return `<p>Thank you for applying for <strong>${vacancyTitle}</strong>.</p>
         <p>After careful review, we are unable to proceed with your application at this time. We encourage you to apply for future vacancies listed on our careers page.</p>
         <p><a href="${SITE}/careers" style="background:#0D2660;color:#fff;padding:10px 24px;border-radius:6px;text-decoration:none;font-weight:bold;">View Open Vacancies</a></p>`;
+    case "accepted":
+      return `<p>Congratulations! Your application for <strong>${vacancyTitle}</strong> has been <strong style="color:#059669">accepted</strong>.</p>
+        <p>Our HR office will contact you with offer letter and joining formalities. You may track updates at your careers dashboard.</p>
+        <p><a href="${dashboard}" style="background:#0D2660;color:#fff;padding:10px 24px;border-radius:6px;text-decoration:none;font-weight:bold;">View Dashboard</a></p>`;
     default:
       return `<p>Your application status for <strong>${vacancyTitle}</strong> is now: <strong>${status}</strong>.</p>
         <p><a href="${dashboard}">Track at careers dashboard</a></p>`;
@@ -68,6 +72,7 @@ export async function sendRecruitmentStatusEmail(payload: RecruitmentEmailPayloa
     submitted:   "Application Received",
     shortlisted: "Application Shortlisted",
     interview:   "Interview Stage",
+    accepted:    "Offer / Acceptance",
     rejected:    "Application Update",
   };
 

@@ -59,29 +59,50 @@ export async function upsertExamNotice(item: {
     const { user, role } = await requireExamStaff();
     if (!can(role, "examination", "edit")) throw new Error("Cannot edit examination notices");
 
+    const publishNow = Boolean(item.is_published) && !item.scheduled_publish_at;
+
     const payload = {
       ...item,
       category: "examination",
-      published_at: item.is_published ? new Date().toISOString() : null,
+      is_published: publishNow,
+      published_at: publishNow ? new Date().toISOString() : null,
+      scheduled_publish_at: item.scheduled_publish_at ?? null,
     };
 
     const { error } = await admin.from("news_events").upsert(payload, { onConflict: "slug" });
     if (error) throw error;
 
-    await writeAudit({
-      entity_type: "news_event",
-      entity_id:   item.slug,
-      action:      item.is_published ? "news_publish" : "news_draft",
-      actor_id:    user.id,
-      new_value:   { title: item.title, category: "examination" },
-    });
-
-    if (item.is_published) {
+    if (publishNow) {
+      await writeAudit({
+        entity_type: "news_event",
+        entity_id:   item.slug,
+        action:      "news_publish",
+        actor_id:    user.id,
+        new_value:   { title: item.title, category: "examination" },
+      });
       await notifyStaff({
         type:        "content_draft",
         title:       `Exam notice published: ${item.title}`,
         href:        `/news/${item.slug}`,
         target_role: "examination_staff",
+      });
+    } else if (item.scheduled_publish_at) {
+      await writeAudit({
+        entity_type: "news_event",
+        entity_id:   item.slug,
+        action:      "news_scheduled",
+        actor_id:    user.id,
+        new_value:   { title: item.title, scheduled_publish_at: item.scheduled_publish_at },
+        notify:      false,
+      });
+    } else {
+      await writeAudit({
+        entity_type: "news_event",
+        entity_id:   item.slug,
+        action:      "news_draft",
+        actor_id:    user.id,
+        new_value:   { title: item.title, category: "examination" },
+        notify:      false,
       });
     }
 

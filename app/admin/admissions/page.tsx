@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { listApplications, getAdmissionStats } from "@/lib/actions/admin-admissions";
-import { requireRole } from "@/lib/auth/helpers";
+import { requirePermission } from "@/lib/auth/helpers";
 import { AdmissionsSearchBar } from "@/components/admin/AdmissionsSearchBar";
 import type { ApplicationStatus, ApplicationView } from "@/lib/supabase/types";
 
@@ -153,7 +153,7 @@ export default async function AdminAdmissionsPage({
 }: {
   searchParams: Promise<{ status?: ApplicationStatus; q?: string }>;
 }) {
-  await requireRole(["admissions_staff", "admin", "super_admin"]);
+  await requirePermission("admissions", "view");
   const { status, q } = await searchParams;
 
   return (
@@ -165,6 +165,9 @@ export default async function AdminAdmissionsPage({
           <p className="text-sm text-gray-500 mt-1">Review and manage all student applications</p>
         </div>
         <div className="flex gap-3">
+          <Button asChild variant="outline" className="border-purple-300 text-purple-800 gap-2">
+            <Link href="/admin/admissions/seats">Seat matrix</Link>
+          </Button>
           <Button asChild variant="outline" className="border-[#0D2660] text-[#0D2660] gap-2">
             <a href="/api/admin/export?type=admissions" download>
               <Download className="h-4 w-4" /> Export Excel

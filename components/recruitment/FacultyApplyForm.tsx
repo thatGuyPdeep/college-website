@@ -19,6 +19,7 @@ interface Props {
 export function FacultyApplyForm({ vacancy }: Props) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     full_name: "", email: "", phone: "", address: "",
     current_org: "", current_role: "",
@@ -57,13 +58,30 @@ export function FacultyApplyForm({ vacancy }: Props) {
       }
       const result = await submitFacultyApplication(vacancy.id, form, { cv_path, cert_paths }, { dpdpConsent: true });
       if (!result.ok) { toast.error(result.error); return; }
+      setSubmitted(true);
       toast.success("Application submitted successfully!");
-      router.push("/careers/dashboard");
+      setTimeout(() => router.push("/careers/dashboard?submitted=1"), 2500);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Submission failed");
     } finally {
       setLoading(false);
     }
+  }
+
+  if (submitted) {
+    return (
+      <div className="bg-white border border-green-200 rounded-2xl p-8 shadow-sm text-center space-y-4">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-green-700 text-2xl font-bold">
+          ✓
+        </div>
+        <h2 className="text-xl font-semibold text-[#0D2660]">Application Submitted</h2>
+        <p className="text-sm text-gray-600 max-w-md mx-auto">
+          Please <strong>do not reload this page</strong> until you are redirected to your dashboard.
+          Your application status will appear there shortly.
+        </p>
+        <p className="text-xs text-gray-400">Redirecting to your careers dashboard…</p>
+      </div>
+    );
   }
 
   return (

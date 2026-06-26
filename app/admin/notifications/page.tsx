@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default async function AdminNotificationsPage() {
   await requirePermission("notifications", "view");
-  const result = await listStaffNotifications(50);
+  const result = await listStaffNotifications(100);
   const items = result.ok ? result.data : [];
 
   return (

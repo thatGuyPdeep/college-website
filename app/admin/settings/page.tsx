@@ -1,5 +1,7 @@
 import { requirePermission, getUserProfile } from "@/lib/auth/helpers";
 import { getSystemConfig } from "@/lib/actions/admin-settings";
+import { getOperationalSettings } from "@/lib/config/operational-settings";
+import { OperationalSettingsForm } from "@/components/admin/OperationalSettingsForm";
 import { canEditSettings } from "@/lib/auth/permissions";
 import type { UserRole } from "@/lib/supabase/types";
 
@@ -17,7 +19,7 @@ export default async function AdminSettingsPage() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const role = (profile as any)?.role as UserRole;
   const canEdit = canEditSettings(role);
-  const cfg = await getSystemConfig();
+  const [cfg, operational] = await Promise.all([getSystemConfig(), getOperationalSettings()]);
 
   const rows: { label: string; value: React.ReactNode }[] = [
     { label: "Environment", value: cfg.nodeEnv },
@@ -79,7 +81,7 @@ export default async function AdminSettingsPage() {
       <h1 className="text-2xl font-bold text-[#0D2660] mb-2">System Settings</h1>
       <p className="text-sm text-gray-500 mb-8">
         {canEdit
-          ? "Super admin can update env vars in Netlify or .env.local."
+          ? "Super admin can tune admission fees below or update API keys in Netlify / .env.local."
           : "Read-only overview. Only super admin can change system configuration."}
       </p>
 
@@ -92,8 +94,10 @@ export default async function AdminSettingsPage() {
         ))}
       </dl>
 
+      {canEdit && <OperationalSettingsForm initial={operational} />}
+
       <p className="text-xs text-gray-400 mt-6">
-        After changing env vars, redeploy or restart the dev server. Run pending SQL migrations in Supabase (006–014) if ERP, uploads, gallery storage, leadership CMS, or consent columns fail.
+        After changing env vars, redeploy or restart the dev server. Run pending SQL migrations in Supabase (001–026) if tables or columns are missing.
       </p>
     </div>
   );

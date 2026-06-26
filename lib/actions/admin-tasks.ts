@@ -10,14 +10,14 @@ import { can } from "@/lib/auth/permissions";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const admin = _adminClient as any;
 
-async function requireTaskManager() {
+async function requireTaskAccess(edit = false) {
   const supabase = await createClient();
   const { data: { user }, error } = await supabase.auth.getUser();
   if (error || !user) throw new Error("Not authenticated");
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const role = (profile as any)?.role as UserRole;
-  if (!["admin", "super_admin", "principal"].includes(role)) {
+  if (!can(role, "tasks", edit ? "edit" : "view")) {
     throw new Error("Insufficient permissions");
   }
   return { user, role };
@@ -34,22 +34,67 @@ export type StaffTask = {
   entity_id: string | null;
   created_at: string;
   assignee_name?: string | null;
+  assigner_name?: string | null;
 };
 
 export async function listStaffTasks(): Promise<ActionResult<StaffTask[]>> {
   try {
-    const { user } = await requireTaskManager();
-    const { data, error } = await admin
+    const { user, role } = await requireTaskAccess();
+    const canSeeAll = can(role, "tasks", "edit");
+
+    let query = admin
       .from("staff_tasks")
       .select("id, title, assigned_to, assigned_by, due_at, completed_at, entity_type, entity_id, created_at")
-      .or(`assigned_by.eq.${user.id},assigned_to.eq.${user.id}`)
       .order("created_at", { ascending: false })
-      .limit(50);
+      .limit(100);
 
+    if (!canSeeAll) {
+      query = query.eq("assigned_to", user.id);
+    }
+
+    const { data, error } = await query;
     if (error) throw error;
-    return { ok: true, data: (data ?? []) as StaffTask[] };
+
+    const rows = (data ?? []) as StaffTask[];
+    const userIds = [...new Set(rows.flatMap((r) => [r.assigned_to, r.assigned_by]))];
+    const { data: profiles } = await admin
+      .from("profiles")
+      .select("id, full_name")
+      .in("id", userIds);
+    const nameMap = new Map<string, string | null>(
+      (profiles ?? []).map((p: { id: string; full_name: string | null }) => [p.id, p.full_name]),
+    );
+
+    return {
+      ok: true,
+      data: rows.map((r) => ({
+        ...r,
+        assignee_name: nameMap.get(r.assigned_to) ?? null,
+        assigner_name: nameMap.get(r.assigned_by) ?? null,
+      })),
+    };
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : "Failed to load tasks" };
+  }
+}
+
+export async function listAssignableStaff(): Promise<ActionResult<{ id: string; full_name: string | null; email: string | null; role: string }[]>> {
+  try {
+    await requireTaskAccess(true);
+    const { data, error } = await admin
+      .from("profiles")
+      .select("id, full_name, email, role")
+      .eq("is_active", true)
+      .in("role", [
+        "admissions_staff", "examination_staff", "hr_staff", "content_editor",
+        "accounts_staff", "iqac_coordinator", "principal", "hod", "faculty",
+        "admin", "super_admin",
+      ])
+      .order("full_name");
+    if (error) throw error;
+    return { ok: true, data: data ?? [] };
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : "Failed to load staff" };
   }
 }
 
@@ -61,7 +106,7 @@ export async function createStaffTask(params: {
   entity_id?: string;
 }): Promise<ActionResult<void>> {
   try {
-    const { user } = await requireTaskManager();
+    const { user } = await requireTaskAccess(true);
 
     const { error } = await admin.from("staff_tasks").insert({
       title:       params.title,
@@ -75,12 +120,13 @@ export async function createStaffTask(params: {
     if (error) throw error;
 
     await notifyStaff({
-      type:     "task_assigned",
-      title:    `Task assigned: ${params.title}`,
-      user_id:  params.assigned_to,
-      href:     "/admin",
+      type:    "task_assigned",
+      title:   `Task assigned: ${params.title}`,
+      user_id: params.assigned_to,
+      href:    "/admin/tasks",
     });
 
+    revalidatePath("/admin/tasks");
     revalidatePath("/admin");
     return { ok: true, data: undefined };
   } catch (err) {
@@ -90,9 +136,7 @@ export async function createStaffTask(params: {
 
 export async function completeStaffTask(taskId: string): Promise<ActionResult<void>> {
   try {
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) throw new Error("Not authenticated");
+    const { user } = await requireTaskAccess();
 
     const { error } = await admin
       .from("staff_tasks")
@@ -101,6 +145,7 @@ export async function completeStaffTask(taskId: string): Promise<ActionResult<vo
       .eq("assigned_to", user.id);
 
     if (error) throw error;
+    revalidatePath("/admin/tasks");
     revalidatePath("/admin");
     return { ok: true, data: undefined };
   } catch (err) {

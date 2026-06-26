@@ -1,9 +1,17 @@
 import Link from "next/link";
-import { requireRole } from "@/lib/auth/helpers";
+import { requirePermission, getUserProfile } from "@/lib/auth/helpers";
+import { can } from "@/lib/auth/permissions";
 import { listAuditLogs } from "@/lib/actions/admin-audit";
+import { AuditExportButton } from "@/components/admin/AuditExportButton";
+import type { UserRole } from "@/lib/supabase/types";
 
 export default async function AdminAuditPage() {
-  await requireRole(["admin", "super_admin", "admissions_staff"]);
+  await requirePermission("audit", "view");
+  const profile = await getUserProfile();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const role = (profile as any)?.role as UserRole;
+  const canExport = can(role, "audit", "export");
+
   const result = await listAuditLogs(150);
   const logs = result.ok ? result.data : [];
 
@@ -12,7 +20,10 @@ export default async function AdminAuditPage() {
       <nav className="text-sm text-gray-500 mb-4">
         <Link href="/admin" className="hover:text-[#0D2660]">Admin</Link> / Audit Log
       </nav>
-      <h1 className="text-2xl font-bold text-[#0D2660] mb-6">Audit Log</h1>
+      <div className="flex items-center justify-between gap-4 mb-6">
+        <h1 className="text-2xl font-bold text-[#0D2660]">Audit Log</h1>
+        {canExport && <AuditExportButton />}
+      </div>
 
       {logs.length === 0 ? (
         <p className="text-sm text-gray-400">No audit entries yet.</p>

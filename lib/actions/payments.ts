@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { APPLICATION_FEE_INR, isPaymentRequired } from "@/lib/payments/razorpay";
+import { getOperationalSettings, isOperationalPaymentRequired } from "@/lib/config/operational-settings";
 import type { ActionResult } from "@/lib/supabase/types";
 
 export async function getPaymentConfig(): Promise<{
@@ -9,16 +9,20 @@ export async function getPaymentConfig(): Promise<{
   amount: number;
   keyId: string | null;
 }> {
+  const [required, amount] = await Promise.all([
+    isOperationalPaymentRequired(),
+    getOperationalSettings().then((s) => s.application_fee_inr),
+  ]);
   return {
-    required: isPaymentRequired(),
-    amount:   APPLICATION_FEE_INR,
-    keyId:    process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ?? process.env.RAZORPAY_KEY_ID ?? null,
+    required,
+    amount,
+    keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ?? process.env.RAZORPAY_KEY_ID ?? null,
   };
 }
 
 export async function isApplicationPaid(applicationId: string): Promise<ActionResult<boolean>> {
   try {
-    if (!isPaymentRequired()) return { ok: true, data: true };
+    if (!(await isOperationalPaymentRequired())) return { ok: true, data: true };
 
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();

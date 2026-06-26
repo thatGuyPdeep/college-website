@@ -40,11 +40,18 @@ export async function listNewsEvents(): Promise<ActionResult<NewsEvent[]>> {
 export async function upsertNewsEvent(item: Partial<NewsEvent> & { title: string; slug: string }): Promise<ActionResult<void>> {
   try {
     const { user } = await requireEditor();
+    const publishNow = Boolean(item.is_published) && !item.scheduled_publish_at;
+    const row = {
+      ...item,
+      is_published: publishNow,
+      published_at: publishNow ? (item.published_at ?? new Date().toISOString()) : item.published_at ?? null,
+      scheduled_publish_at: item.scheduled_publish_at ?? null,
+    };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { error } = await (adminClient as any).from("news_events").upsert(item, { onConflict: "slug" });
+    const { error } = await (adminClient as any).from("news_events").upsert(row, { onConflict: "slug" });
     if (error) throw error;
 
-    if (item.is_published) {
+    if (publishNow) {
       await writeAudit({
         entity_type: "news_event",
         entity_id:   item.slug,
@@ -52,11 +59,19 @@ export async function upsertNewsEvent(item: Partial<NewsEvent> & { title: string
         actor_id:    user.id,
         new_value:   { title: item.title },
       });
+    } else if (item.scheduled_publish_at) {
+      await writeAudit({
+        entity_type: "news_event",
+        entity_id:   item.slug,
+        action:      "news_schedule",
+        actor_id:    user.id,
+        new_value:   { title: item.title, scheduled_publish_at: item.scheduled_publish_at },
+      });
     }
 
     revalidatePath("/news");
     revalidatePath("/admin/content");
-    if (item.is_published !== false) {
+    if (publishNow) {
       void indexNewsForRag({
         slug:     item.slug,
         title:    item.title,

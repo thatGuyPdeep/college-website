@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ExternalLink, Sparkles } from "lucide-react";
+import { ExternalLink, Search, Sparkles } from "lucide-react";
 import type { UserRole } from "@/lib/supabase/types";
 import { NotificationBell } from "@/components/admin/NotificationBell";
+import { AdminProfileMenu } from "@/components/admin/AdminProfileMenu";
 import { LogoutButton } from "@/components/admin/LogoutButton";
 import { roleLabel } from "@/lib/content/staff-roles";
 
@@ -38,7 +39,15 @@ export function AdminHeader({
           </p>
         </div>
         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+          <Link
+            href="/admin/search"
+            className="p-2.5 rounded-xl text-gray-600 hover:bg-blue-50 hover:text-[#0D2660] transition-colors"
+            aria-label="Admin search"
+          >
+            <Search className="h-5 w-5" />
+          </Link>
           <NotificationBell />
+          <AdminProfileMenu role={role} email={email} fullName={fullName} />
           <Link
             href="/"
             className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-gray-600 hover:text-[#0D2660] px-3 py-2 rounded-xl hover:bg-blue-50 border border-transparent hover:border-blue-100 transition-colors"

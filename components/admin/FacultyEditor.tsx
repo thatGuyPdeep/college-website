@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { upsertFacultyMember } from "@/lib/actions/admin-content";
+import { ContentPreviewLink } from "@/components/admin/ContentPreviewLink";
 import type { Department, FacultyMember } from "@/lib/supabase/types";
 
 type DeptOption = Pick<Department, "id" | "name">;
@@ -119,7 +120,10 @@ export function FacultyEditor({
                 {f.designation ?? "—"} · {f.is_active ? "Active" : "Hidden"}
               </div>
             </div>
-            <Button type="button" size="sm" variant="outline" onClick={() => loadItem(f)}>Edit</Button>
+            <div className="flex flex-col items-end gap-2 shrink-0">
+              {f.is_active && <ContentPreviewLink href={`/faculty/${f.id}`} />}
+              <Button type="button" size="sm" variant="outline" onClick={() => loadItem(f)}>Edit</Button>
+            </div>
           </li>
         ))}
         {items.length === 0 && <p className="text-sm text-gray-400">No faculty in database — static roster shown on /faculty</p>}

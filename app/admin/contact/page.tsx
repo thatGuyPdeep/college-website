@@ -1,4 +1,4 @@
-import { requireRole } from "@/lib/auth/helpers";
+import { requirePermission } from "@/lib/auth/helpers";
 import { listContactEnquiries } from "@/lib/actions/admin-contact";
 import { EnquiryList } from "@/components/admin/EnquiryList";
 import { ContactEnquiryFilter } from "@/components/admin/ContactEnquiryFilter";
@@ -9,7 +9,7 @@ export default async function AdminContactPage({
 }: {
   searchParams: Promise<{ status?: "new" | "read"; grievance?: string }>;
 }) {
-  await requireRole(["admissions_staff", "admin", "super_admin"]);
+  await requirePermission("contact", "view");
   const { status, grievance } = await searchParams;
   const result = await listContactEnquiries({
     status: status === "new" || status === "read" ? status : undefined,

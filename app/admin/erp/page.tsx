@@ -1,4 +1,4 @@
-import { requireRole } from "@/lib/auth/helpers";
+import { requirePermission } from "@/lib/auth/helpers";
 import { ErpConsole } from "@/components/admin/ErpConsole";
 import { ErpRecordsOverview } from "@/components/admin/ErpRecordsOverview";
 import {
@@ -15,7 +15,7 @@ import {
 } from "@/lib/actions/admin-erp";
 
 export default async function AdminErpPage() {
-  await requireRole(["faculty", "admin", "super_admin"]);
+  await requirePermission("erp", "view");
 
   const [
     studentsResult,

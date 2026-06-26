@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { adminClient as _adminClient } from "@/lib/supabase/admin";
-import { APPLICATION_FEE_INR, createRazorpayOrder, isPaymentRequired } from "@/lib/payments/razorpay";
+import { createRazorpayOrder } from "@/lib/payments/razorpay";
+import { getApplicationFeeInr, isOperationalPaymentRequired } from "@/lib/config/operational-settings";
 import { clientIp, rateLimitResponse } from "@/lib/security/rate-limit";
 
 const adminClient = _adminClient as ReturnType<typeof import("@supabase/supabase-js").createClient>;
@@ -11,7 +12,7 @@ export async function POST(req: NextRequest) {
     const limited = await rateLimitResponse(`payments:order:${clientIp(req)}`, 10, 60_000);
     if (limited) return limited;
 
-    if (!isPaymentRequired()) {
+    if (!(await isOperationalPaymentRequired())) {
       return NextResponse.json({ error: "Payment not configured" }, { status: 400 });
     }
 
@@ -32,12 +33,13 @@ export async function POST(req: NextRequest) {
 
     if (!app) return NextResponse.json({ error: "Application not found" }, { status: 404 });
 
-    const order = await createRazorpayOrder(APPLICATION_FEE_INR, `app-${application_id.slice(0, 8)}`);
+    const feeInr = await getApplicationFeeInr();
+    const order = await createRazorpayOrder(feeInr, `app-${application_id.slice(0, 8)}`);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (adminClient as any).from("payments").upsert({
       application_id,
-      amount:            APPLICATION_FEE_INR,
+      amount:            feeInr,
       gateway:           "razorpay",
       gateway_ref:       order.id,
       razorpay_order_id: order.id,
@@ -46,7 +48,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       order_id: order.id,
-      amount:   APPLICATION_FEE_INR,
+      amount:   feeInr,
       currency: "INR",
       key_id:   process.env.RAZORPAY_KEY_ID,
     });

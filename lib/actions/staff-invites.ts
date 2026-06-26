@@ -12,11 +12,7 @@ import { canInviteStaff, canAssignRole } from "@/lib/auth/permissions";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const admin = _adminClient as any;
 
-const INVITE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
-
-function hashToken(token: string): string {
-  return createHash("sha256").update(token).digest("hex");
-}
+import { hashInviteToken, isInviteExpired, INVITE_TTL_MS } from "@/lib/auth/staff-invite-utils";
 
 async function requireInviteAdmin() {
   const supabase = await createClient();
@@ -77,7 +73,7 @@ export async function createStaffInvite(email: string, role: UserRole): Promise<
     if (!normalized.includes("@")) throw new Error("Invalid email");
 
     const token = randomBytes(32).toString("hex");
-    const tokenHash = hashToken(token);
+    const tokenHash = hashInviteToken(token);
     const expiresAt = new Date(Date.now() + INVITE_TTL_MS).toISOString();
 
     const { error } = await admin.from("staff_invites").insert({
@@ -127,7 +123,7 @@ export async function acceptStaffInvite(token: string): Promise<ActionResult<{ r
     const { data: { user }, error } = await supabase.auth.getUser();
     if (error || !user) throw new Error("Not authenticated");
 
-    const tokenHash = hashToken(token.trim());
+    const tokenHash = hashInviteToken(token.trim());
     const { data: invite, error: findErr } = await admin
       .from("staff_invites")
       .select("id, email, role, expires_at, accepted_at")
@@ -136,7 +132,7 @@ export async function acceptStaffInvite(token: string): Promise<ActionResult<{ r
 
     if (findErr || !invite) throw new Error("Invalid or expired invitation");
     if (invite.accepted_at) throw new Error("Invitation already used");
-    if (new Date(invite.expires_at) < new Date()) throw new Error("Invitation expired");
+    if (isInviteExpired(invite.expires_at)) throw new Error("Invitation expired");
 
     const userEmail = (user.email ?? "").toLowerCase();
     if (userEmail !== invite.email.toLowerCase()) {

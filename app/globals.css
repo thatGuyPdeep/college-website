@@ -6,6 +6,26 @@
 @theme inline {
   --font-heading: var(--font-heading), "Roboto Slab", Georgia, serif;
   --font-body: var(--font-body), "Titillium Web", system-ui, sans-serif;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-fg));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-fg));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-fg));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-fg));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-fg));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-fg));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-fg));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
 }
 
 :root {
@@ -171,6 +191,19 @@ body {
 /* Accessibility sheet — solid panel background */
 .a11y-sheet-content,
 .a11y-sheet-content [data-slot="sheet-content"] {
+  background-color: #ffffff !important;
+}
+
+/* Mobile nav sheet — solid panel (bg-popover token may not resolve on all viewports) */
+.mobile-nav-sheet,
+.mobile-nav-sheet[data-slot="sheet-content"],
+#mobile-menu,
+#mobile-menu[data-slot="sheet-content"] {
+  background-color: #ffffff !important;
+}
+
+/* Dropdown menus — solid panel background */
+[data-slot="dropdown-menu-content"] {
   background-color: #ffffff !important;
 }
 

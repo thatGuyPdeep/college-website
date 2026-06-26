@@ -2,10 +2,10 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { adminClient } from "@/lib/supabase/admin";
-import { isPaymentRequired } from "@/lib/payments/razorpay";
+import { isOperationalPaymentRequired } from "@/lib/config/operational-settings";
 import { isApplicationPaid } from "@/lib/actions/payments";
 import { sendEmail } from "@/lib/email/admissions";
-import { notifyStaff } from "@/lib/actions/staff-notifications";
+import { writeAudit } from "@/lib/audit/log";
 import {
   hasPersonalData,
   hasAcademicData,
@@ -319,7 +319,7 @@ export async function submitApplication(
       throw new Error("You must accept the privacy consent to submit");
     }
 
-    if (isPaymentRequired()) {
+    if (await isOperationalPaymentRequired()) {
       const paid = await isApplicationPaid(applicationId);
       if (!paid.ok || !paid.data) {
         throw new Error("Application fee payment is required before submit");
@@ -397,14 +397,13 @@ export async function submitApplication(
     });
 
     const programName = (app.program_data as { program_name?: string } | null)?.program_name;
-    await notifyStaff({
-      type:        "application_submitted",
-      title:       `New application ${updated.application_no}`,
-      body:        programName ? `Programme: ${programName}` : undefined,
-      href:        `/admin/admissions/${applicationId}`,
+    await writeAudit({
       entity_type: "application",
       entity_id:   applicationId,
-      target_role: "admissions_staff",
+      action:      "submitted",
+      actor_id:    user.id,
+      new_value:   { application_no: updated.application_no, program: programName },
+      note:        programName ? `Programme: ${programName}` : undefined,
     });
 
     revalidatePath("/admissions/dashboard");
@@ -421,7 +420,7 @@ export async function submitApplication(
 export async function getApplicationPaymentMap(
   applicationIds: string[]
 ): Promise<Record<string, boolean>> {
-  if (!isPaymentRequired() || applicationIds.length === 0) {
+  if (!(await isOperationalPaymentRequired()) || applicationIds.length === 0) {
     return Object.fromEntries(applicationIds.map((id) => [id, true]));
   }
   try {

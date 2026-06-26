@@ -227,7 +227,10 @@ export function AuthNav({ variant = "desktop", onNavigate }: AuthNavProps) {
         <span className="truncate font-medium">{label}</span>
         <ChevronDown className="h-3.5 w-3.5 shrink-0 opacity-60" aria-hidden="true" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+      <DropdownMenuContent
+        align="end"
+        className="auth-account-menu w-56 bg-white text-gray-900 shadow-lg border border-gray-200"
+      >
         <DropdownMenuGroup>
           <DropdownMenuLabel className="font-normal">
             <p className="text-xs text-muted-foreground">Signed in</p>
@@ -235,24 +238,36 @@ export function AuthNav({ variant = "desktop", onNavigate }: AuthNavProps) {
           </DropdownMenuLabel>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem render={<Link href="/admissions/dashboard" />}>
+        <DropdownMenuItem
+          className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
+          render={<Link href="/admissions/dashboard" />}
+        >
           <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
           My Applications
         </DropdownMenuItem>
         {isErp && (
-          <DropdownMenuItem render={<Link href="/student" />}>
+          <DropdownMenuItem
+            className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
+            render={<Link href="/student" />}
+          >
             <GraduationCap className="h-4 w-4" aria-hidden="true" />
             Student Portal
           </DropdownMenuItem>
         )}
         {isStaff && (
-          <DropdownMenuItem render={<Link href="/admin" />}>
+          <DropdownMenuItem
+            className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
+            render={<Link href="/admin" />}
+          >
             <Shield className="h-4 w-4" aria-hidden="true" />
             Admin
           </DropdownMenuItem>
         )}
         {isFacultyErp && (
-          <DropdownMenuItem render={<Link href="/admin/erp" />}>
+          <DropdownMenuItem
+            className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
+            render={<Link href="/admin/erp" />}
+          >
             <Shield className="h-4 w-4" aria-hidden="true" />
             ERP Console
           </DropdownMenuItem>
@@ -260,6 +275,7 @@ export function AuthNav({ variant = "desktop", onNavigate }: AuthNavProps) {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           variant="destructive"
+          className="cursor-pointer"
           disabled={signingOut}
           onClick={() => void handleSignOut()}
         >

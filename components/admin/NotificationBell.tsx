@@ -27,7 +27,7 @@ export function NotificationBell() {
     startTransition(async () => {
       const [countRes, listRes] = await Promise.all([
         getUnreadNotificationCount(),
-        listStaffNotifications(15),
+        listStaffNotifications(25),
       ]);
       if (countRes.ok) setUnread(countRes.data);
       if (listRes.ok) setItems(listRes.data);

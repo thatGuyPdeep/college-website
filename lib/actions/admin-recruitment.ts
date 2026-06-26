@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { adminClient as _adminClient } from "@/lib/supabase/admin";
+import { writeAudit } from "@/lib/audit/log";
 import type { ActionResult, FacultyAppStatus } from "@/lib/supabase/types";
 
 const STAFF_ROLES = ["hr_staff", "admin", "super_admin"];
@@ -90,11 +91,12 @@ export async function updateFacultyAppStatus(
       .eq("id", applicationId);
     if (error) throw error;
 
-    await adminClient.from("audit_logs").insert({
+    await writeAudit({
       entity_type: "faculty_application",
       entity_id:   applicationId,
       action:      "status_change",
       actor_id:    user.id,
+      old_value:   { status: existing.status },
       new_value:   { status },
     });
 
@@ -117,7 +119,15 @@ export async function updateFacultyAppStatus(
     revalidatePath("/careers/dashboard");
     return { ok: true, data: undefined };
   } catch (err) {
-    return { ok: false, error: err instanceof Error ? err.message : "Update failed" };
+    const message = err instanceof Error ? err.message : "Update failed";
+    if (message.includes("invalid input value for enum faculty_app_status")) {
+      return {
+        ok: false,
+        error:
+          "The database is missing the 'accepted' application status. Run db migration 024_faculty_app_accepted.sql in Supabase.",
+      };
+    }
+    return { ok: false, error: message };
   }
 }
 
@@ -126,6 +136,7 @@ export async function getRecruitmentStats(): Promise<ActionResult<{
   submitted: number;
   shortlisted: number;
   interview: number;
+  accepted: number;
 }>> {
   try {
     await requireHr();
@@ -141,6 +152,7 @@ export async function getRecruitmentStats(): Promise<ActionResult<{
         submitted:    list.filter((a: { status: string }) => a.status === "submitted").length,
         shortlisted:  list.filter((a: { status: string }) => a.status === "shortlisted").length,
         interview:    list.filter((a: { status: string }) => a.status === "interview").length,
+        accepted:     list.filter((a: { status: string }) => a.status === "accepted").length,
       },
     };
   } catch (err) {

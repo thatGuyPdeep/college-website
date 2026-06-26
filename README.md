@@ -22,8 +22,7 @@ npm install
 cp .env.example .env.local
 # Fill in your Supabase URL, anon key, and other values
 
-# 3. Run DB schema in Supabase SQL editor
-# → copy db/migrations/001_initial_schema.sql
+# 3. Run DB migrations in Supabase SQL editor (001–026) or: npm run db:migrate
 
 # 4. Start dev server
 npm run dev

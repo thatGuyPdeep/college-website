@@ -5,7 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { adminClient as _adminClient } from "@/lib/supabase/admin";
 import { sendEmail } from "@/lib/email/admissions";
 import { writeAudit } from "@/lib/audit/log";
-import { notifyStaff } from "@/lib/actions/staff-notifications";
+import { getAdmissionsScopeFilter } from "@/lib/auth/scopes";
 import type { ActionResult, ApplicationStatus, ApplicationView } from "@/lib/supabase/types";
 import { can } from "@/lib/auth/permissions";
 import type { UserRole } from "@/lib/supabase/types";
@@ -43,7 +43,8 @@ export async function listApplications(filters?: {
   offset?: number;
 }): Promise<ActionResult<ApplicationView[]>> {
   try {
-    await requireStaff();
+    const { user, role } = await requireStaff();
+    const scope = await getAdmissionsScopeFilter(user.id, role);
 
     let query = adminClient
       .from("v_applications")
@@ -51,6 +52,13 @@ export async function listApplications(filters?: {
       .order("created_at", { ascending: false })
       .limit(filters?.limit ?? 50)
       .range(filters?.offset ?? 0, (filters?.offset ?? 0) + (filters?.limit ?? 50) - 1);
+
+    if (scope.programIds !== null) {
+      if (scope.programIds.length === 0) {
+        return { ok: true, data: [] };
+      }
+      query = query.in("program_id", scope.programIds);
+    }
 
     if (filters?.status) query = query.eq("status", filters.status);
     if (filters?.program_id) query = query.eq("program_id", filters.program_id);
@@ -231,8 +239,8 @@ export async function requestDocuments(
         );
     }
 
-    // Audit log
-    await adminClient.from("audit_logs").insert({
+    // Audit log + staff notifications
+    await writeAudit({
       entity_type: "application",
       entity_id:   applicationId,
       action:      "docs_requested",

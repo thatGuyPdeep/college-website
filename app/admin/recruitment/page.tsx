@@ -4,7 +4,7 @@ import { Download, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { listFacultyApplications, getRecruitmentStats } from "@/lib/actions/admin-recruitment";
-import { requireRole } from "@/lib/auth/helpers";
+import { requirePermission } from "@/lib/auth/helpers";
 import { RecruitmentActions } from "@/components/admin/RecruitmentActions";
 import { VacancyEditor } from "@/components/admin/VacancyEditor";
 import { RecruitmentVacancyFilter } from "@/components/admin/RecruitmentVacancyFilter";
@@ -31,6 +31,7 @@ const STATUS_COLORS: Record<FacultyAppStatus, string> = {
   shortlisted: "bg-green-100 text-green-800",
   interview:   "bg-purple-100 text-purple-800",
   rejected:    "bg-red-100 text-red-800",
+  accepted:    "bg-emerald-100 text-emerald-800",
 };
 
 async function RecruitmentContent({
@@ -50,12 +51,13 @@ async function RecruitmentContent({
   return (
     <>
       {stats && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-8">
           {[
             { label: "Open Vacancies", value: stats.open },
             { label: "Submitted",      value: stats.submitted },
             { label: "Shortlisted",    value: stats.shortlisted },
             { label: "Interview",      value: stats.interview },
+            { label: "Accepted",       value: stats.accepted },
           ].map((s) => (
             <div key={s.label} className="bg-white rounded-xl p-4 border border-blue-100">
               <div className="text-2xl font-bold text-[#0D2660]">{s.value}</div>
@@ -71,6 +73,7 @@ async function RecruitmentContent({
           { label: "Submitted", href: recruitmentFilterHref(status, vacancyId, "submitted") },
           { label: "Shortlisted", href: recruitmentFilterHref(status, vacancyId, "shortlisted") },
           { label: "Interview", href: recruitmentFilterHref(status, vacancyId, "interview") },
+          { label: "Accepted", href: recruitmentFilterHref(status, vacancyId, "accepted") },
         ].map((f) => (
           <Link key={f.label} href={f.href}
             className={`px-4 py-1.5 rounded-full text-sm font-medium border ${
@@ -148,7 +151,7 @@ export default async function AdminRecruitmentPage({
 }: {
   searchParams: Promise<{ status?: FacultyAppStatus; vacancy_id?: string }>;
 }) {
-  await requireRole(["hr_staff", "admin", "super_admin"]);
+  await requirePermission("recruitment", "view");
   const { status, vacancy_id: vacancyId } = await searchParams;
   const vacResult = await listAdminVacancies();
   const vacancies = vacResult.ok ? vacResult.data : [];

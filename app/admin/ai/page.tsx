@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { requireRole } from "@/lib/auth/helpers";
+import { requirePermission } from "@/lib/auth/helpers";
 import { getChatAnalytics, listChatLogs } from "@/lib/actions/admin-ai";
 
 export default async function AdminAiPage() {
-  await requireRole(["admin", "super_admin"]);
+  await requirePermission("ai", "view");
 
   const [analyticsResult, logsResult] = await Promise.all([
     getChatAnalytics(),
