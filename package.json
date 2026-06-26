@@ -16,6 +16,7 @@
     "test:all": "npm run test && npm run build && npm run test:e2e",
     "lighthouse": "node scripts/lighthouse-check.mjs",
     "check:env": "node scripts/check-env.mjs",
+    "netlify:env": "node scripts/push-netlify-env.mjs",
     "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,md,css}\" --ignore-path .gitignore",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,json,md,css}\" --ignore-path .gitignore",
     "db:migrate": "node scripts/migrate.mjs",
