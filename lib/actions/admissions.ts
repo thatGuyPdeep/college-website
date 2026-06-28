@@ -408,6 +408,7 @@ export async function submitApplication(
 
     revalidatePath("/admissions/dashboard");
     revalidatePath("/admissions/apply");
+    revalidatePath("/admissions/application-form");
 
     return { ok: true, data: { application_no: updated.application_no } };
   } catch (err) {

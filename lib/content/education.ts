@@ -16,7 +16,7 @@ export const VIDYAPEETH = {
   hostel: {
     boys: 668,
     girls: 400,
-    note: "Three separate hostel buildings for boys; girls' hostel in another section of campus. Students are groomed in a spiritual way of life.",
+    note: "Hostel is for Abujhmarh students only — three separate hostel buildings for boys; girls' hostel in another section of campus. Students are groomed in a spiritual way of life.",
   },
 } as const;
 

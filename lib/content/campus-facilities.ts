@@ -40,7 +40,7 @@ export const COLLEGE_INFRASTRUCTURE: CampusFacility[] = [
     name: "Hostel & Residential Blocks",
     hindi: "छात्रावास",
     description:
-      "Supervised residential facilities for Vidyapeeth, ITI, and eligible college students — spiritual routine and study hours.",
+      "Supervised residential facilities for Abujhmarh students in Vidyapeeth, interior Vidyamandirs, and residential ITI — not available to general college day scholars.",
     href: "/campus/hostel",
   },
   {

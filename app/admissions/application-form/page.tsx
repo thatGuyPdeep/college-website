@@ -277,7 +277,7 @@ export default function ApplyPage() {
           <p className="text-sm text-gray-500 mb-6">You need to log in before starting your admission application.</p>
           <Button
             className="bg-[#0D2660] hover:bg-[#071540] text-white w-full"
-            onClick={() => router.push("/login?redirect=/admissions/apply")}
+            onClick={() => router.push("/login?redirect=/admissions/application-form")}
           >
             Go to Login
           </Button>

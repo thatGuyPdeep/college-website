@@ -5,7 +5,8 @@ import { COLLEGE_INFRASTRUCTURE, INFRASTRUCTURE_INTRO } from "@/lib/content/camp
 
 export const metadata: Metadata = {
   title: "Infrastructure",
-  description: "Campus facilities at Ramakrishna Mission Vivekananda College, Narayanpur — labs, library, ITI workshops, hostel, and auditorium.",
+  description:
+    "Campus facilities at Ramakrishna Mission Vivekananda College, Narayanpur — labs, library, ITI workshops, Abujhmarh-only residential hostel, and auditorium.",
 };
 
 export default function InfrastructurePage() {

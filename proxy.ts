@@ -20,7 +20,7 @@ const PROTECTED_ROUTES: { prefix: string; roles: string[] | null }[] = [
   { prefix: "/admin/search", roles: STAFF_ROLES as string[] },
   { prefix: "/admin/admissions/seats", roles: ["admissions_staff", "admin", "super_admin"] },
   { prefix: "/admin", roles: STAFF_ROLES as string[] },
-  { prefix: "/admissions/apply", roles: null },
+  { prefix: "/admissions/application-form", roles: null },
   { prefix: "/admissions/dashboard", roles: null },
   { prefix: "/careers/apply", roles: null },
   { prefix: "/careers/dashboard", roles: null },

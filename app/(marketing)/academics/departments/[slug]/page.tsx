@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/layout/PageHero";
 import { DeptQuickLinks } from "@/components/academics/SyllabusSemesterTables";
+import { DeptPeopleLinks } from "@/components/academics/DeptPeopleLinks";
+import { facultyForDepartment } from "@/lib/content/academic-faculties";
 import { getDepartmentBySlug } from "@/lib/content/departments";
 import { getExplorerPrograms } from "@/lib/content/programs";
 import { getSyllabusForDepartment } from "@/lib/content/syllabus";
@@ -42,6 +44,7 @@ export default async function DepartmentDetailPage({
   const programs = allPrograms.filter((p) => dept.programSlugs.includes(p.slug));
   const syllabus = getSyllabusForDepartment(slug);
   const notices = news.filter((n) => n.category === "Notice").slice(0, 4);
+  const academicFaculty = facultyForDepartment(slug);
 
   const base = SITE_URL.replace(/\/$/, "");
   const jsonLd = breadcrumbJsonLd([
@@ -62,6 +65,20 @@ export default async function DepartmentDetailPage({
           </nav>
 
           <DeptQuickLinks deptSlug={slug} deptName={dept.name} />
+
+          {academicFaculty && (
+            <p className="text-sm text-gray-600 mb-6">
+              Part of{" "}
+              <Link
+                href={`/academics/faculties/${academicFaculty.slug}`}
+                className="font-semibold text-[#0D2660] hover:underline"
+              >
+                {academicFaculty.name}
+              </Link>
+            </p>
+          )}
+
+          <DeptPeopleLinks deptSlug={slug} deptName={dept.name} />
 
           {programs.length > 0 && (
             <section className="mb-10">

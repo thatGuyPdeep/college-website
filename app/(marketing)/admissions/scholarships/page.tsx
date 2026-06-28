@@ -12,7 +12,7 @@ const SCHOLARSHIPS = [
 
 const RESERVATION = [
   "Reservation follows Government of Chhattisgarh and affiliating university norms for SC, ST, OBC, EWS, and PwD categories.",
-  "Category certificates must be uploaded during application and verified at admission.",
+  "Caste certificate must be uploaded during application and verified at admission.",
   "Horizontal reservation for women, ex-servicemen, and other categories as applicable.",
 ];
 

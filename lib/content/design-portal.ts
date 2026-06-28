@@ -38,7 +38,7 @@ export const HERO_SLIDES = [
   },
 ] as const;
 
-/** IITD-style hero portal tiles (Research / Startups / News pattern) */
+/** IIT Kanpur–style hero portal tiles */
 export const HOME_HERO_PORTALS = [
   {
     title: "Admission",
@@ -47,31 +47,31 @@ export const HOME_HERO_PORTALS = [
     image: "/images/school-1.jpg",
   },
   {
-    title: "Examination",
-    subtitle: "Results, timetables & forms",
-    href: "/examination",
+    title: "Research",
+    subtitle: "Facilities · Extension · Labs",
+    href: "/research",
     image: "/images/ashrama-3.jpg",
   },
   {
-    title: "Academics",
-    subtitle: "NEP 2020 · FYUGP · Syllabus",
-    href: "/academics",
+    title: "People",
+    subtitle: "Faculty · Staff · Students",
+    href: "/people",
     image: "/images/school-2.jpg",
   },
   {
-    title: "Seva & Outreach",
-    subtitle: "Serving Abujhmarh since 1985",
-    href: "/about/activities",
+    title: "Administration",
+    subtitle: "Leadership · Governance · IQAC",
+    href: "/administration",
     image: "/images/ashrama-4.jpg",
   },
 ] as const;
 
 /** IITD Academic Units row */
 export const HOME_ACADEMIC_UNITS = [
-  { title: "Departments", href: "/academics/departments" },
-  { title: "Programmes", href: "/academics" },
+  { title: "Science", href: "/academics/faculties/science" },
+  { title: "Social Sciences", href: "/academics/faculties/social-science" },
+  { title: "Sports", href: "/academics/faculties/sports" },
   { title: "ITI & Vocational", href: "/academics/iti" },
-  { title: "IQAC & Quality", href: "/iqac" },
 ] as const;
 
 export const HOME_ABOUT = {
@@ -92,14 +92,13 @@ export const HOME_STATS = [
 
 /** IITD-style top utility links — compact set (no duplicate quick-links bar) */
 export const UTILITY_BAR_LINKS: UtilityLink[] = [
+  { label: "Prospectus", href: "/prospectus" },
+  { label: "Contact",    href: "/contact" },
   { label: "Calendar",  href: "/academics/calendar" },
-  { label: "Tenders",   href: "/tenders" },
+  { label: "Notices",   href: "/noticeboard" },
   { label: "Careers",   href: "/careers" },
   { label: "Donate",    href: "/donate" },
-  { label: "Notices",   href: "/news?category=Notice" },
   { label: "Alumni",    href: "/alumni" },
-  { label: "Forms",     href: "/forms" },
-  { label: "Events",    href: "/events" },
   { label: "Search",    href: "/search" },
 ];
 

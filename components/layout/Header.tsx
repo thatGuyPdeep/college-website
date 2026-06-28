@@ -89,12 +89,12 @@ export function Header() {
         <div className="iitd-brand-bar bg-white border-b border-gray-200 shadow-sm">
           <div className="container-site py-2.5 sm:py-3">
             <div className="flex items-center justify-between gap-3">
-              <Link
-                href="/"
-                className="flex items-center gap-2.5 sm:gap-3 group min-w-0"
-                aria-label={`${SITE_FULL_NAME}, Narayanpur — Home`}
-              >
-                <div className="relative w-12 h-12 sm:w-16 sm:h-16 shrink-0">
+              <div className="flex items-center gap-2.5 sm:gap-3 group min-w-0">
+                <Link
+                  href="/"
+                  className="relative w-12 h-12 sm:w-16 sm:h-16 shrink-0"
+                  aria-label={`${SITE_FULL_NAME}, Narayanpur — Home`}
+                >
                   <Image
                     src={RKM_LOGO_URL}
                     alt=""
@@ -103,17 +103,19 @@ export function Header() {
                     sizes="64px"
                     priority
                   />
-                </div>
+                </Link>
                 <div className="leading-tight min-w-0">
-                  <div className="font-devanagari hidden sm:block text-xs font-semibold text-[#0D2660] leading-snug">
-                    {SITE_HINDI_NAME}, नारायणपुर
-                  </div>
-                  <div className="font-heading font-bold text-sm sm:text-lg text-[#0D2660] leading-tight tracking-tight">
-                    {SITE_FULL_NAME}
-                  </div>
-                  <div className="text-[10px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">
-                    A Branch Centre of Ramakrishna Math & Mission, Belur Math
-                  </div>
+                  <Link href="/" className="block hover:opacity-90 transition-opacity">
+                    <div className="font-devanagari hidden sm:block text-xs font-semibold text-[#0D2660] leading-snug">
+                      {SITE_HINDI_NAME}, नारायणपुर
+                    </div>
+                    <div className="font-heading font-bold text-sm sm:text-lg text-[#0D2660] leading-tight tracking-tight">
+                      {SITE_FULL_NAME}
+                    </div>
+                    <div className="text-[10px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">
+                      A Branch Centre of Ramakrishna Math & Mission, Belur Math
+                    </div>
+                  </Link>
                   <div className="hidden sm:flex flex-wrap gap-1.5 mt-1">
                     <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide bg-[#0D2660] text-white">
                       NEP 2020
@@ -128,7 +130,7 @@ export function Header() {
                     </a>
                   </div>
                 </div>
-              </Link>
+              </div>
 
               <div className="hidden lg:flex flex-col items-end gap-1.5 shrink-0 text-right">
                 <div className="flex items-center gap-1.5 text-xs text-gray-600">
@@ -255,13 +257,6 @@ export function Header() {
                 <Link href="/search" className="p-1.5 text-white/80 hover:text-white" aria-label="Search">
                   <Search className="h-4 w-4" />
                 </Link>
-                <Button
-                  asChild
-                  size="sm"
-                  className="h-7 bg-[#B80F0A] hover:bg-[#9B1812] text-white text-[10px] font-bold uppercase px-3"
-                >
-                  <Link href="/admissions/apply">Apply</Link>
-                </Button>
               </div>
             </div>
           </div>

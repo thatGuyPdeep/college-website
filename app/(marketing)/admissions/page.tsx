@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AdmissionsStatsStrip } from "@/components/marketing/AdmissionsStatsStrip";
 import { RKM_FACTS } from "@/lib/utils/constants";
-import { getOperationalSettings } from "@/lib/config/operational-settings";
 
 export const metadata: Metadata = {
   title: "Admissions",
@@ -39,17 +38,20 @@ const LINKS = [
     desc:  "Government scholarships, reservation categories, and financial aid.",
   },
   {
+    href:  "/admissions/shortlist",
+    icon:  FileText,
+    title: "1st Shortlist",
+    desc:  "First list of shortlisted students for session 2026–27.",
+  },
+  {
     href:  "/admissions/apply",
     icon:  ArrowRight,
     title: "Online Application",
-    desc:  "Start or resume your admission application (login required).",
+    desc:  "Apply through the official SMKV Bastar University admission portal.",
   },
 ];
 
 export default async function AdmissionsHubPage() {
-  const { application_fee_inr: feeInr } = await getOperationalSettings();
-  const fee = String(feeInr || process.env.APPLICATION_FEE_INR || "500");
-
   return (
     <>
       <PageHero
@@ -63,7 +65,16 @@ export default async function AdmissionsHubPage() {
 
           <div className="bg-blue-50 border border-blue-100 rounded-xl p-5 mb-10 text-sm text-gray-700">
             <HelpCircle className="inline h-4 w-4 mr-2 text-[#0D2660]" aria-hidden="true" />
-            Application fee: <strong>₹{fee}</strong> (online payment). Track your application anytime from the applicant dashboard.
+            Online applications for {RKM_FACTS.university} are submitted at{" "}
+            <a
+              href="https://smkvbastar.ac.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#0D2660] hover:underline"
+            >
+              smkvbastar.ac.in
+            </a>
+            . See programme-wise seats at our college below.
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4 mb-10">

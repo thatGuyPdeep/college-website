@@ -24,7 +24,7 @@ export function HomeImportantAnnouncements({ items }: { items: PublicNewsItem[] 
           variant="centered"
           title="Important "
           accent="Announcements"
-          viewAllHref="/news"
+          viewAllHref="/noticeboard"
         />
 
         <StaggerReveal className="announcement-list space-y-3 sm:space-y-4">

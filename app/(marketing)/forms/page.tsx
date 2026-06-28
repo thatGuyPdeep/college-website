@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Download, FileText } from "lucide-react";
 import { MarketingPage } from "@/components/layout/MarketingPage";
 import { DOWNLOAD_FORMS } from "@/lib/content/reference-portal";
+import { HOSTEL_ELIGIBILITY } from "@/lib/content/hostel";
 
 export const metadata: Metadata = {
   title: "Download Forms",
@@ -39,8 +40,10 @@ export default function FormsPage() {
 
       <section id="hostel" className="mt-10 scroll-mt-24">
         <h2 className="font-bold text-[#0D2660] mb-2">Hostel Application</h2>
+        <p className="text-sm text-gray-600 mb-3">{HOSTEL_ELIGIBILITY}</p>
         <p className="text-sm text-gray-600 mb-3">
-          Residential admission for Vidyapeeth and ITI programmes. Submit the completed form at the Ashrama office.
+          Eligible Abujhmarh students in Vidyapeeth or residential ITI programmes may submit the completed form
+          at the Ashrama office.
         </p>
         <Link href="/campus/hostel#apply" className="text-[#C8201A] font-semibold hover:underline text-sm">
           Hostel admission process →

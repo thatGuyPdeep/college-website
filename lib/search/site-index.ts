@@ -27,7 +27,7 @@ export function buildSiteIndex(): SearchResult[] {
     { title: "How to Apply", excerpt: "Step-by-step admission application guide", href: "/admissions/how-to-apply", category: "admission" },
     { title: "Fee Structure", excerpt: "Programme fees and refund policy", href: "/admissions/fees", category: "admission" },
     { title: "Scholarships", excerpt: "Government scholarships and reservation policy", href: "/admissions/scholarships", category: "admission" },
-    { title: "Admissions — Apply", excerpt: "Online admission application for UG programmes", href: "/admissions/apply", category: "admission" },
+    { title: "Admissions — Apply", excerpt: "Apply online through SMKV Bastar University portal at smkvbastar.ac.in", href: "/admissions/apply", category: "admission" },
     { title: "Track Application", excerpt: "Check your admission application status", href: "/admissions/dashboard", category: "admission" },
     { title: "Faculty Vacancies", excerpt: "Open faculty recruitment positions", href: "/careers", category: "faculty" },
     { title: "Contact", excerpt: `${CONTACT.address} · ${CONTACT.phones[0]}`, href: "/contact", category: "page" },

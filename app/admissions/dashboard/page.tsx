@@ -163,7 +163,7 @@ export default async function DashboardPage() {
                   <div className="flex flex-wrap gap-3">
                     {app.status === "draft" && (
                       <Button asChild className="bg-[#0D2660] text-white">
-                        <Link href="/admissions/apply">Continue Application</Link>
+                        <Link href="/admissions/application-form">Continue Application</Link>
                       </Button>
                     )}
                     {app.status !== "draft" && (

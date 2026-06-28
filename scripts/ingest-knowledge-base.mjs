@@ -37,7 +37,7 @@ const CHUNKS = [
   { source: "/donate", text: "Donate to Ramakrishna Mission Ashrama Narayanpur. 80G tax deduction. Online Razorpay minimum 500 rupees." },
   { source: "/admissions", text: "Admissions overview at /admissions. How to apply at /admissions/how-to-apply. Fee structure at /admissions/fees. Scholarships at /admissions/scholarships." },
   { source: "/admissions/apply", text: "Online 5-step admission: Personal, Academic, Programme, Documents, Submit. Sign in with email OTP. Application number format RKM-YYYY-XXXXX. Track at /admissions/dashboard." },
-  { source: "/admissions/apply", text: "Required documents: 10th Marksheet, 12th Marksheet, ID Proof, Passport Photo, Transfer Certificate. PDF/JPG/PNG max 5 MB each." },
+  { source: "/admissions/apply", text: "Required documents for admission: 10th Marksheet, 12th Marksheet, Caste Certificate, Domicile Certificate, Transfer Certificate (TC), Migration Certificate. PDF/JPG/PNG max 5 MB each. Apply on smkvbastar.ac.in." },
   { source: "/admissions/fees", text: "Application fee is paid online during submission. Programme fees vary; see /admissions/fees. Refunds follow university and state government norms." },
   { source: "/admissions/scholarships", text: "Post-Matric scholarships for SC/ST/OBC via National Scholarship Portal. Reservation follows Chhattisgarh government norms." },
   { source: "/academics", text: "UG programmes under NEP 2020 FYUGP. Also ITI vocational training and Vivekananda Vidyapeeth residential school for tribal children." },

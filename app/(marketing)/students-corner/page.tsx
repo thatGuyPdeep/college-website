@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingPage } from "@/components/layout/MarketingPage";
 import { STUDENTS_CORNER_LINKS } from "@/lib/content/reference-portal";
+import { HOSTEL_ELIGIBILITY } from "@/lib/content/hostel";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -64,8 +65,10 @@ export default function StudentsCornerPage() {
 
       <section id="hostel-apply" className="mt-8 rounded-xl border border-blue-100 bg-[#F0F4FF] p-6">
         <h2 className="font-bold text-[#0D2660] mb-2">Hostel Application</h2>
+        <p className="text-sm text-gray-600 mb-4">{HOSTEL_ELIGIBILITY}</p>
         <p className="text-sm text-gray-600 mb-4">
-          Residential students may apply for hostel accommodation. Download the form or contact the warden.
+          Eligible Abujhmarh students in Mission residential programmes may download the form or contact the
+          warden.
         </p>
         <Button asChild variant="outline" className="border-[#0D2660] text-[#0D2660]">
           <Link href="/forms#hostel">Download Hostel Form</Link>

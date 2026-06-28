@@ -50,9 +50,10 @@ export function DeptQuickLinks({
   const syllabus = getSyllabusForDepartment(deptSlug);
   const links = [
     ...(syllabus ? [{ label: "Syllabus", href: `/academics/syllabus/${syllabus.slug}` }] : []),
-    { label: "Notices", href: "/news?category=Notice" },
-    { label: "Time Tables", href: "/examination/timetables" },
-    { label: "Faculty", href: "/faculty" },
+    { label: "Prospectus", href: "/prospectus" },
+    { label: "Time Table", href: "/timetable" },
+    { label: "Notices", href: "/noticeboard" },
+    { label: "Faculty", href: `/people/faculty?dept=${deptSlug}` },
   ];
 
   return (

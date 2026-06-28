@@ -1,3 +1,4 @@
+import { SITE_FULL_NAME } from "@/lib/utils/constants";
 import { KNOWLEDGE_BASE } from "@/lib/ai/knowledge-base";
 import { retrieveContextHybrid } from "@/lib/ai/rag";
 import { retrieveContextKeyword } from "@/lib/ai/keyword-retrieval";
@@ -12,8 +13,8 @@ function ruleBasedAnswer(query: string, chunks: { text: string; source: string }
 
   if (q.includes("document") || q.includes("required") || q.includes("upload")) {
     return {
-      answer: `For admission, you need to upload: 10th Marksheet, 12th Marksheet, ID Proof (Aadhaar/PAN), Passport-size Photo, and Transfer Certificate. Each file must be PDF, JPG or PNG (max 5 MB). Apply at /admissions/apply.`,
-      sources: ["/admissions/apply"],
+      answer: `Admission applications for ${SITE_FULL_NAME} are submitted on the official Shaheed Mahendra Karma Vishwavidyalaya (Bastar University) portal at https://smkvbastar.ac.in — not on this college website. Visit /admissions/apply for instructions. Required documents: 10th marksheet, 12th marksheet, caste certificate, domicile certificate, transfer certificate (TC), and migration certificate.`,
+      sources: ["/admissions/apply", "/admissions/how-to-apply"],
     };
   }
   if (q.includes("fee") || q.includes("cost") || q.includes("payment")) {
@@ -30,8 +31,8 @@ function ruleBasedAnswer(query: string, chunks: { text: string; source: string }
   }
   if (q.includes("apply") || q.includes("admission") || q.includes("how to")) {
     return {
-      answer: `To apply: 1) Sign in at /login with your email OTP. 2) Complete the 5-step application at /admissions/apply (Personal → Academic → Programme → Documents → Submit). 3) Track status at /admissions/dashboard. Applications are reviewed within 7–10 working days.`,
-      sources: ["/admissions/apply", "/login"],
+      answer: `Admission applications are submitted on the official Bastar University portal at https://smkvbastar.ac.in — visit /admissions/apply on this site for step-by-step instructions. Select Ramakrishna Mission Vivekananda College, Narayanpur when applying. For local queries contact rkm.narainpur@gmail.com or 07781-252251.`,
+      sources: ["/admissions/apply", "/admissions/how-to-apply"],
     };
   }
   if (q.includes("deadline") || q.includes("last date") || q.includes("when")) {

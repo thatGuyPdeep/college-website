@@ -4,9 +4,13 @@ import { Download, Home } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { HOSTEL_APPLY_STEPS, HOSTEL_FACILITIES, HOSTEL_RULES } from "@/lib/content/hostel";
+import { HOSTEL_APPLY_STEPS, HOSTEL_ELIGIBILITY, HOSTEL_FACILITIES, HOSTEL_RULES } from "@/lib/content/hostel";
 
-export const metadata: Metadata = { title: "Hostel" };
+export const metadata: Metadata = {
+  title: "Hostel",
+  description:
+    "Residential hostel facilities at Ramakrishna Mission Ashrama, Narayanpur — for Abujhmarh students in Mission programmes only.",
+};
 
 export default function HostelPage() {
   return (
@@ -14,7 +18,7 @@ export default function HostelPage() {
       <PageHero
         eyebrow="Campus Life"
         title="Student Hostels"
-        description="Residential facilities for tribal students at Ramakrishna Mission Ashrama, Narayanpur."
+        description="Residential facilities for Abujhmarh students in Mission programmes — not available to all college students."
       />
       <section className="section bg-white">
         <div className="container-site max-w-3xl">
@@ -22,12 +26,18 @@ export default function HostelPage() {
             <Link href="/">Home</Link> / <Link href="/campus/infrastructure">Campus</Link> / Hostel
           </nav>
 
+          <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 sm:p-5 text-sm text-amber-950">
+            <p className="font-semibold text-amber-900 mb-1">Eligibility</p>
+            <p>{HOSTEL_ELIGIBILITY}</p>
+          </div>
+
           <Card className="mb-8 border-blue-100">
             <CardContent className="p-6 sm:p-8 space-y-4 text-sm text-gray-600 leading-relaxed">
               <p>
                 The Ramakrishna Mission Ashrama provides <strong>free residential</strong> schooling and hostel
-                facilities for tribal students from the Abujhmaria community through Vivekananda Vidyapeeth,
-                ITI residential training, and associated programmes.
+                facilities exclusively for students from Abujhmarh through Vivekananda Vidyapeeth, six interior
+                Vivekananda Vidyamandirs, and residential ITI training — not for general undergraduate day
+                scholars.
               </p>
               <p>
                 Hostel life emphasises discipline, study hours, and spiritual values in line with the
@@ -70,7 +80,7 @@ export default function HostelPage() {
             </div>
           </section>
 
-          <section className="mb-10">
+          <section id="rules" className="mb-10 scroll-mt-24">
             <h2 className="text-lg font-bold text-[#0D2660] mb-4">Hostel Rules (Summary)</h2>
             <ul className="list-disc pl-5 space-y-1 text-sm text-gray-600">
               {HOSTEL_RULES.map((r) => (

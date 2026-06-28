@@ -676,6 +676,27 @@ html[data-font-size="large"] { font-size: 112.5%; }
   }
 }
 
+@keyframes notice-ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.notice-ticker-track {
+  animation: notice-ticker-scroll 35s linear infinite;
+  will-change: transform;
+}
+
+.notice-ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notice-ticker-track {
+    animation: notice-ticker-scroll 70s linear infinite;
+  }
+}
+
+
 /* ── IIT DELHI ANNOUNCEMENT CARDS ──────────────────────────────── */
 .announcement-section {
   background: #f9fbfd;

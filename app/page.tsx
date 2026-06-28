@@ -11,6 +11,8 @@ import { HomeStatsStrip } from "@/components/marketing/HomeStatsStrip";
 import { HomeGalleryPreview } from "@/components/marketing/HomeGalleryPreview";
 import { ImportantLinksGrid } from "@/components/marketing/ImportantLinksGrid";
 import { HomeYouTubeSection } from "@/components/marketing/HomeYouTubeSection";
+import { HomeWelcomeVideo } from "@/components/marketing/HomeWelcomeVideo";
+import { HomeIITKFeed } from "@/components/marketing/HomeIITKFeed";
 import { HomeSocialStrip } from "@/components/marketing/HomeSocialStrip";
 import { URGENT_HOME_NOTICE } from "@/lib/content/reference-portal";
 
@@ -24,6 +26,8 @@ export default async function Home() {
       <UrgentNoticeModal notice={URGENT_HOME_NOTICE} />
       <HomeHeroSlider />
       <HomeHeroPortals />
+      <HomeWelcomeVideo />
+      <HomeIITKFeed news={news} />
       <AdmissionsStatsStrip />
       <HomeImportantAnnouncements items={news} />
       <HomeAboutSection />

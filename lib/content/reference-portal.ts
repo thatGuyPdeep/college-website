@@ -42,9 +42,9 @@ export const HOME_ANNOUNCEMENTS = [
 export const URGENT_HOME_NOTICE = {
   id:      "admissions-2026-27",
   title:   "Admissions Open 2026–27",
-  message: "Applications are invited for UG (FYUGP) programmes under NEP 2020 and NCVT-affiliated ITI trades. Apply online or check seat availability.",
+  message: "Applications for UG programmes are submitted on the official Bastar University portal at smkvbastar.ac.in. Select Ramakrishna Mission Vivekananda College, Narayanpur when applying.",
   href:    "/admissions/apply",
-  cta:     "Apply Now",
+  cta:     "Apply on University Portal",
 };
 
 import { LEADERSHIP_PROFILES } from "@/lib/content/leadership-profiles";

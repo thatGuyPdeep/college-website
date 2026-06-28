@@ -9,11 +9,11 @@ export const KNOWLEDGE_BASE = [
   {
     title: "How to Apply",
     source: "/admissions/apply",
-    text: `Admission is online via the 5-step wizard: Personal details, Academic records, Programme choice, Document upload, Review & Submit. Sign in with email OTP at /login. Save and resume anytime. Application number format: RKM-YYYY-XXXXX.`,
+    text: `Admission to ${SITE_FULL_NAME} is processed through Shaheed Mahendra Karma Vishwavidyalaya (Bastar University) at https://smkvbastar.ac.in. Visit /admissions/apply on this college website for instructions. Select Ramakrishna Mission Vivekananda College, Narayanpur when applying on the university portal.`,
   },
   {
     title: "Required Documents",
-    source: "/admissions/apply",
+    source: "/admissions/how-to-apply",
     text: REQUIRED_DOCUMENTS.map((d) => d.label).join(", ") + ". Accepted formats: PDF, JPG, PNG. Maximum 5 MB per file.",
   },
   {

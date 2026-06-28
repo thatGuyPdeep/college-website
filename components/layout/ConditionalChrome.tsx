@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { ShortlistAnnouncementTicker } from "@/components/marketing/ShortlistAnnouncementTicker";
 
 export function ConditionalChrome({
   header,
@@ -26,6 +27,7 @@ export function ConditionalChrome({
   return (
     <>
       {header}
+      <ShortlistAnnouncementTicker />
       {children}
       {footer}
       {chat}
