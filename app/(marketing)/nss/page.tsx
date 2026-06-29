@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingPage } from "@/components/layout/MarketingPage";
 import { NSS_CONTENT } from "@/lib/content/reference-portal";
+import { NssEnrollmentForm } from "@/components/nss/NssEnrollmentForm";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -39,14 +40,18 @@ export default function NssPage() {
         </div>
       </section>
 
-      <section className="rounded-xl border border-green-200 bg-green-50 p-6">
+      <section className="rounded-xl border border-green-200 bg-green-50 p-6 mb-10">
         <h2 className="font-bold text-green-900 mb-2">Volunteer with NSS</h2>
         <p className="text-sm text-green-800 mb-4">
           Enrolled students may join the NSS unit through the college office at the start of each session.
         </p>
-        <Button asChild className="bg-green-800 hover:bg-green-900">
+        <Button asChild className="bg-green-800 hover:bg-green-900 mb-6">
           <Link href="/contact?subject=NSS%20Enrollment">Contact NSS Coordinator</Link>
         </Button>
+        <div className="bg-white rounded-xl p-5 border border-green-100">
+          <h3 className="font-semibold text-[#0D2660] mb-3 text-sm">NSS Enrollment Form</h3>
+          <NssEnrollmentForm />
+        </div>
       </section>
     </MarketingPage>
   );

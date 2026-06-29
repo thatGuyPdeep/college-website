@@ -15,6 +15,7 @@ import { HomeWelcomeVideo } from "@/components/marketing/HomeWelcomeVideo";
 import { HomeAccreditationStrip } from "@/components/marketing/HomeAccreditationStrip";
 import { HomeIITKFeed } from "@/components/marketing/HomeIITKFeed";
 import { HomeSocialStrip } from "@/components/marketing/HomeSocialStrip";
+import { HomeSocialEmbeds } from "@/components/marketing/HomeSocialEmbeds";
 import { URGENT_HOME_NOTICE } from "@/lib/content/reference-portal";
 
 /** IIT Delhi visual layout — hero slider, portal dock, announcements, about, units, news */
@@ -39,6 +40,7 @@ export default async function Home() {
       <HomeGalleryPreview />
       <HomeYouTubeSection />
       <ImportantLinksGrid />
+      <HomeSocialEmbeds />
       <HomeSocialStrip />
     </>
   );

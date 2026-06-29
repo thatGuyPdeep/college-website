@@ -105,11 +105,11 @@ export const UTILITY_BAR_LINKS: UtilityLink[] = [
 /** IITD-style home quick-access portal tiles */
 export const HOME_QUICK_ACCESS = [
   { title: "Apply for Admission", subtitle: "UG · ITI · Session 2026–27", href: "/admissions/apply", accent: "crimson" as const },
-  { title: "Examination Portal",  subtitle: "Forms · Results · Time tables", href: "/examination", accent: "navy" as const },
+  { title: "Noticeboard",         subtitle: "Notices · Circulars · Updates", href: "/noticeboard", accent: "navy" as const },
   { title: "Student ERP",         subtitle: "Marks · Attendance · Timetable", href: "/login?redirect=/student", accent: "navy" as const },
-  { title: "Syllabus & Academics", subtitle: "FYUGP 2024–28 · Departments", href: "/academics/syllabus", accent: "gold" as const },
-  { title: "Library & E-Resources", subtitle: "INFLIBNET · Publications", href: "/campus/library/e-resources", accent: "navy" as const },
-  { title: "Mandatory Disclosure", subtitle: "UGC · IQAC · Governance", href: "/disclosure", accent: "gold" as const },
+  { title: "Faculty ERP",         subtitle: "Salary · Leave · Attendance", href: "/login?redirect=/faculty-portal", accent: "gold" as const },
+  { title: "Prospectus",          subtitle: "Programmes · Fees · Apply", href: "/prospectus", accent: "gold" as const },
+  { title: "Mandatory Disclosure", subtitle: "UGC · IQAC · Governance", href: "/disclosure", accent: "navy" as const },
 ];
 
 export const INSTITUTION_MOTTO = {

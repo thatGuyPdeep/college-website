@@ -137,7 +137,8 @@ export function AuthNav({ variant = "desktop", onNavigate }: AuthNavProps) {
   const label = displayLabel(user);
   const isStaff = role != null && STAFF_ROLES.includes(role);
   const isErp   = role != null && ERP_ROLES.includes(role);
-  const isFacultyErp = role != null && ERP_ADMIN_ROLES.includes(role) && !isStaff;
+  const isFacultyErp = role != null && ERP_ADMIN_ROLES.includes(role);
+  const showFacultyPortal = isFacultyErp && role !== "admin" && role !== "super_admin";
 
   if (variant === "mobile") {
     return (
@@ -152,7 +153,17 @@ export function AuthNav({ variant = "desktop", onNavigate }: AuthNavProps) {
           )}
         </div>
         <div className="grid grid-cols-2 gap-3">
-          {isErp && (
+          {showFacultyPortal && (
+            <Link
+              href="/faculty-portal"
+              onClick={onNavigate}
+              className="col-span-2 text-center py-3 text-sm text-[#0D2660] border border-[#0D2660]/30 rounded-xl hover:bg-blue-50 touch-target min-h-11 flex items-center justify-center gap-1.5"
+            >
+              <GraduationCap className="h-4 w-4" aria-hidden="true" />
+              Faculty Portal
+            </Link>
+          )}
+          {isErp && role === "student" && (
             <Link
               href="/student"
               onClick={onNavigate}
@@ -245,7 +256,16 @@ export function AuthNav({ variant = "desktop", onNavigate }: AuthNavProps) {
           <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
           My Applications
         </DropdownMenuItem>
-        {isErp && (
+        {showFacultyPortal && (
+          <DropdownMenuItem
+            className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
+            render={<Link href="/faculty-portal" />}
+          >
+            <GraduationCap className="h-4 w-4" aria-hidden="true" />
+            Faculty Portal
+          </DropdownMenuItem>
+        )}
+        {isErp && role === "student" && (
           <DropdownMenuItem
             className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
             render={<Link href="/student" />}
@@ -263,7 +283,7 @@ export function AuthNav({ variant = "desktop", onNavigate }: AuthNavProps) {
             Admin
           </DropdownMenuItem>
         )}
-        {isFacultyErp && (
+        {isFacultyErp && !showFacultyPortal && (
           <DropdownMenuItem
             className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
             render={<Link href="/admin/erp" />}

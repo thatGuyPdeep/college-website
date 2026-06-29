@@ -8,6 +8,12 @@ export type PostLoginResult = {
   role?: UserRole;
 };
 
+/** Default landing after login when no explicit redirect was requested. */
+function defaultStaffHome(role: UserRole): string {
+  if (role === "faculty") return "/faculty-portal";
+  return "/admin";
+}
+
 /** Pure redirect logic — shared by client + server. */
 export function resolveRedirectForRole(
   role: UserRole,
@@ -27,7 +33,7 @@ export function resolveRedirectForRole(
     requested.startsWith("/admin");
 
   if (STAFF_ROLES.includes(role)) {
-    const target = wantsAdmin ? "/admin" : sanitizeAuthRedirect(requested);
+    const target = wantsAdmin ? defaultStaffHome(role) : sanitizeAuthRedirect(requested);
 
     if (options?.needsMfa && target.startsWith("/admin")) {
       return {

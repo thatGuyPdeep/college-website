@@ -62,7 +62,7 @@ export default async function FacultyPortalPage() {
           </Card>
         </div>
 
-        {payroll.ok && (
+        {payroll.ok && payroll.payrollNote && (
           <div className="p-5 rounded-xl border border-amber-200 bg-amber-50 text-sm text-amber-900">
             {payroll.payrollNote}
           </div>

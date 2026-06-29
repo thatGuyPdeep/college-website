@@ -5,6 +5,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { HOSTEL_APPLY_STEPS, HOSTEL_ELIGIBILITY, HOSTEL_FACILITIES, HOSTEL_RULES } from "@/lib/content/hostel";
+import { HostelEnquiryForm } from "@/components/hostel/HostelEnquiryForm";
 
 export const metadata: Metadata = {
   title: "Hostel",
@@ -77,6 +78,15 @@ export default function HostelPage() {
               <Button asChild variant="outline" className="border-[#0D2660] text-[#0D2660]">
                 <Link href="/contact?subject=Hostel%20Admission">Contact Warden</Link>
               </Button>
+            </div>
+
+            <div className="mt-8 rounded-xl border border-blue-100 bg-[#F0F4FF] p-6">
+              <h3 className="font-bold text-[#0D2660] mb-2">Online Hostel Enquiry</h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Submit details below for Mission residential programmes (Vidyapeeth / Vidyamandir / ITI hostel).
+                The warden office will respond within 3–5 working days.
+              </p>
+              <HostelEnquiryForm />
             </div>
           </section>
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ExternalLink, FileText } from "lucide-react";
+import type { ReactNode } from "react";
 import { MarketingPage } from "@/components/layout/MarketingPage";
 import type { ExamDocument } from "@/lib/content/examination-portal";
 import { EXAMINATION_OFFICE } from "@/lib/content/examination-portal";
@@ -10,7 +11,7 @@ type ExaminationListingPageProps = {
   description: string;
   items: ExamDocument[];
   steps?: string[];
-  intro?: string;
+  intro?: ReactNode;
   externalCta?: { label: string; href: string };
 };
 
