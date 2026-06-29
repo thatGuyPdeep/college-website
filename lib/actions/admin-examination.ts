@@ -108,6 +108,7 @@ export async function upsertExamNotice(item: {
 
     revalidatePath("/admin/examination");
     revalidatePath("/examination");
+    revalidatePath("/examination/notices");
     revalidatePath("/news");
     return { ok: true, data: undefined };
   } catch (err) {

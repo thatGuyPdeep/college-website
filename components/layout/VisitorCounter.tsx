@@ -7,6 +7,7 @@ const SESSION_KEY = "rkm-visitor-counted";
 
 export function VisitorCounter() {
   const [count, setCount] = useState<number | null>(null);
+  const [live, setLive] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -16,17 +17,26 @@ export function VisitorCounter() {
         if (!sessionStorage.getItem(SESSION_KEY)) {
           sessionStorage.setItem(SESSION_KEY, "1");
           const inc = await fetch("/api/visitors", { method: "POST" });
+          if (!inc.ok) throw new Error("increment failed");
           const incData = (await inc.json()) as { count?: number };
           if (!cancelled && typeof incData.count === "number") {
             setCount(incData.count);
+            setLive(true);
             return;
           }
         }
         const res = await fetch("/api/visitors");
+        if (!res.ok) throw new Error("fetch failed");
         const data = (await res.json()) as { count?: number };
-        if (!cancelled) setCount(typeof data.count === "number" ? data.count : FALLBACK);
+        if (!cancelled && typeof data.count === "number") {
+          setCount(data.count);
+          setLive(true);
+        }
       } catch {
-        if (!cancelled) setCount(FALLBACK);
+        if (!cancelled) {
+          setCount(FALLBACK);
+          setLive(false);
+        }
       }
     }
 
@@ -38,5 +48,10 @@ export function VisitorCounter() {
 
   const display = (count ?? FALLBACK).toLocaleString("en-IN");
 
-  return <span aria-live="polite">Visitors: {display}</span>;
+  return (
+    <span aria-live="polite" title={live ? "Live visitor count" : "Approximate visitor count"}>
+      Visitors: {display}
+      {!live && count === null ? " …" : ""}
+    </span>
+  );
 }

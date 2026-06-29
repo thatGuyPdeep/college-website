@@ -61,6 +61,7 @@ export function HomeIITKFeed({ news }: { news: PublicNewsItem[] }) {
     }));
 
   const admissions = [
+    { title: "1st Shortlist — Session 2026–27", href: "/admissions/shortlist" },
     { title: "Apply Online — UG & ITI Session 2026–27", href: "/admissions/apply" },
     { title: "How to Apply — Documents & Process", href: "/admissions/how-to-apply" },
     { title: "Fee Structure & Scholarships", href: "/admissions/fees" },

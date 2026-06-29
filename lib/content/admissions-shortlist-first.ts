@@ -9,8 +9,11 @@ export type ShortlistStudent = {
 export const SHORTLIST_META = {
   title: "1st List of Shortlisted Students",
   session: "2026-27",
-  publishedAt: "2026-06-22",
+  publishedAt: "2026-06-28",
   href: "/admissions/shortlist",
+  pdfUrl: "/documents/admissions-shortlist-1st-list-2026-27.pdf",
+  pdfSize: "3.7 MB",
+  noticeSlug: "admissions-shortlist-1st-list-2026-27",
 } as const;
 
 export const ADMISSIONS_SHORTLIST_FIRST: ShortlistStudent[] = [

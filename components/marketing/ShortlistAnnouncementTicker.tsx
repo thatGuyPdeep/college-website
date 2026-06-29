@@ -40,6 +40,14 @@ export function ShortlistAnnouncementTicker() {
         </div>
 
         <Link
+          href={SHORTLIST_META.pdfUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 hidden sm:flex items-center px-3 text-[10px] sm:text-xs font-semibold text-white/90 hover:text-white hover:underline bg-[#071540]/40 transition-colors whitespace-nowrap border-l border-white/10"
+        >
+          PDF
+        </Link>
+        <Link
           href={SHORTLIST_META.href}
           className="shrink-0 flex items-center px-3 sm:px-4 text-[10px] sm:text-xs font-semibold text-[#F5C200] hover:text-white hover:underline bg-[#071540]/40 transition-colors whitespace-nowrap"
         >

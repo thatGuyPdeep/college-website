@@ -4,7 +4,7 @@ import { FileText, Clock, Award, Download, ClipboardList, ClipboardCheck, Phone 
 import { MarketingPage } from "@/components/layout/MarketingPage";
 import { EXAMINATION_SECTIONS } from "@/lib/content/reference-portal";
 import { EXAM_NOTICES } from "@/lib/content/examination-portal";
-import { getPublicNews } from "@/lib/content/public-data";
+import { getPublicExamNotices, getPublicNews } from "@/lib/content/public-data";
 
 export const metadata: Metadata = {
   title: "Examination",
@@ -14,22 +14,36 @@ export const metadata: Metadata = {
 const ICONS = [FileText, ClipboardList, Clock, Award, Download, ClipboardCheck, Phone];
 
 export default async function ExaminationPage() {
-  const news = await getPublicNews(20);
-  const examNews = news.filter(
-    (n) =>
-      n.category === "Notice" &&
-      (n.title.toLowerCase().includes("exam") ||
-        n.title.toLowerCase().includes("semester") ||
-        n.slug.includes("exam"))
-  );
+  const [examNotices, news] = await Promise.all([getPublicExamNotices(10), getPublicNews(20)]);
+
   const recentNotices =
-    examNews.length > 0
-      ? examNews.slice(0, 5).map((n) => ({
+    examNotices.length > 0
+      ? examNotices.slice(0, 5).map((n) => ({
           key: n.slug,
           title: n.title,
           date: n.date,
-          href: `/news/${n.slug}`,
+          href: n.attachmentUrl ?? `/news/${n.slug}`,
         }))
+      : news
+          .filter(
+            (n) =>
+              n.category.toLowerCase() === "examination" ||
+              (n.category === "Notice" &&
+                (n.title.toLowerCase().includes("exam") ||
+                  n.title.toLowerCase().includes("semester") ||
+                  n.slug.includes("exam")))
+          )
+          .slice(0, 5)
+          .map((n) => ({
+            key: n.slug,
+            title: n.title,
+            date: n.date,
+            href: `/news/${n.slug}`,
+          }));
+
+  const fallbackNotices =
+    recentNotices.length > 0
+      ? recentNotices
       : EXAM_NOTICES.slice(0, 5).map((n) => ({
           key: n.href,
           title: n.title,
@@ -76,6 +90,22 @@ export default async function ExaminationPage() {
       </div>
 
       <section id="question-papers" className="rounded-2xl border border-amber-200 bg-amber-50 p-6">
+        <h2 className="font-bold text-[#0D2660] mb-2">Question Papers & Study Material</h2>
+        <p className="text-sm text-gray-600 mb-4">
+          Previous years&apos; question papers and syllabus-aligned study material are available through the library
+          e-resources hub and study material section.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/campus/library/e-resources#question-papers" className="text-sm font-semibold text-[#C8201A] hover:underline">
+            Old question papers →
+          </Link>
+          <Link href="/study-material" className="text-sm font-semibold text-[#C8201A] hover:underline">
+            Study material →
+          </Link>
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
         <h2 className="font-bold text-[#0D2660] mb-2">Examination Control Room</h2>
         <p className="text-sm text-gray-600 mb-4">
           For examination-related queries contact the college office during working hours.
@@ -86,11 +116,11 @@ export default async function ExaminationPage() {
         </Link>
       </section>
 
-      {recentNotices.length > 0 && (
+      {fallbackNotices.length > 0 && (
         <section className="mt-10">
           <h2 className="text-xl font-bold text-[#0D2660] mb-4">Recent Examination Notices</h2>
           <ul className="divide-y border rounded-xl overflow-hidden bg-white">
-            {recentNotices.map((n) => (
+            {fallbackNotices.map((n) => (
               <li key={n.key}>
                 <Link href={n.href} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-4 hover:bg-blue-50 transition-colors">
                   <span className="font-medium text-gray-800">{n.title}</span>

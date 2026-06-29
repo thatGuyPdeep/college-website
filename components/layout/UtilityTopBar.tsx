@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { FontSizeControl } from "@/components/layout/FontSizeControl";
 import { AccessibilityPanel } from "@/components/layout/AccessibilityPanel";
+import { SOCIAL_LINKS } from "@/lib/utils/constants";
 
 const QUICK_LINKS = [
   { label: "Jobs", href: "/careers", icon: Briefcase },
@@ -42,7 +43,7 @@ export function UtilityTopBar() {
 
           <div className="flex items-center gap-3 shrink-0">
             <a
-              href="https://www.facebook.com/RKMNarainpur"
+              href={SOCIAL_LINKS.facebook}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#F5C200] transition-colors"

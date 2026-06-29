@@ -311,6 +311,18 @@ export const LEADERSHIP = LEADERSHIP_PROFILES.map((p) => ({
 /** News & events — festival calendar + notices (drive from CMS later) */
 export const NEWS_EVENTS = [
   {
+    title: "1st List of Shortlisted Students — Session 2026–27",
+    slug: "admissions-shortlist-1st-list-2026-27",
+    date: "28 Jun 2026",
+    category: "Announcement",
+    img: "/images/school-1.jpg",
+    excerpt: "80 candidates shortlisted for UG admission at Ramakrishna Mission Vivekananda College, Narayanpur. Download the official PDF or view the list online.",
+    attachmentUrl: "/documents/admissions-shortlist-1st-list-2026-27.pdf",
+    attachmentLabel: "Download PDF",
+    attachmentSize: "3.7 MB",
+    language: "EN",
+  },
+  {
     title: "Admissions Open for Session 2026–27",
     slug: "admissions-2026-27",
     date: "1 May 2026",

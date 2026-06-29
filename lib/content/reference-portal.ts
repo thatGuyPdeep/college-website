@@ -40,11 +40,11 @@ export const HOME_ANNOUNCEMENTS = [
 
 /** Shown once per session on the home page (SMKV important-notice modal pattern). */
 export const URGENT_HOME_NOTICE = {
-  id:      "admissions-2026-27",
-  title:   "Admissions Open 2026–27",
-  message: "Applications for UG programmes are submitted on the official Bastar University portal at smkvbastar.ac.in. Select Ramakrishna Mission Vivekananda College, Narayanpur when applying.",
-  href:    "/admissions/apply",
-  cta:     "Apply on University Portal",
+  id:      "admissions-shortlist-1st-list-2026-27",
+  title:   "1st Shortlist Published",
+  message: "The first list of shortlisted students for UG admission (session 2026–27) has been published. View the list online or download the official PDF notice.",
+  href:    "/admissions/shortlist",
+  cta:     "View Shortlist",
 };
 
 import { LEADERSHIP_PROFILES } from "@/lib/content/leadership-profiles";
@@ -291,7 +291,7 @@ export const ALUMNI_PORTAL = {
   about: "The Ramakrishna Mission Vivekananda College alumni network connects graduates serving across Bastar, India, and abroad — in education, healthcare, government, and social service.",
   registrationNote: "Alumni may register contact details with the college office for reunions, mentorship, and institutional updates.",
   links: [
-    { label: "Register / Update Details", href: "/contact?subject=Alumni%20Registration" },
+    { label: "Register / Update Details", href: "/alumni#register" },
     { label: "Photo Gallery", href: "/gallery" },
     { label: "News & Events", href: "/news" },
     { label: "Donate to the Mission", href: "/donate" },

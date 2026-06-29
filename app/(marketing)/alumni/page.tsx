@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingPage } from "@/components/layout/MarketingPage";
 import { ALUMNI_PORTAL } from "@/lib/content/reference-portal";
+import { AlumniRegistrationForm } from "@/components/alumni/AlumniRegistrationForm";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -20,8 +21,16 @@ export default function AlumniPage() {
       <p className="text-gray-600 leading-relaxed mb-8 max-w-3xl">{ALUMNI_PORTAL.about}</p>
       <p className="text-sm text-gray-500 mb-8 max-w-3xl">{ALUMNI_PORTAL.registrationNote}</p>
 
+      <section id="register" className="mb-10 rounded-2xl border border-blue-100 bg-white p-6 sm:p-8">
+        <h2 className="text-xl font-bold text-[#0D2660] mb-2">Register / Update Your Details</h2>
+        <p className="text-sm text-gray-600 mb-6 max-w-xl">
+          Submit your batch, programme, and contact information. The alumni cell will reach out for reunions, mentorship, and college updates.
+        </p>
+        <AlumniRegistrationForm />
+      </section>
+
       <div className="grid sm:grid-cols-2 gap-4 mb-10">
-        {ALUMNI_PORTAL.links.map((link) => (
+        {ALUMNI_PORTAL.links.filter((l) => !l.label.includes("Register")).map((link) => (
           <Link
             key={link.href}
             href={link.href}

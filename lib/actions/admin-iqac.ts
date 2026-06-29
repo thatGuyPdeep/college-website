@@ -83,6 +83,7 @@ export async function upsertIqacDocument(item: {
 
     revalidatePath("/admin/iqac");
     revalidatePath("/iqac");
+    revalidatePath("/cells/iqac");
     return { ok: true, data: undefined };
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : "Save failed" };

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Download } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
+import { Button } from "@/components/ui/button";
 import {
   ADMISSIONS_SHORTLIST_FIRST,
   SHORTLIST_COUNT,
@@ -36,6 +38,23 @@ export default function AdmissionsShortlistPage() {
             {" / "}
             <span className="text-[#0D2660] font-medium">1st Shortlist</span>
           </nav>
+
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 sm:p-5 mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-amber-900">Official notice (PDF)</p>
+              <p className="text-sm text-amber-950 mt-1">
+                Scanned shortlist published {SHORTLIST_META.publishedAt}. Download or view the searchable table below.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2 shrink-0">
+              <Button asChild className="bg-[#0D2660] hover:bg-[#071540]">
+                <a href={SHORTLIST_META.pdfUrl} target="_blank" rel="noopener noreferrer">
+                  <Download className="h-4 w-4 mr-2" aria-hidden="true" />
+                  Download PDF ({SHORTLIST_META.pdfSize})
+                </a>
+              </Button>
+            </div>
+          </div>
 
           <p className="text-sm text-gray-600 mb-8 leading-relaxed">
             The following candidates appear on the first shortlist for undergraduate admission at
